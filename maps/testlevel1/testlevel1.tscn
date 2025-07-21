@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://c7evt6848gmsp"]
 
-[ext_resource type="Texture2D" uid="uid://mevtc730a8eg" path="res://textures/kenney_prototype_checker2.png" id="1_eupo4"]
-[ext_resource type="Texture2D" uid="uid://c3f44qt1ylrdw" path="res://textures/kenney_prototype_wall.png" id="2_q7ijp"]
-[ext_resource type="Texture2D" uid="uid://bur5pqkbdc4qx" path="res://textures/kenney_prototype_multigrid.png" id="3_q7ijp"]
+[ext_resource type="Texture2D" uid="uid://mevtc730a8eg" path="res://textures/kenney_prototype_checker2.png" id="1_t6lmf"]
+[ext_resource type="Texture2D" uid="uid://c3f44qt1ylrdw" path="res://textures/kenney_prototype_wall.png" id="2_271fd"]
+[ext_resource type="Texture2D" uid="uid://bur5pqkbdc4qx" path="res://textures/kenney_prototype_multigrid.png" id="3_lv4sn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q7ijp"]
 sky_top_color = Color(0.0822872, 0.350402, 0.845244, 1)
@@ -23,7 +23,7 @@ glow_enabled = true
 size = Vector3(100, 1, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnwcu"]
-albedo_texture = ExtResource("1_eupo4")
+albedo_texture = ExtResource("1_t6lmf")
 uv1_scale = Vector3(25, 25, 25)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3st6x"]
@@ -33,7 +33,7 @@ size = Vector3(100, 1, 100)
 [sub_resource type="BoxShape3D" id="BoxShape3D_kabis"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jm8pa"]
-albedo_texture = ExtResource("2_q7ijp")
+albedo_texture = ExtResource("2_271fd")
 
 [sub_resource type="BoxMesh" id="BoxMesh_mgucs"]
 material = SubResource("StandardMaterial3D_jm8pa")
@@ -42,7 +42,7 @@ material = SubResource("StandardMaterial3D_jm8pa")
 size = Vector3(1, 1, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kerkd"]
-albedo_texture = ExtResource("3_q7ijp")
+albedo_texture = ExtResource("3_lv4sn")
 uv1_scale = Vector3(1, 5, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_q7ijp"]
@@ -53,14 +53,14 @@ size = Vector3(1, 1, 5)
 size = Vector3(1, 1, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3st6x"]
-albedo_texture = ExtResource("3_q7ijp")
+albedo_texture = ExtResource("3_lv4sn")
 uv1_scale = Vector3(5, 25, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kabis"]
 material = SubResource("StandardMaterial3D_3st6x")
 size = Vector3(1, 1, 5)
 
-[node name="Testlevel1" type="Node3D"]
+[node name="TestLevel1" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vnwcu")
