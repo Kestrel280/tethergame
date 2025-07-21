@@ -11,5 +11,5 @@ config_version=5
 [application]
 
 config/name="TetherGame"
+run/main_scene="uid://b2qka215r7qmw"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"

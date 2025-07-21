@@ -1,0 +1,108 @@
+[gd_scene load_steps=19 format=3 uid="uid://c7evt6848gmsp"]
+
+[ext_resource type="Texture2D" uid="uid://mevtc730a8eg" path="res://textures/kenney_prototype_checker2.png" id="1_eupo4"]
+[ext_resource type="Texture2D" uid="uid://c3f44qt1ylrdw" path="res://textures/kenney_prototype_wall.png" id="2_q7ijp"]
+[ext_resource type="Texture2D" uid="uid://bur5pqkbdc4qx" path="res://textures/kenney_prototype_multigrid.png" id="3_q7ijp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q7ijp"]
+sky_top_color = Color(0.0822872, 0.350402, 0.845244, 1)
+sky_horizon_color = Color(0.581445, 0.678163, 0.755009, 1)
+ground_bottom_color = Color(0.203082, 0.321838, 0.13438, 1)
+ground_horizon_color = Color(0.581445, 0.678163, 0.755009, 1)
+
+[sub_resource type="Sky" id="Sky_kerkd"]
+sky_material = SubResource("ProceduralSkyMaterial_q7ijp")
+
+[sub_resource type="Environment" id="Environment_vnwcu"]
+background_mode = 2
+sky = SubResource("Sky_kerkd")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kerkd"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnwcu"]
+albedo_texture = ExtResource("1_eupo4")
+uv1_scale = Vector3(25, 25, 25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3st6x"]
+material = SubResource("StandardMaterial3D_vnwcu")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kabis"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jm8pa"]
+albedo_texture = ExtResource("2_q7ijp")
+
+[sub_resource type="BoxMesh" id="BoxMesh_mgucs"]
+material = SubResource("StandardMaterial3D_jm8pa")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eupo4"]
+size = Vector3(1, 1, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kerkd"]
+albedo_texture = ExtResource("3_q7ijp")
+uv1_scale = Vector3(1, 5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q7ijp"]
+material = SubResource("StandardMaterial3D_kerkd")
+size = Vector3(1, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q7ijp"]
+size = Vector3(1, 1, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3st6x"]
+albedo_texture = ExtResource("3_q7ijp")
+uv1_scale = Vector3(5, 25, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kabis"]
+material = SubResource("StandardMaterial3D_3st6x")
+size = Vector3(1, 1, 5)
+
+[node name="Testlevel1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vnwcu")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.64011, -0.395695, 0.658548, 0, 0.857167, 0.515038, -0.768284, 0.329681, -0.548681, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_kerkd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_3st6x")
+
+[node name="Box" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+shape = SubResource("BoxShape3D_kabis")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
+mesh = SubResource("BoxMesh_mgucs")
+
+[node name="Slope" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 1, -0.63, -2.215)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope"]
+shape = SubResource("BoxShape3D_eupo4")
+debug_color = Color(0, 0.6, 0.701961, 0.784314)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Slope"]
+mesh = SubResource("BoxMesh_q7ijp")
+
+[node name="Ramp" type="StaticBody3D" parent="."]
+transform = Transform3D(1.41421, -1.41421, 0, 1.41421, 1.41421, 0, 0, 0, 2, -3, -0.5, -5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp"]
+shape = SubResource("BoxShape3D_q7ijp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp"]
+mesh = SubResource("BoxMesh_kabis")
+skeleton = NodePath("../CollisionShape3D")
