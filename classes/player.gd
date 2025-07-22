@@ -49,5 +49,6 @@ func _physics_process(delta: float) -> void:
 	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
 	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);
 	Globals.debug_panel.add_property("xy_speed", "%3.2f" % Vector2(get_real_velocity().x, get_real_velocity().z).length());
+	Globals.debug_panel.add_property("energy", "%3.2f" % (get_real_velocity().length_squared() + position.y * ProjectSettings.get_setting("physics/3d/default_gravity")));
 	Globals.debug_panel.add_property("movement_state", movement_controller.movement_state_machine.current_state.state_name);
 	
