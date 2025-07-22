@@ -26,7 +26,7 @@ func change_level(level_name : String):
 	$Level_Container.add_child(level);
 	
 	# Wait for level to finish intro
-	if !level.is_intro_finished: await level.intro_finished;
+	await level.ready;
 	
 	# TODO: Spawn player
 
