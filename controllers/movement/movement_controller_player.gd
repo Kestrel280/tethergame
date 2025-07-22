@@ -16,6 +16,8 @@ func move(dt : float, wish_dir : Vector3):
 	# Test movement without actually performing it
 	# If we collided, do our own slide calculation first, before doing move_and_slide
 	var collision = body.move_and_collide(body.velocity * dt, true);
-	if collision: body.velocity = body.velocity.slide(collision.get_normal());
+	if collision:
+		if collision.get_normal().y > body.floor_max_angle: body.apply_floor_snap();
+		body.velocity = body.velocity.slide(collision.get_normal());
 	
 	body.move_and_slide();
