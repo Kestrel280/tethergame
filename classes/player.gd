@@ -16,6 +16,8 @@ var _rot : Vector2 = Vector2.ZERO; # Cumulative rotation of the player
 @export_range(0.1, 1.0) var ground_accel = 0.3;
 @export_range(0.1, 1.0) var ground_friction = 0.3;
 @export_range(2.0, 10.0) var jump_impulse = 4.0;
+@export_range(1.0, 3.0) var air_speed_cap = 0.5; # Per-frame max speed to add
+@export_range(1.0, 3.0) var air_accel = 150.0; # How aggressively to apply air_speed_cap
 
 
 func _input(event) -> void:

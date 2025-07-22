@@ -14,3 +14,7 @@ func _ready():
 func try_move(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 	return "";
 	pass;
+
+
+func do_jump():
+	body.velocity.y = body.jump_impulse;
