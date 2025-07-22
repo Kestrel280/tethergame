@@ -5,5 +5,9 @@ extends Node
 signal change_level_requested(map_name : String);
 
 
-# Player attempting to close the game.
-signal player_requested_quit();
+# Attempting to close the game.
+signal quit_requested();
+
+
+# Attempting to return to main menu.
+signal quit_to_menu_requested();

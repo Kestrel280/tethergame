@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bafvmi2dg38db"]
 
-[ext_resource type="Script" uid="uid://ej3bxyssnqma" path="res://maps/mainmenu/main_menu.gd" id="1_mwchs"]
-[ext_resource type="Theme" uid="uid://2v8ny3qxt58g" path="res://maps/mainmenu/themes/logo_theme.tres" id="1_n4bl2"]
-[ext_resource type="Theme" uid="uid://cp7oojxyjnbs7" path="res://maps/mainmenu/themes/buttons_theme.tres" id="2_pmqs8"]
+[ext_resource type="Script" uid="uid://ej3bxyssnqma" path="res://maps/main_menu/main_menu.gd" id="1_mwchs"]
+[ext_resource type="Theme" uid="uid://2v8ny3qxt58g" path="res://maps/main_menu/themes/logo_theme.tres" id="1_n4bl2"]
+[ext_resource type="Theme" uid="uid://cp7oojxyjnbs7" path="res://maps/main_menu/themes/buttons_theme.tres" id="2_pmqs8"]
 
 [node name="Main_Menu" type="Node"]
 script = ExtResource("1_mwchs")
