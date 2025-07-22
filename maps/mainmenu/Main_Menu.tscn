@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://bafvmi2dg38db"]
+
+[ext_resource type="Script" uid="uid://ej3bxyssnqma" path="res://maps/mainmenu/main_menu.gd" id="1_mwchs"]
+[ext_resource type="Theme" uid="uid://2v8ny3qxt58g" path="res://maps/mainmenu/themes/logo_theme.tres" id="1_n4bl2"]
+[ext_resource type="Theme" uid="uid://cp7oojxyjnbs7" path="res://maps/mainmenu/themes/buttons_theme.tres" id="2_pmqs8"]
+
+[node name="Main_Menu" type="Node"]
+script = ExtResource("1_mwchs")
+
+[node name="Ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Logo_Container" type="Control" parent="Ui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme = ExtResource("1_n4bl2")
+
+[node name="Label" type="Label" parent="Ui/Logo_Container"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -338.5
+offset_right = 338.5
+offset_bottom = 137.0
+grow_horizontal = 2
+text = "TETHER GAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons_Hierarchy" type="HBoxContainer" parent="Ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -59.0
+offset_right = 36.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons_Level1" type="VBoxContainer" parent="Ui/Buttons_Hierarchy"]
+layout_mode = 2
+theme = ExtResource("2_pmqs8")
+alignment = 1
+
+[node name="Play" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
+layout_mode = 2
+text = "Play"
+
+[node name="Quit" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Quit" to="." method="_on_quit_pressed"]

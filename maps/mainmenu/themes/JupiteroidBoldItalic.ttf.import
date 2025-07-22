@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://basd7o274qy5k"
-path="res://.godot/imported/JupiteroidBoldItalic.ttf-4e1a446d401cea3aee00e310cbc78363.fontdata"
+path="res://.godot/imported/JupiteroidBoldItalic.ttf-d1994bb5884e0980949a26b200b670fa.fontdata"
 
 [deps]
 
-source_file="res://maps/mainmenu/JupiteroidBoldItalic.ttf"
-dest_files=["res://.godot/imported/JupiteroidBoldItalic.ttf-4e1a446d401cea3aee00e310cbc78363.fontdata"]
+source_file="res://maps/mainmenu/themes/JupiteroidBoldItalic.ttf"
+dest_files=["res://.godot/imported/JupiteroidBoldItalic.ttf-d1994bb5884e0980949a26b200b670fa.fontdata"]
 
 [params]
 

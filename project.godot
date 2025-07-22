@@ -13,3 +13,7 @@ config_version=5
 config/name="TetherGame"
 run/main_scene="uid://b2qka215r7qmw"
 config/features=PackedStringArray("4.4", "Forward Plus")
+
+[autoload]
+
+MessageBus="*res://autoload/message_bus.gd"

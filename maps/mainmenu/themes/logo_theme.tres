@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://2v8ny3qxt58g"]
 
-[ext_resource type="FontFile" uid="uid://basd7o274qy5k" path="res://maps/mainmenu/JupiteroidBoldItalic.ttf" id="1_hy1h4"]
+[ext_resource type="FontFile" uid="uid://basd7o274qy5k" path="res://maps/mainmenu/themes/JupiteroidBoldItalic.ttf" id="1_hy1h4"]
 
 [resource]
 Label/colors/font_color = Color(0.641073, 0.204389, 9.62615e-08, 1)
