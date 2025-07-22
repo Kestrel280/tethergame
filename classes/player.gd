@@ -43,3 +43,8 @@ func _physics_process(delta: float) -> void:
 	var input_dir = ($Head.transform.basis * input_dir_raw).normalized();
 	movement_controller.set_jumping(input_controller.is_trying_jump());
 	movement_controller.move(delta, (self.transform.basis * input_dir).normalized());
+	
+	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
+	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [velocity.x, velocity.y, velocity.z]);
+	Globals.debug_panel.add_property("movement_state", movement_controller.movement_state_machine.current_state.state_name);
+	
