@@ -7,12 +7,11 @@ var body : Node3D;
 var head : Node3D;
 var camera : Camera3D;
 
-
+# Don't override these
 func start(body : Node3D, head : Node3D, camera : Camera3D):
 	self.body = body;
 	self.head = head;
 	self.camera = camera;
-	print(body, head, camera);
 
 
 func look_at(dir : Vector3):

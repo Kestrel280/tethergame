@@ -9,7 +9,13 @@ var input_controller : Input_Controller;
 var movement_controller : Movement_Controller;
 
 
-var _rot : Vector2 = Vector2.ZERO;
+var _rot : Vector2 = Vector2.ZERO; # Cumulative rotation of the player
+
+# TODO find a better place for these; referenced in movement states
+@export_range(2.0, 10.0) var max_ground_speed = 5.0;
+@export_range(0.1, 1.0) var ground_accel = 0.5;
+@export_range(0.1, 1.0) var ground_friction = 0.3;
+@export_range(0.1, 1.0) var jump_impulse = 5.0;
 
 
 func _input(event) -> void:
@@ -21,16 +27,19 @@ func _ready() -> void:
 	input_controller = input_controller_script.new();
 	movement_controller = movement_controller_script.new();
 	camera_controller.start(self, $Head, $Head/Camera3D);
+	movement_controller.start(self, $Movement_State_Machine);
 	pass
 
 
 func _physics_process(delta: float) -> void:
 	# Get player's inputs
-	var input_dir_flat = input_controller.input_dir_flat();
-	var holding_jump = input_controller.jumping();
+	var input_dir_raw = input_controller.input_dir_raw();
 	_rot -= input_controller.incremental_rotation() * input_controller.sensitivity / ProjectSettings.get_setting("display/window/size/viewport_width");
 	_rot.x = wrapf(_rot.x, -PI, PI);
 	_rot.y = clampf(_rot.y, -PI/2, PI/2);
 
 	camera_controller.set_rotation(_rot.x, _rot.y);
 	
+	var input_dir = ($Head.transform.basis * input_dir_raw).normalized();
+	movement_controller.set_jumping(input_controller.is_trying_jump());
+	movement_controller.move(delta, (self.transform.basis * input_dir).normalized());

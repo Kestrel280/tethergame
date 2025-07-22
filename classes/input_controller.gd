@@ -7,14 +7,7 @@ var _rot_x : float = 0.0;
 var _rot_y : float = 0.0;
 
 
-func input_dir_flat() -> Vector3:
-	return Vector3.ZERO;
-
-
-func jumping() -> bool:
-	return false;
-
-
+# Don't override these
 func incremental_rotation() -> Vector2:
 	var x = _rot_x;
 	var y = _rot_y;
@@ -23,5 +16,10 @@ func incremental_rotation() -> Vector2:
 	return Vector2(x, y);
 
 
-func _init() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
+# Override these
+func input_dir_raw() -> Vector3:
+	return Vector3.ZERO;
+
+
+func is_trying_jump() -> bool:
+	return false;
