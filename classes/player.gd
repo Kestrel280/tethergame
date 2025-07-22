@@ -13,9 +13,9 @@ var _rot : Vector2 = Vector2.ZERO; # Cumulative rotation of the player
 
 # TODO find a better place for these; referenced in movement states
 @export_range(2.0, 10.0) var max_ground_speed = 5.0;
-@export_range(0.1, 1.0) var ground_accel = 0.5;
+@export_range(0.1, 1.0) var ground_accel = 0.3;
 @export_range(0.1, 1.0) var ground_friction = 0.3;
-@export_range(0.1, 1.0) var jump_impulse = 5.0;
+@export_range(2.0, 10.0) var jump_impulse = 4.0;
 
 
 func _input(event) -> void:
@@ -45,6 +45,7 @@ func _physics_process(delta: float) -> void:
 	movement_controller.move(delta, (self.transform.basis * input_dir).normalized());
 	
 	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
-	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [velocity.x, velocity.y, velocity.z]);
+	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);
+	Globals.debug_panel.add_property("xy_speed", "%3.2f" % Vector2(get_real_velocity().x, get_real_velocity().z).length());
 	Globals.debug_panel.add_property("movement_state", movement_controller.movement_state_machine.current_state.state_name);
 	

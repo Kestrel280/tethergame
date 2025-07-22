@@ -14,6 +14,7 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xhfnw"]
 
 [node name="Player" type="CharacterBody3D"]
+floor_constant_speed = true
 script = ExtResource("1_xhfnw")
 camera_controller_script = ExtResource("2_e80uo")
 input_controller_script = ExtResource("3_cxr5p")

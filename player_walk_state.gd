@@ -19,6 +19,7 @@ func try_move(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 	var wish_vel : Vector3 = body.velocity;
 	
 	if !body.is_on_floor(): # TODO maybe do Player_Air_State.try_move()? idk if possible since nonstatic method
+#		Player_Air_State.try_move(dt, wish_dir, trying_jump);
 		return Player_Air_State.state_name;
 	
 	# If trying to jump, just jump and transition to air state
