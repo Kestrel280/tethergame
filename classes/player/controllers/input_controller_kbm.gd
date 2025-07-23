@@ -1,4 +1,4 @@
-extends Input_Controller
+extends Input_Controller_Base
 
 
 @export_range(1.0, 25.0) var sensitivity : float = 4.0;

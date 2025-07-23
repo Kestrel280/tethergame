@@ -1,5 +1,5 @@
-class_name Camera_Controller
-extends Resource
+class_name Camera_Controller_Base
+extends Node
 
 
 var rot : Vector2 = Vector2.ZERO;
@@ -32,7 +32,6 @@ func apply_rotation():
 	head.rotate_object_local(Vector3(1, 0, 0), rot.y);
 
 
-# (Not related to the Node3D built-in "look_at()", which we can't override; although similar functionality)
 func look_at(dir : Vector3):
 	rot.x = -atan2(dir.z, dir.x) - PI/2; # Rotation about y axis
 	rot.y = PI/2 - acos(dir.y); # Inclination from xz plane

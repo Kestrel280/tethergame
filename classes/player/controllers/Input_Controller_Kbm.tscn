@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsecrpcholfvy"]
+
+[ext_resource type="Script" uid="uid://bk2mg7jt7y2dm" path="res://classes/player/controllers/input_controller_kbm.gd" id="1_3gcxy"]
+
+[node name="Input_Controller_Kbm" type="Node"]
+script = ExtResource("1_3gcxy")
+metadata/_custom_type_script = "uid://dkg0qookjw5ai"

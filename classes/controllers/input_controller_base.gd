@@ -1,5 +1,5 @@
-class_name Input_Controller
-extends Resource
+class_name Input_Controller_Base
+extends Node
 
 
 # Amount of x/y rotation since last fetched by rotation()

@@ -28,5 +28,9 @@ func _on_body_entered(body: Node3D) -> void:
 	body.velocity.z = body.velocity.z if preserve_xy_velocity else 0;
 	if add_speed: body.velocity += (destination.transform.basis.x * add_speed);
 	if set_view_angle:
-		if "camera_controller" in body:
-			body.camera_controller.look_at(destination.transform.basis.x);
+		var cc : Camera_Controller_Base = null;
+		for child in body.get_children():
+			if child is Camera_Controller_Base:
+				cc = child;
+				break;
+		if cc: cc.look_at(destination.transform.basis.x);
