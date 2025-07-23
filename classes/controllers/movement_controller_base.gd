@@ -4,14 +4,13 @@ extends Controller_Base
 
 ## Movement controllers must define a move(dt : float) function,
 ## which updates the location of the body it is controlling (set via start()).
-## There are no other requirements; the movement_state_machine can be null if not needed.
-
+## They should also define a get_current_move_state()->StringName function,
+## but it is not strictly necessary.
 
 signal movement_state_changed(new_state : StringName);
 
 
 var jumping : bool;
-var movement_state_machine : State_Machine;
 
 
 # Users of the component must set this!
@@ -23,9 +22,8 @@ func get_controller_name():
 	return "Movement_Controller";
 
 
-func start(body : Node3D, movement_state_machine : State_Machine):
+func start(body : Node3D):
 	self.body = body;
-	self.movement_state_machine = movement_state_machine;
 
 
 func set_jumping(j : bool):
@@ -35,3 +33,7 @@ func set_jumping(j : bool):
 # Override these
 func move(dt : float, wish_dir : Vector3):
 	pass;
+
+
+func get_current_move_state():
+	return "Unknown_Move_State";

@@ -5,9 +5,8 @@ extends State
 @export var body : CharacterBody3D;
 
 
-func _ready():
-	if !body: body = get_owner();
-	await body.ready;
+func start(body : CharacterBody3D):
+	self.body = body;
 
 
 # Should update 'velocity' of body and return a state name.

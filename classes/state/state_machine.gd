@@ -10,7 +10,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name] = child;
-	current_state.enter();
+	if current_state: current_state.enter();
 
 
 func _process(dt : float):

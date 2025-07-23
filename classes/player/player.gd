@@ -17,14 +17,14 @@ func _input(event) -> void:
 	$Input_Controller.handle_input(event);
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_0:
-			var test = Movement_Controller_Player.new();
-			test.start(self, $Movement_State_Machine);
+			var test = load("res://classes/player/controllers/Movement_Controller_Player.tscn").instantiate();
+			test.start(self);
 			swap_controller(test);
 
 
 func _ready() -> void:
 	$Camera_Controller.start(self, $Head, $Head/Camera3D);
-	$Movement_Controller.start(self, $Movement_State_Machine);
+	$Movement_Controller.start(self);
 
 
 func _physics_process(delta: float) -> void:
@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	Globals.debug_panel.add_property("xy_speed", "%3.2f" % Vector2(get_real_velocity().x, get_real_velocity().z).length());
 	Globals.debug_panel.add_property("energy", "%3.2f" % (get_real_velocity().length_squared() / 2 + position.y * ProjectSettings.get_setting("physics/3d/default_gravity")));
 	Globals.debug_panel.add_property("rotation", "%3.1f, %3.1f" % [rad_to_deg($Camera_Controller.rot.x), rad_to_deg($Camera_Controller.rot.y)]);
-	Globals.debug_panel.add_property("movement_state", $Movement_Controller.movement_state_machine.current_state.state_name);
+	Globals.debug_panel.add_property("movement_state", $Movement_Controller.get_current_move_state());
 
 
 func swap_controller(new_controller : Controller_Base) -> Node:
