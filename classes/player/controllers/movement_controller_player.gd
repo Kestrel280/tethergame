@@ -1,4 +1,4 @@
-extends Movement_Controller
+extends Movement_Controller_Base
 
 
 var wish_vel : Vector3;

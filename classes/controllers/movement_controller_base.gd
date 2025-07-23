@@ -1,5 +1,5 @@
-class_name Movement_Controller
-extends Resource
+class_name Movement_Controller_Base
+extends Node
 
 
 ## Movement controllers must define a move(dt : float) function,

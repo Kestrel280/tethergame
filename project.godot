@@ -27,9 +27,8 @@ folder_colors={
 "res://classes/controllers/": "red",
 "res://classes/level/": "orange",
 "res://classes/player/": "yellow",
-"res://classes/player/states/": "red",
+"res://classes/player/controllers/movement_states/": "red",
 "res://classes/state/": "green",
-"res://controllers/": "yellow",
 "res://maps/": "green",
 "res://textures/": "teal",
 "res://ui/": "blue"
