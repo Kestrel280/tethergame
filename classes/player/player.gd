@@ -17,7 +17,7 @@ func _input(event) -> void:
 	$Input_Controller.handle_input(event);
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_0:
-			var test = load("res://classes/player/controllers/Movement_Controller_Player.tscn").instantiate();
+			var test = Movement_Controller_Player.construct();
 			test.start(self);
 			swap_controller(test);
 

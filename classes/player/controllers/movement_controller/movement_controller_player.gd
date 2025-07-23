@@ -5,6 +5,10 @@ extends Movement_Controller_Base
 var wish_vel : Vector3;
 
 
+static func construct() -> Movement_Controller_Player:
+	return preload("Movement_Controller_Player.tscn").instantiate();
+
+
 func start(body : Node3D):
 	super(body);
 	assert(body is CharacterBody3D, "Movement_Controller_Player must be applied to a CharacterBody3D");
@@ -20,7 +24,6 @@ func start(body : Node3D):
 
 
 func move(dt : float, wish_dir : Vector3):
-	
 	wish_vel = body.velocity;
 	wish_dir = Vector3(wish_dir.x, 0, wish_dir.z).normalized();
 	

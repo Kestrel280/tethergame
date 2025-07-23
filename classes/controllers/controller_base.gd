@@ -11,3 +11,4 @@ func get_controller_name() -> StringName:
 
 func _ready():
 	self.name = get_controller_name();
+	print("New '%s' created" % self.name);
