@@ -15,6 +15,11 @@ var _rot : Vector2 = Vector2.ZERO; # Cumulative rotation of the player
 
 func _input(event) -> void:
 	$Input_Controller.handle_input(event);
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_0:
+			var test = Movement_Controller_Player.new();
+			test.start(self, $Movement_State_Machine);
+			swap_controller(test);
 
 
 func _ready() -> void:
@@ -37,4 +42,17 @@ func _physics_process(delta: float) -> void:
 	Globals.debug_panel.add_property("energy", "%3.2f" % (get_real_velocity().length_squared() / 2 + position.y * ProjectSettings.get_setting("physics/3d/default_gravity")));
 	Globals.debug_panel.add_property("rotation", "%3.1f, %3.1f" % [rad_to_deg($Camera_Controller.rot.x), rad_to_deg($Camera_Controller.rot.y)]);
 	Globals.debug_panel.add_property("movement_state", $Movement_Controller.movement_state_machine.current_state.state_name);
-	
+
+
+func swap_controller(new_controller : Controller_Base) -> Node:
+	var old_controller : Node = null;
+	# Scan children for a controller of matching type
+	# If there is one, remove it and return it
+	# Then, install the new controller
+	for child in get_children():
+		if child is Controller_Base:
+			if new_controller.get_controller_name() == child.get_controller_name():
+				old_controller = child;
+				remove_child(old_controller);
+	add_child(new_controller);
+	return old_controller;

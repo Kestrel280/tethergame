@@ -1,3 +1,4 @@
+class_name Input_Controller_Kbm
 extends Input_Controller_Base
 
 

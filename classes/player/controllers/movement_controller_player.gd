@@ -1,3 +1,4 @@
+class_name Movement_Controller_Player
 extends Movement_Controller_Base
 
 

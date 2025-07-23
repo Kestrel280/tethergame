@@ -1,5 +1,5 @@
 class_name Input_Controller_Base
-extends Node
+extends Controller_Base
 
 
 # Amount of x/y rotation since last fetched by rotation()
@@ -8,6 +8,10 @@ var _rot_y : float = 0.0;
 
 
 # Don't override these
+func get_controller_name():
+	return "Input_Controller";
+
+
 func incremental_rotation() -> Vector2:
 	var x = _rot_x;
 	var y = _rot_y;

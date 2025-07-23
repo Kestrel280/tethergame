@@ -1,5 +1,5 @@
 class_name Camera_Controller_Base
-extends Node
+extends Controller_Base
 
 
 var rot : Vector2 = Vector2.ZERO;
@@ -12,6 +12,10 @@ var camera : Camera3D;
 
 
 # Don't override these
+func get_controller_name():
+	return "Camera_Controller";
+
+
 func start(body : Node3D, head : Node3D, camera : Camera3D):
 	self.body = body;
 	self.head = head;

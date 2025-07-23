@@ -1,5 +1,5 @@
 class_name Movement_Controller_Base
-extends Node
+extends Controller_Base
 
 
 ## Movement controllers must define a move(dt : float) function,
@@ -19,6 +19,10 @@ var body : CharacterBody3D;
 
 
 # Don't override these
+func get_controller_name():
+	return "Movement_Controller";
+
+
 func start(body : Node3D, movement_state_machine : State_Machine):
 	self.body = body;
 	self.movement_state_machine = movement_state_machine;
