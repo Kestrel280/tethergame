@@ -5,7 +5,7 @@ extends Input_Controller
 
 
 func handle_input(event) -> void:
-	if event is InputEventMouse:
+	if event is InputEventMouseMotion:
 		_rot_x += event.relative.x;
 		_rot_y += event.relative.y;
 

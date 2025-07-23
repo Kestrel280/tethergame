@@ -38,5 +38,4 @@ func look_at(dir : Vector3):
 	rot.y = PI/2 - acos(dir.y); # Inclination from xz plane
 	rot.x = wrapf(rot.x, -PI, PI);
 	rot.y = wrapf(rot.y, -PI/2, PI/2);
-	print(dir, rot);
 	apply_rotation();
