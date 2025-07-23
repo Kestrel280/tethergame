@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://c7evt6848gmsp"]
+[gd_scene load_steps=25 format=3 uid="uid://c7evt6848gmsp"]
 
-[ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level.gd" id="1_otnkw"]
+[ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_otnkw"]
 [ext_resource type="Texture2D" uid="uid://mevtc730a8eg" path="res://textures/kenney_prototype_checker2.png" id="2_7v2bt"]
 [ext_resource type="Texture2D" uid="uid://c3f44qt1ylrdw" path="res://textures/kenney_prototype_wall.png" id="3_f4oj7"]
 [ext_resource type="Texture2D" uid="uid://bur5pqkbdc4qx" path="res://textures/kenney_prototype_multigrid.png" id="4_4vsd1"]
-[ext_resource type="PackedScene" uid="uid://cmu3p2dw8cim5" path="res://Player.tscn" id="5_7v2bt"]
+[ext_resource type="PackedScene" uid="uid://cmu3p2dw8cim5" path="res://classes/player/Player.tscn" id="5_7v2bt"]
+[ext_resource type="PackedScene" uid="uid://bu5oy1qgfmusx" path="res://classes/level/teleporter/teleporter.tscn" id="6_f4oj7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q7ijp"]
 sky_top_color = Color(0.0822872, 0.350402, 0.845244, 1)
@@ -62,6 +63,17 @@ uv1_scale = Vector3(5, 25, 5)
 material = SubResource("StandardMaterial3D_3st6x")
 size = Vector3(1, 1, 5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4oj7"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.196078)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4vsd1"]
+material = SubResource("StandardMaterial3D_f4oj7")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_16v1w"]
+size = Vector3(2, 2, 2)
+
 [node name="TestLevel1" type="Node"]
 script = ExtResource("1_otnkw")
 metadata/_custom_type_script = "uid://bn50xtepv757k"
@@ -112,3 +124,17 @@ mesh = SubResource("BoxMesh_kabis")
 skeleton = NodePath("../CollisionShape3D")
 
 [node name="Player" parent="." instance=ExtResource("5_7v2bt")]
+
+[node name="Teleporter" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("6_f4oj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, -5.5)
+destination = NodePath("../Teleporter_Exit")
+add_speed = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter"]
+mesh = SubResource("BoxMesh_4vsd1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter"]
+shape = SubResource("BoxShape3D_16v1w")
+
+[node name="Teleporter_Exit" type="Node3D" parent="."]
+transform = Transform3D(0.414693, 0, -0.909961, 0, 1, 0, 0.909961, 0, 0.414693, 0, 15, -50)

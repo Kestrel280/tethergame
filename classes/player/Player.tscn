@@ -1,19 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmu3p2dw8cim5"]
+[gd_scene load_steps=12 format=3 uid="uid://cmu3p2dw8cim5"]
 
-[ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://dv5u34mk2sgl5" path="res://controllers/camera/camera_controller_player.gd" id="2_e80uo"]
 [ext_resource type="Script" uid="uid://bk2mg7jt7y2dm" path="res://controllers/input/input_controller_kbm.gd" id="3_cxr5p"]
 [ext_resource type="Script" uid="uid://b4dy0hm3wdem5" path="res://controllers/movement/movement_controller_player.gd" id="4_tdg3f"]
-[ext_resource type="Script" uid="uid://cnfr7v75ouaag" path="res://classes/state_machine.gd" id="5_cxr5p"]
-[ext_resource type="Script" uid="uid://d1eyuapmclcra" path="res://player_walk_state.gd" id="6_tdg3f"]
-[ext_resource type="Script" uid="uid://bsgml6prcya47" path="res://player_idle_state.gd" id="7_dtqjt"]
-[ext_resource type="Script" uid="uid://de08x13bjvfi" path="res://player_air_state.gd" id="8_5ncpa"]
+[ext_resource type="Script" uid="uid://cnfr7v75ouaag" path="res://classes/state/state_machine.gd" id="5_cxr5p"]
+[ext_resource type="Script" uid="uid://c0xife0bt2mo4" path="res://classes/level/teleporter/teleportable.gd" id="5_loolv"]
+[ext_resource type="Script" uid="uid://d1eyuapmclcra" path="res://classes/player/player_walk_state.gd" id="6_tdg3f"]
+[ext_resource type="Script" uid="uid://bsgml6prcya47" path="res://classes/player/player_idle_state.gd" id="7_dtqjt"]
+[ext_resource type="Script" uid="uid://de08x13bjvfi" path="res://classes/player/player_air_state.gd" id="8_5ncpa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xhfnw"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xhfnw"]
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 6
+collision_mask = 9
 floor_constant_speed = true
 floor_max_angle = 0.698132
 script = ExtResource("1_xhfnw")
@@ -49,3 +52,7 @@ metadata/_custom_type_script = "uid://mpbdcsjvw6q0"
 [node name="Player_Air_State" type="Node" parent="Movement_State_Machine"]
 script = ExtResource("8_5ncpa")
 metadata/_custom_type_script = "uid://mpbdcsjvw6q0"
+
+[node name="Teleportable" type="Node" parent="."]
+script = ExtResource("5_loolv")
+metadata/_custom_type_script = "uid://c0xife0bt2mo4"

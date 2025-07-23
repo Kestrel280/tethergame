@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu5oy1qgfmusx"]
+
+[ext_resource type="Script" uid="uid://eyeha38ywiac" path="res://classes/level/teleporter/teleporter.gd" id="1_kmx4h"]
+
+[node name="Teleporter" type="Area3D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_kmx4h")
+add_speed = null
+metadata/_custom_type_script = "uid://eyeha38ywiac"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

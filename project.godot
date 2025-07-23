@@ -24,6 +24,11 @@ Globals="*res://autoload/globals.gd"
 folder_colors={
 "res://autoload/": "red",
 "res://classes/": "orange",
+"res://classes/controllers/": "red",
+"res://classes/level/": "orange",
+"res://classes/player/": "yellow",
+"res://classes/player/states/": "red",
+"res://classes/state/": "green",
 "res://controllers/": "yellow",
 "res://maps/": "green",
 "res://textures/": "teal",
@@ -62,3 +67,10 @@ move_right={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="world"
+3d_physics/layer_2="player"
+3d_physics/layer_3="teleportable"
+3d_physics/layer_4="teleporter"
