@@ -22,16 +22,18 @@ Globals="*res://autoload/globals.gd"
 [file_customization]
 
 folder_colors={
-"res://autoload/": "red",
-"res://classes/": "orange",
+"res://assets/": "red",
+"res://autoload/": "orange",
+"res://classes/": "yellow",
 "res://classes/controllers/": "red",
 "res://classes/level/": "orange",
 "res://classes/player/": "yellow",
 "res://classes/player/controllers/movement_controller_player/movement_states/": "red",
 "res://classes/state/": "green",
-"res://maps/": "green",
-"res://textures/": "teal",
-"res://ui/": "blue"
+"res://docs/": "green",
+"res://maps/": "teal",
+"res://textures/": "blue",
+"res://ui/": "purple"
 }
 
 [input]
