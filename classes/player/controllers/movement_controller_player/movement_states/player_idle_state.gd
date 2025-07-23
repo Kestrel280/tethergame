@@ -20,4 +20,3 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	# Doing something
 	body.velocity += wish_dir * dt;
 	return Player_Walk_State.state_name;
-	

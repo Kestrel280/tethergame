@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c0xife0bt2mo4" path="res://classes/level/teleporter/teleportable.gd" id="5_loolv"]
 [ext_resource type="PackedScene" uid="uid://dsecrpcholfvy" path="res://classes/player/controllers/Input_Controller_Kbm.tscn" id="9_ki74y"]
 [ext_resource type="PackedScene" uid="uid://dp4jmam2vw06p" path="res://classes/player/controllers/Camera_Controller_Player.tscn" id="9_loolv"]
-[ext_resource type="PackedScene" uid="uid://hau4r4cp3ls0" path="res://classes/player/controllers/movement_controller/Movement_Controller_Player.tscn" id="10_ki74y"]
+[ext_resource type="PackedScene" uid="uid://hau4r4cp3ls0" path="res://classes/player/controllers/movement_controller_player/Movement_Controller_Player.tscn" id="10_ki74y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_loolv"]
 

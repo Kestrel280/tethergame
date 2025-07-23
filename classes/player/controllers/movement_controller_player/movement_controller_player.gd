@@ -2,9 +2,6 @@ class_name Movement_Controller_Player
 extends Movement_Controller_Base
 
 
-var wish_vel : Vector3;
-
-
 static func construct() -> Movement_Controller_Player:
 	return preload("Movement_Controller_Player.tscn").instantiate();
 
@@ -24,7 +21,6 @@ func start(body : Node3D):
 
 
 func move(dt : float, wish_dir : Vector3):
-	wish_vel = body.velocity;
 	wish_dir = Vector3(wish_dir.x, 0, wish_dir.z).normalized();
 	
 	var new_state_name : StringName = $State_Machine.current_state.update_velocity(dt, wish_dir, jumping);

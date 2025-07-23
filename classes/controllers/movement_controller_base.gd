@@ -6,8 +6,6 @@ extends Controller_Base
 ## which updates the location of the body it is controlling (set via start()).
 ## They should also define a get_current_move_state()->StringName function,
 ## but it is not strictly necessary.
-## Similarly, they may define a construct() function, which instantiates a new
-## copy of the controller for convenience; but this is also optional.
 
 signal movement_state_changed(new_state : StringName);
 
@@ -37,9 +35,5 @@ func move(dt : float, wish_dir : Vector3):
 	pass;
 
 
-func get_current_move_state():
+func get_current_move_state() -> StringName:
 	return "Unknown_Move_State";
-
-
-static func construct() -> Variant:
-	return null;

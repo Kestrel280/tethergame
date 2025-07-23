@@ -23,7 +23,10 @@ func _physics_process(dt : float):
 
 func transition(new_state_name : StringName) -> void:
 	var new_state = states.get(new_state_name);
-	if (new_state != null) and (new_state != current_state):
+	if !new_state:
+		print("State machine cannot transition from '%s' to '%s': no such state found" % [current_state.state_name, new_state_name]);
+		return;
+	if new_state != current_state:
 		current_state.exit();
 		new_state.enter();
 		current_state = new_state;
