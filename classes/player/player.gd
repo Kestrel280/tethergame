@@ -17,7 +17,7 @@ var _rot : Vector2 = Vector2.ZERO; # Cumulative rotation of the player
 @export_range(0.1, 1.0) var ground_friction = 0.3;
 @export_range(2.0, 10.0) var jump_impulse = 4.0;
 @export_range(1.0, 3.0) var air_speed_cap = 0.5; # Per-frame max speed to add
-@export_range(1.0, 3.0) var air_accel = 150.0; # How aggressively to apply air_speed_cap
+@export_range(10, 500.0) var air_accel = 150.0; # How aggressively to apply air_speed_cap
 
 
 func _input(event) -> void:
@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	camera_controller.add_rotation(-input_controller.incremental_rotation() * input_controller.sensitivity / ProjectSettings.get_setting("display/window/size/viewport_width"));
 	
 	var input_dir = ($Head.transform.basis * input_dir_raw).normalized();
-	movement_controller.set_jumping(input_controller.is_trying_jump());
+	movement_controller.jumping = input_controller.is_trying_jump();
 	movement_controller.move(delta, (self.transform.basis * input_dir).normalized());
 	
 	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);

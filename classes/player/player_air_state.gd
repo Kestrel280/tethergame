@@ -21,5 +21,4 @@ func try_move(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 	var max_speed_to_add = max(0, body.air_speed_cap - cur_speed_in_wish_dir);
 	var speed_to_add_in_wish_dir = clampf(body.air_accel * body.air_speed_cap * dt, 0.0, max_speed_to_add);
 	body.velocity += speed_to_add_in_wish_dir * wish_dir;
-	body.velocity += body.get_gravity() * dt;
 	return self.state_name;

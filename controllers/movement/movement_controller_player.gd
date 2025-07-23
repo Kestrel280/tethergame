@@ -17,7 +17,9 @@ func move(dt : float, wish_dir : Vector3):
 	# If we collided, do our own slide calculation first, before doing move_and_slide
 	var collision = body.move_and_collide(body.velocity * dt, true);
 	if collision:
-		if collision.get_normal().y > body.floor_max_angle: body.apply_floor_snap();
-		body.velocity = body.velocity.slide(collision.get_normal());
+		Globals.debug_panel.add_property("last_collision_inclination", "%.2f" % rad_to_deg(acos(collision.get_normal().y)));
+		if acos(collision.get_normal().y) < body.floor_max_angle: body.apply_floor_snap();
+		else: body.velocity = body.velocity.slide(collision.get_normal());
 	
+	body.velocity += body.get_gravity() * dt;
 	body.move_and_slide();
