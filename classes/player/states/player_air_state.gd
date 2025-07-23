@@ -5,7 +5,7 @@ extends Movement_State
 static var state_name : StringName = "Player_Air_State";
 
 
-func try_move(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
+func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 	if body.is_on_floor():
 		
 		# If we landed, but we're trying to jump, immediately re-jump and stay in airmove

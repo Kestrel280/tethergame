@@ -14,7 +14,7 @@ func _ready() -> void:
 	ground_accel = body.ground_accel;
 	ground_friction = body.ground_friction;
 
-func try_move(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
+func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 
 	var wish_vel : Vector3 = body.velocity;
 	

@@ -11,7 +11,7 @@ func _ready():
 
 
 # Should update 'velocity' of body and return a state name.
-func try_move(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
+func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 	return "";
 	pass;
 
