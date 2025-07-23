@@ -30,16 +30,12 @@ func _ready() -> void:
 	movement_controller = movement_controller_script.new();
 	camera_controller.start(self, $Head, $Head/Camera3D);
 	movement_controller.start(self, $Movement_State_Machine);
-	pass
 
 
 func _physics_process(delta: float) -> void:
 	# Get player's inputs
 	var input_dir_raw = input_controller.input_dir_raw();
-	_rot -= input_controller.incremental_rotation() * input_controller.sensitivity / ProjectSettings.get_setting("display/window/size/viewport_width");
-	_rot.x = wrapf(_rot.x, -PI, PI);
-	_rot.y = clampf(_rot.y, -PI/2, PI/2);
-	camera_controller.set_rotation(_rot.x, _rot.y);
+	camera_controller.add_rotation(-input_controller.incremental_rotation() * input_controller.sensitivity / ProjectSettings.get_setting("display/window/size/viewport_width"));
 	
 	var input_dir = ($Head.transform.basis * input_dir_raw).normalized();
 	movement_controller.set_jumping(input_controller.is_trying_jump());
@@ -49,15 +45,6 @@ func _physics_process(delta: float) -> void:
 	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);
 	Globals.debug_panel.add_property("xy_speed", "%3.2f" % Vector2(get_real_velocity().x, get_real_velocity().z).length());
 	Globals.debug_panel.add_property("energy", "%3.2f" % (get_real_velocity().length_squared() / 2 + position.y * ProjectSettings.get_setting("physics/3d/default_gravity")));
+	Globals.debug_panel.add_property("rotation", "%3.1f, %3.1f" % [rad_to_deg(camera_controller.rot.x), rad_to_deg(camera_controller.rot.y)]);
 	Globals.debug_panel.add_property("movement_state", movement_controller.movement_state_machine.current_state.state_name);
-
-
-# Helper function so that other nodes (e.g. Teleporters) may properly set
-#	body/head rotation, since built-in look_at() would be insufficient
-func look_at_custom(dir : Vector3):
-	var rot_x = -dir.slide(Vector3(0, 1, 0)).angle_to(Vector3(0, 0, -1)); # project onto xz plane and get angle from -z axis
-	var rot_y = -dir.slide(Vector3(0, 0, 1)).angle_to(Vector3(1, 0, 0)); # up/down: project onto xy plane and get angle from x axis
-	_rot = Vector2(rot_x, rot_y);
-	_rot.x = wrapf(_rot.x, -PI, PI);
-	_rot.y = clampf(_rot.y, -PI/2, PI/2);
-	camera_controller.set_rotation(_rot.x, _rot.y);
+	
