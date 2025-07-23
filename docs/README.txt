@@ -1,0 +1,1 @@
+For now, these are just unstructured notes and diagrams I've put together to help design the game. They may fall out of date or not be fully accurate to the game's logic.
