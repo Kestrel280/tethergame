@@ -30,6 +30,14 @@ func _input(event) -> void:
 			var test = Movement_Controller_State_Machine.construct([Player_Flymode_Idle_State.new(), Player_Flymode_Walk_State.new(), Player_Flymode_Air_State.new()]);
 			test.start(self);
 			swap_controller(test);
+		elif event.pressed and event.keycode == KEY_Z:
+			var test = Camera_Controller_3rd_Person.new();
+			test.start(self, $Head, $Head/Camera3D, $Camera_Controller.rot);
+			swap_controller(test);
+		elif event.pressed and event.keycode == KEY_C:
+			var test = Camera_Controller_1st_Person.new();
+			test.start(self, $Head, $Head/Camera3D, $Camera_Controller.rot);
+			swap_controller(test);
 		elif event.pressed and event.keycode == KEY_1:
 			equip_weapon(Weapon.new(self, preload("res://weapons/pistol/pistol.tres")));
 		elif event.pressed and event.keycode == KEY_2:
