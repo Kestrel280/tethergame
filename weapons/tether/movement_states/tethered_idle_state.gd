@@ -3,6 +3,12 @@ extends Movement_State
 
 
 static var state_name : StringName = "Tethered_Idle_State";
+var anchor_info : Anchor_Info;
+
+
+func start(body : CharacterBody3D):
+	super(body);
+	anchor_info = body.get_node("Tether_Anchor_Info");
 
 
 func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:

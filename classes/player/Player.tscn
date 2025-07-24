@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmu3p2dw8cim5"]
+[gd_scene load_steps=13 format=3 uid="uid://cmu3p2dw8cim5"]
 
 [ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cug1n1avxre40" path="res://classes/controllers/movement_controller_state_machine.gd" id="5_nqxhk"]
@@ -12,7 +12,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_loolv"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_loolv"]
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ki74y"]
+material = SubResource("StandardMaterial3D_loolv")
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 6

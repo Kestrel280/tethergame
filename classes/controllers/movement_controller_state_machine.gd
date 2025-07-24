@@ -9,7 +9,7 @@ extends Movement_Controller_Base
 
 # AIO, construct a new Movement_Controller_State_Machine.
 # states[0] -> default idle state; states[1] -> default ground state; states[2] default air state.
-static func construct(states : Array[Movement_State]) -> Movement_Controller_State_Machine:	
+static func construct(states : Array[Movement_State]) -> Movement_Controller_State_Machine:
 	assert(states.size() > 0, "Movement_Controller_State_Machine cannot be constructed with 0 states");
 	var me = Movement_Controller_State_Machine.new();
 	var sm = State_Machine.new();
