@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4bl141yrgl5l"
-path.s3tc="res://.godot/imported/kenney_prototype_checker1.png-789162f6852b7bc2a02251a16820cab1.s3tc.ctex"
+uid="uid://mevtc730a8eg"
+path.s3tc="res://.godot/imported/kenney_prototype_checker2.png-28cb90a6e75b0f7ac8c3b8fe1b9ba507.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/kenney_prototype_checker1.png"
-dest_files=["res://.godot/imported/kenney_prototype_checker1.png-789162f6852b7bc2a02251a16820cab1.s3tc.ctex"]
+source_file="res://assets/textures/kenney_prototype_checker2.png"
+dest_files=["res://.godot/imported/kenney_prototype_checker2.png-28cb90a6e75b0f7ac8c3b8fe1b9ba507.s3tc.ctex"]
 
 [params]
 

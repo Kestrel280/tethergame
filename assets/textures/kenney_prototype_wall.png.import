@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0p4to3curgd7"
-path.s3tc="res://.godot/imported/kenney_prototype_crosses.png-1fd5d98f72aaf9fb69483f200b6f5096.s3tc.ctex"
+uid="uid://c3f44qt1ylrdw"
+path.s3tc="res://.godot/imported/kenney_prototype_wall.png-cff539e3cebd7ac2667adcd4a4bf20ba.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/kenney_prototype_crosses.png"
-dest_files=["res://.godot/imported/kenney_prototype_crosses.png-1fd5d98f72aaf9fb69483f200b6f5096.s3tc.ctex"]
+source_file="res://assets/textures/kenney_prototype_wall.png"
+dest_files=["res://.godot/imported/kenney_prototype_wall.png-cff539e3cebd7ac2667adcd4a4bf20ba.s3tc.ctex"]
 
 [params]
 

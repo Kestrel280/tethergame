@@ -18,7 +18,3 @@ func input_dir_raw() -> Vector3:
 
 func is_trying_jump() -> bool:
 	return Input.is_action_pressed("jump");
-
-
-func _init() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);

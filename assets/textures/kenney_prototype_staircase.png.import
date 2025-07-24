@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3f44qt1ylrdw"
-path.s3tc="res://.godot/imported/kenney_prototype_wall.png-d8ee531c5929783a3ca7701637e9a6f9.s3tc.ctex"
+uid="uid://bcv7cwr8eakxn"
+path.s3tc="res://.godot/imported/kenney_prototype_staircase.png-c62828ac59d84a09a8fa25dfdd1dcc0e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/kenney_prototype_wall.png"
-dest_files=["res://.godot/imported/kenney_prototype_wall.png-d8ee531c5929783a3ca7701637e9a6f9.s3tc.ctex"]
+source_file="res://assets/textures/kenney_prototype_staircase.png"
+dest_files=["res://.godot/imported/kenney_prototype_staircase.png-c62828ac59d84a09a8fa25dfdd1dcc0e.s3tc.ctex"]
 
 [params]
 

@@ -5,7 +5,7 @@ extends Controller_Base
 var rot : Vector2 = Vector2.ZERO;
 
 
-# Users of the component must set these!
+# Users of the component must set these! (using start())
 var body : Node3D;
 var head : Node3D;
 var camera : Camera3D;

@@ -1,10 +1,10 @@
 [gd_scene load_steps=25 format=3 uid="uid://c7evt6848gmsp"]
 
 [ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_otnkw"]
-[ext_resource type="Texture2D" uid="uid://mevtc730a8eg" path="res://textures/kenney_prototype_checker2.png" id="2_7v2bt"]
-[ext_resource type="Texture2D" uid="uid://c3f44qt1ylrdw" path="res://textures/kenney_prototype_wall.png" id="3_f4oj7"]
-[ext_resource type="Texture2D" uid="uid://bur5pqkbdc4qx" path="res://textures/kenney_prototype_multigrid.png" id="4_4vsd1"]
-[ext_resource type="PackedScene" uid="uid://cmu3p2dw8cim5" path="res://classes/player/Player.tscn" id="5_7v2bt"]
+[ext_resource type="Texture2D" uid="uid://mevtc730a8eg" path="res://assets/textures/kenney_prototype_checker2.png" id="2_7v2bt"]
+[ext_resource type="Texture2D" uid="uid://dvywqmcpt1odj" path="res://assets/textures/cap.png" id="3_4vsd1"]
+[ext_resource type="Texture2D" uid="uid://c3f44qt1ylrdw" path="res://assets/textures/kenney_prototype_wall.png" id="3_f4oj7"]
+[ext_resource type="Texture2D" uid="uid://bur5pqkbdc4qx" path="res://assets/textures/kenney_prototype_multigrid.png" id="4_4vsd1"]
 [ext_resource type="PackedScene" uid="uid://bu5oy1qgfmusx" path="res://classes/level/teleporter/teleporter.tscn" id="6_f4oj7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q7ijp"]
@@ -27,7 +27,20 @@ size = Vector3(100, 1, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnwcu"]
 albedo_texture = ExtResource("2_7v2bt")
-uv1_scale = Vector3(25, 25, 25)
+roughness_texture_channel = 4
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+emission_operator = 1
+emission_texture = ExtResource("3_4vsd1")
+normal_scale = 0.15
+normal_texture = ExtResource("3_4vsd1")
+rim = 0.0
+clearcoat_roughness = 0.95
+clearcoat_texture = ExtResource("3_4vsd1")
+anisotropy = 1.0
+heightmap_scale = -16.0
+heightmap_texture = ExtResource("3_4vsd1")
+uv1_scale = Vector3(100, 100, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3st6x"]
 material = SubResource("StandardMaterial3D_vnwcu")
@@ -122,8 +135,6 @@ shape = SubResource("BoxShape3D_q7ijp")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp"]
 mesh = SubResource("BoxMesh_kabis")
 skeleton = NodePath("../CollisionShape3D")
-
-[node name="Player" parent="." instance=ExtResource("5_7v2bt")]
 
 [node name="Teleporter" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("6_f4oj7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, -5.5)

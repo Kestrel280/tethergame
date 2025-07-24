@@ -23,6 +23,7 @@ Globals="*res://autoload/globals.gd"
 
 folder_colors={
 "res://assets/": "red",
+"res://assets/textures/": "blue",
 "res://autoload/": "orange",
 "res://classes/": "yellow",
 "res://classes/controllers/": "red",
@@ -32,7 +33,6 @@ folder_colors={
 "res://classes/state/": "green",
 "res://docs/": "green",
 "res://maps/": "teal",
-"res://textures/": "blue",
 "res://ui/": "purple"
 }
 

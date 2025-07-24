@@ -13,6 +13,10 @@ var _rot : Vector2 = Vector2.ZERO; # Cumulative rotation of the player
 @export_range(10, 500.0) var air_accel = 150.0; # How aggressively to apply air_speed_cap
 
 
+static func construct() -> Player:
+	return preload("Player.tscn").instantiate();
+
+
 func _input(event) -> void:
 	$Input_Controller.handle_input(event);
 	if event is InputEventKey:
@@ -20,7 +24,7 @@ func _input(event) -> void:
 			var test = Movement_Controller_Player.construct();
 			test.start(self);
 			swap_controller(test);
-		if event.pressed and event.keycode == KEY_2:
+		elif event.pressed and event.keycode == KEY_2:
 			var test = Movement_Controller_Player_Alt.construct();
 			test.start(self);
 			swap_controller(test);

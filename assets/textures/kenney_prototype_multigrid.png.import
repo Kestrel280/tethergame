@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcv7cwr8eakxn"
-path.s3tc="res://.godot/imported/kenney_prototype_staircase.png-69a81bcf8eecd2ea52ccb46bf8adf082.s3tc.ctex"
+uid="uid://bur5pqkbdc4qx"
+path.s3tc="res://.godot/imported/kenney_prototype_multigrid.png-61e1859bcc2d518c9d89438b6914133c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/kenney_prototype_staircase.png"
-dest_files=["res://.godot/imported/kenney_prototype_staircase.png-69a81bcf8eecd2ea52ccb46bf8adf082.s3tc.ctex"]
+source_file="res://assets/textures/kenney_prototype_multigrid.png"
+dest_files=["res://.godot/imported/kenney_prototype_multigrid.png-61e1859bcc2d518c9d89438b6914133c.s3tc.ctex"]
 
 [params]
 
