@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c762mopf1a4ec"]
-
-[ext_resource type="Script" uid="uid://c0xife0bt2mo4" path="res://classes/level/teleporter/teleportable.gd" id="1_451d3"]
-
-[node name="Teleportable" type="Node"]
-script = ExtResource("1_451d3")

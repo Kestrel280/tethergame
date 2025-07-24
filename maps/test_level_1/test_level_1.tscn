@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dvywqmcpt1odj" path="res://assets/textures/cap.png" id="3_4vsd1"]
 [ext_resource type="Texture2D" uid="uid://c3f44qt1ylrdw" path="res://assets/textures/kenney_prototype_wall.png" id="3_f4oj7"]
 [ext_resource type="Texture2D" uid="uid://bur5pqkbdc4qx" path="res://assets/textures/kenney_prototype_multigrid.png" id="4_4vsd1"]
-[ext_resource type="PackedScene" uid="uid://bu5oy1qgfmusx" path="res://classes/level/teleporter/teleporter.tscn" id="6_f4oj7"]
+[ext_resource type="PackedScene" uid="uid://tl2aentxvhia" path="res://classes/level/teleporter/teleporter.tscn" id="6_f4oj7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q7ijp"]
 sky_top_color = Color(0.0822872, 0.350402, 0.845244, 1)
