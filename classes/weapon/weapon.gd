@@ -23,13 +23,13 @@ func _ready() -> void:
 	add_child(mesh);
 
 
-func try_shoot() -> void:
-	if in_shot_cooldown: return;
+func try_shoot() -> bool:
+	if in_shot_cooldown: return false;
 	
 	in_shot_cooldown = true;
 	shoot_action.shoot(carrier, self);
-	await get_tree().create_timer(weapon_res.shot_cooldown).timeout;
-	in_shot_cooldown = false;
+	get_tree().create_timer(weapon_res.shot_cooldown).timeout.connect(func(): in_shot_cooldown = false);
+	return true;
 
 
 func stop_shoot() -> void:

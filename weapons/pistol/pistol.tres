@@ -12,5 +12,6 @@ mesh = SubResource("BoxMesh_tsb7k")
 position = Vector3(0.15, -0.08, -0.25)
 orientation = Vector3(12, 0, 0)
 single_shot = false
+shot_cooldown = 0.2
 shoot_script = ExtResource("2_tsb7k")
 metadata/_custom_type_script = "uid://dumbt6yqtdj6q"
