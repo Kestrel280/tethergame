@@ -31,8 +31,10 @@ func _input(event) -> void:
 			test.start(self);
 			swap_controller(test);
 		elif event.pressed and event.keycode == KEY_1:
-			equip_weapon(Weapon.new(preload("res://weapons/pistol/pistol.tres")));
-		
+			equip_weapon(Weapon.new(self, preload("res://weapons/pistol/pistol.tres")));
+	elif Input.is_action_just_pressed("shoot"):
+		if weapon: weapon.try_shoot();
+
 
 
 func _ready() -> void:
