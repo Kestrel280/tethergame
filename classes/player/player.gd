@@ -32,8 +32,12 @@ func _input(event) -> void:
 			swap_controller(test);
 		elif event.pressed and event.keycode == KEY_1:
 			equip_weapon(Weapon.new(self, preload("res://weapons/pistol/pistol.tres")));
+		elif event.pressed and event.keycode == KEY_2:
+			equip_weapon(Weapon.new(self, preload("res://weapons/tether/tether.tres")));
 	elif Input.is_action_just_pressed("shoot"):
 		if weapon: weapon.try_shoot();
+	elif Input.is_action_just_released("shoot"):
+		if weapon: weapon.stop_shoot();
 
 
 

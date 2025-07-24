@@ -5,6 +5,8 @@ extends Node3D
 var carrier : Node3D;
 var mesh : MeshInstance3D;
 var shoot_action : Weapon_Shoot_Action;
+var in_shot_cooldown : bool = false;
+var weapon_res : Weapon_Resource;
 
 
 func _init(carrier : Node3D, weapon_res : Weapon_Resource):
@@ -14,6 +16,7 @@ func _init(carrier : Node3D, weapon_res : Weapon_Resource):
 	mesh.position = weapon_res.position;
 	mesh.rotation_degrees = weapon_res.orientation;
 	shoot_action = weapon_res.shoot_script.new();
+	self.weapon_res = weapon_res;
 
 
 func _ready() -> void:
@@ -21,4 +24,17 @@ func _ready() -> void:
 
 
 func try_shoot() -> void:
+	if in_shot_cooldown: return;
+	
+	in_shot_cooldown = true;
 	shoot_action.shoot(carrier, self);
+	await get_tree().create_timer(weapon_res.shot_cooldown).timeout;
+	in_shot_cooldown = false;
+
+
+func stop_shoot() -> void:
+	shoot_action.stop_shoot(carrier);
+
+
+func abort_shoot() -> void:
+	shoot_action.abort_shoot(carrier);

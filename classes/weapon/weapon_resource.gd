@@ -7,4 +7,5 @@ extends Resource
 @export var orientation : Vector3;
 @export_subgroup("Properties")
 @export var single_shot : bool = false;
+@export_range(0.05, 5.0) var shot_cooldown : float = 0.2;
 @export var shoot_script : GDScript;

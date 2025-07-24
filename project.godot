@@ -33,7 +33,8 @@ folder_colors={
 "res://classes/state/": "green",
 "res://docs/": "green",
 "res://maps/": "teal",
-"res://ui/": "purple"
+"res://ui/": "purple",
+"res://weapons/": "pink"
 }
 
 [input]
