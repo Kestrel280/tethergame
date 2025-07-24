@@ -3,6 +3,8 @@ extends CharacterBody3D
 
 
 var _rot : Vector2 = Vector2.ZERO; # Cumulative rotation of the player
+var weapon : Weapon; # Currently equipped weapon
+
 
 # TODO find a better place for these; referenced in movement states
 @export_range(2.0, 10.0) var max_ground_speed = 5.0;
@@ -20,14 +22,17 @@ static func construct() -> Player:
 func _input(event) -> void:
 	$Input_Controller.handle_input(event);
 	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_1:
+		if event.pressed and event.keycode == KEY_Q:
 			var test = Movement_Controller_Player.construct();
 			test.start(self);
 			swap_controller(test);
-		elif event.pressed and event.keycode == KEY_2:
+		elif event.pressed and event.keycode == KEY_E:
 			var test = Movement_Controller_Player_Alt.construct();
 			test.start(self);
 			swap_controller(test);
+		elif event.pressed and event.keycode == KEY_1:
+			equip_weapon(Weapon.new(preload("res://weapons/pistol/pistol.tres")));
+		
 
 
 func _ready() -> void:
@@ -64,3 +69,10 @@ func swap_controller(new_controller : Controller_Base) -> Node:
 				remove_child(old_controller);
 	add_child(new_controller);
 	return old_controller;
+
+
+func equip_weapon(weapon : Weapon):
+	if self.weapon:
+		self.weapon.queue_free();
+	$Camera_Controller.get_head().add_child(weapon);
+	self.weapon = weapon;

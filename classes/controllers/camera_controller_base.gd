@@ -22,6 +22,10 @@ func start(body : Node3D, head : Node3D, camera : Camera3D):
 	self.camera = camera;
 
 
+func get_head():
+	return head;
+
+
 func add_rotation(r : Vector2):
 	rot += r;
 	rot.x = wrapf(rot.x, -PI, PI);
