@@ -23,11 +23,11 @@ func _input(event) -> void:
 	$Input_Controller.handle_input(event);
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_Q:
-			var test = Movement_Controller_Player.construct();
+			var test = Movement_Controller_State_Machine.construct([Player_Idle_State.new(), Player_Walk_State.new(), Player_Air_State.new()]);
 			test.start(self);
 			swap_controller(test);
 		elif event.pressed and event.keycode == KEY_E:
-			var test = Movement_Controller_Player_Alt.construct();
+			var test = Movement_Controller_State_Machine.construct([Player_Alt_Idle_State.new(), Player_Alt_Walk_State.new(), Player_Alt_Fly_State.new()]);
 			test.start(self);
 			swap_controller(test);
 		elif event.pressed and event.keycode == KEY_1:

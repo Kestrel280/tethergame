@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmu3p2dw8cim5"]
+[gd_scene load_steps=12 format=3 uid="uid://cmu3p2dw8cim5"]
 
 [ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player/player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://cug1n1avxre40" path="res://classes/controllers/movement_controller_state_machine.gd" id="5_nqxhk"]
 [ext_resource type="Script" uid="uid://c0xife0bt2mo4" path="res://classes/level/teleporter/teleportable.gd" id="5_vqdx7"]
+[ext_resource type="Script" uid="uid://cnfr7v75ouaag" path="res://classes/state/state_machine.gd" id="6_loolv"]
+[ext_resource type="Script" uid="uid://de08x13bjvfi" path="res://classes/player/move_states/player_air_state.gd" id="6_v2huk"]
+[ext_resource type="Script" uid="uid://bsgml6prcya47" path="res://classes/player/move_states/player_idle_state.gd" id="7_loolv"]
+[ext_resource type="Script" uid="uid://d1eyuapmclcra" path="res://classes/player/move_states/player_walk_state.gd" id="8_ki74y"]
 [ext_resource type="PackedScene" uid="uid://dsecrpcholfvy" path="res://classes/player/controllers/Input_Controller_Kbm.tscn" id="9_ki74y"]
 [ext_resource type="PackedScene" uid="uid://dp4jmam2vw06p" path="res://classes/player/controllers/Camera_Controller_Player.tscn" id="9_loolv"]
-[ext_resource type="PackedScene" uid="uid://hau4r4cp3ls0" path="res://classes/player/controllers/movement_controller_player/Movement_Controller_Player.tscn" id="10_ki74y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_loolv"]
 
@@ -33,8 +37,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Input_Controller" parent="." instance=ExtResource("9_ki74y")]
 
-[node name="Movement_Controller" parent="." instance=ExtResource("10_ki74y")]
-
 [node name="Teleportable" type="Node" parent="."]
 script = ExtResource("5_vqdx7")
 metadata/_custom_type_script = "uid://c0xife0bt2mo4"
+
+[node name="Movement_Controller_State_Machine" type="Node" parent="." node_paths=PackedStringArray("default_idle_state", "default_ground_state", "default_air_state")]
+script = ExtResource("5_nqxhk")
+default_idle_state = NodePath("State_Machine/Player_Idle_State")
+default_ground_state = NodePath("State_Machine/Player_Walk_State")
+default_air_state = NodePath("State_Machine/Player_Air_State")
+metadata/_custom_type_script = "uid://cug1n1avxre40"
+
+[node name="State_Machine" type="Node" parent="Movement_Controller_State_Machine"]
+script = ExtResource("6_loolv")
+metadata/_custom_type_script = "uid://cnfr7v75ouaag"
+
+[node name="Player_Air_State" type="Node" parent="Movement_Controller_State_Machine/State_Machine"]
+script = ExtResource("6_v2huk")
+metadata/_custom_type_script = "uid://de08x13bjvfi"
+
+[node name="Player_Idle_State" type="Node" parent="Movement_Controller_State_Machine/State_Machine"]
+script = ExtResource("7_loolv")
+metadata/_custom_type_script = "uid://bsgml6prcya47"
+
+[node name="Player_Walk_State" type="Node" parent="Movement_Controller_State_Machine/State_Machine"]
+script = ExtResource("8_ki74y")
+metadata/_custom_type_script = "uid://d1eyuapmclcra"

@@ -3,8 +3,7 @@ extends Weapon_Shoot_Action
 
 var anchor_pos : Vector3;
 var stored_movement_controller : Movement_Controller_Base;
-var tethered_movement_controller : Movement_Controller_Tethered = Movement_Controller_Tethered.construct();
-
+var tethered_movement_controller : Movement_Controller_State_Machine = Movement_Controller_State_Machine.construct([Tethered_Idle_State.new(), Tethered_Walk_State.new(), Tethered_Air_State.new()]);
 
 
 func shoot(weapon_carrier : Player, weapon : Weapon):
@@ -17,7 +16,6 @@ func shoot(weapon_carrier : Player, weapon : Weapon):
 		stored_movement_controller = weapon_carrier.swap_controller(tethered_movement_controller);
 		print("tethered to %s at %s" % [result.collider, result.position]);
 	else: print("tether missed");
-
 
 
 func stop_shoot(weapon_carrier : Player):

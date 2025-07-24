@@ -8,6 +8,8 @@ static var state_name : StringName = "Player_Walk_State";
 func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 	if !body.is_on_floor(): return Player_Air_State.state_name;
 	
+	wish_dir = Vector3(wish_dir.x, 0, wish_dir.z).normalized();
+	
 	# If trying to jump, just jump and transition to air state
 	if trying_jump: 
 		do_jump();
@@ -21,4 +23,3 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 		body.velocity = body.velocity.move_toward(Vector3.ZERO, body.ground_friction);
 		if body.velocity.is_zero_approx(): return Player_Idle_State.state_name;
 	return Player_Walk_State.state_name;
-	

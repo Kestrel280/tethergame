@@ -18,5 +18,6 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	if wish_dir == Vector3.ZERO: return Player_Idle_State.state_name;
 	
 	# Doing something
+	wish_dir = Vector3(wish_dir.x, 0, wish_dir.z).normalized();
 	body.velocity += wish_dir * dt;
 	return Player_Walk_State.state_name;
