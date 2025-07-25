@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cmu3p2dw8cim5"]
+[gd_scene load_steps=16 format=3 uid="uid://cmu3p2dw8cim5"]
 
 [ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cug1n1avxre40" path="res://classes/controllers/movement_controller_state_machine.gd" id="5_nqxhk"]
@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://d1eyuapmclcra" path="res://classes/player/move_states/default_mode/player_walk_state.gd" id="8_ki74y"]
 [ext_resource type="Script" uid="uid://bk2mg7jt7y2dm" path="res://classes/controllers/input_controller_kbm.gd" id="9_ki74y"]
 [ext_resource type="Script" uid="uid://cm5b2uks7uwmw" path="res://classes/controllers/camera_controller_base.gd" id="9_loolv"]
+[ext_resource type="Script" uid="uid://7kl4mh5of1t7" path="res://classes/player/player_ui.gd" id="10_wc7k0"]
+[ext_resource type="Script" uid="uid://mqoi0xuptywi" path="res://ui/label_kinetic/label_kinetic.gd" id="12_4kxxt"]
+[ext_resource type="Texture2D" uid="uid://f425rgeqtr4c" path="res://assets/textures/plus_32px.png" id="12_wc7k0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_loolv"]
 
@@ -70,3 +73,79 @@ metadata/_custom_type_script = "uid://cm5b2uks7uwmw"
 [node name="Input_Controller_Kbm" type="Node" parent="."]
 script = ExtResource("9_ki74y")
 metadata/_custom_type_script = "uid://bk2mg7jt7y2dm"
+
+[node name="Player_Ui" type="Control" parent="." node_paths=PackedStringArray("player")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_wc7k0")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://d1cktkjuaj1f7"
+
+[node name="Center_Screen" type="Control" parent="Player_Ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Kinetics_Console" type="VBoxContainer" parent="Player_Ui/Center_Screen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 50.0
+offset_right = 50.0
+offset_bottom = 103.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Speed_Label" type="Label" parent="Player_Ui/Center_Screen/Kinetics_Console"]
+layout_mode = 2
+text = "[speed]"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("12_4kxxt")
+max_gain = 0.02
+max_loss = -0.05
+smoothing_factor = 0.4
+metadata/_custom_type_script = "uid://mqoi0xuptywi"
+
+[node name="Energy_Label" type="Label" parent="Player_Ui/Center_Screen/Kinetics_Console"]
+layout_mode = 2
+text = "[energy]"
+horizontal_alignment = 1
+script = ExtResource("12_4kxxt")
+max_gain = 0.2
+max_loss = -0.35
+smoothing_factor = 0.4
+metadata/_custom_type_script = "uid://mqoi0xuptywi"
+
+[node name="Crosshair" type="TextureRect" parent="Player_Ui/Center_Screen"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_wc7k0")

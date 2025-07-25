@@ -12,5 +12,6 @@ mesh = SubResource("BoxMesh_xx77b")
 position = Vector3(0.2, -0.08, -0.25)
 orientation = Vector3(45, 45, 45)
 single_shot = true
+shot_cooldown = 0.2
 shoot_script = ExtResource("2_mpja1")
 metadata/_custom_type_script = "uid://dumbt6yqtdj6q"
