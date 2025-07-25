@@ -21,7 +21,7 @@ func _init(counterweight : Node3D, embedded_object : Node3D, anchor_point : Vect
 		debug_sphere.mesh = SphereMesh.new();
 		debug_sphere.mesh.radius = sqrt(self.sqdist);
 		debug_sphere.mesh.height = sqrt(self.sqdist) * 2;
-		debug_sphere.mesh.material = preload("res://assets/materials/debug/transparent_debug_material.tres");
+		debug_sphere.mesh.material = preload("res://assets/materials/debug/debug_transparent_grid_material.tres");
 		self.embedded_object.add_child(debug_sphere);
 
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5fvsif3u55py"]
+
+[ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_d8o4e"]
+
+[node name="Test_Level_2" type="Node"]
+script = ExtResource("1_d8o4e")
+metadata/_custom_type_script = "uid://bn50xtepv757k"

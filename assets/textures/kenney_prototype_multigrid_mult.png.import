@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvoubv5yxmk58"
-path.bptc="res://.godot/imported/plus_128px.png-3556ef77f08037a5adac6387d3bf830c.bptc.ctex"
+uid="uid://d4m0tedehee0u"
+path.s3tc="res://.godot/imported/kenney_prototype_multigrid_mult.png-5f5ea820cb59c5952e9f3a1b6b7cd1d4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,13 +11,13 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/plus_128px.png"
-dest_files=["res://.godot/imported/plus_128px.png-3556ef77f08037a5adac6387d3bf830c.bptc.ctex"]
+source_file="res://assets/textures/kenney_prototype_multigrid_mult.png"
+dest_files=["res://.godot/imported/kenney_prototype_multigrid_mult.png-5f5ea820cb59c5952e9f3a1b6b7cd1d4.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

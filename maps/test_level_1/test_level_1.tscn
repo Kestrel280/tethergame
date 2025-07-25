@@ -1,11 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://c7evt6848gmsp"]
+[gd_scene load_steps=23 format=3 uid="uid://c7evt6848gmsp"]
 
 [ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_otnkw"]
-[ext_resource type="Texture2D" uid="uid://mevtc730a8eg" path="res://assets/textures/kenney_prototype_checker2.png" id="2_7v2bt"]
-[ext_resource type="Texture2D" uid="uid://dvywqmcpt1odj" path="res://assets/textures/cap.png" id="3_4vsd1"]
+[ext_resource type="Texture2D" uid="uid://d4m0tedehee0u" path="res://assets/textures/kenney_prototype_multigrid_mult.png" id="3_4vsd1"]
 [ext_resource type="Texture2D" uid="uid://c3f44qt1ylrdw" path="res://assets/textures/kenney_prototype_wall.png" id="3_f4oj7"]
 [ext_resource type="Texture2D" uid="uid://bur5pqkbdc4qx" path="res://assets/textures/kenney_prototype_multigrid.png" id="4_4vsd1"]
+[ext_resource type="PackedScene" uid="uid://c2d6hkg0pedug" path="res://assets/models/ramp.tscn" id="6_4vsd1"]
 [ext_resource type="PackedScene" uid="uid://tl2aentxvhia" path="res://classes/level/teleporter/teleporter.tscn" id="6_f4oj7"]
+[ext_resource type="Material" uid="uid://d3e031uj0u37s" path="res://assets/materials/debug/debug_grid_material.tres" id="7_4vsd1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q7ijp"]
 sky_top_color = Color(0.0822872, 0.350402, 0.845244, 1)
@@ -25,25 +26,22 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_kerkd"]
 size = Vector3(100, 1, 100)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnwcu"]
-albedo_texture = ExtResource("2_7v2bt")
-roughness_texture_channel = 4
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16v1w"]
+albedo_texture = ExtResource("4_4vsd1")
+emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.0
+emission_energy_multiplier = 2.0
 emission_operator = 1
 emission_texture = ExtResource("3_4vsd1")
-normal_scale = 0.15
-normal_texture = ExtResource("3_4vsd1")
-rim = 0.0
-clearcoat_roughness = 0.95
-clearcoat_texture = ExtResource("3_4vsd1")
-anisotropy = 1.0
-heightmap_scale = -16.0
-heightmap_texture = ExtResource("3_4vsd1")
-uv1_scale = Vector3(100, 100, 100)
+uv1_scale = Vector3(0.125, 0.125, 0.125)
+uv1_triplanar = true
+uv2_world_triplanar = true
+texture_filter = 4
+grow_amount = 6.4
+proximity_fade_distance = 5.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_3st6x"]
-material = SubResource("StandardMaterial3D_vnwcu")
+material = SubResource("StandardMaterial3D_16v1w")
 size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kabis"]
@@ -57,23 +55,22 @@ material = SubResource("StandardMaterial3D_jm8pa")
 [sub_resource type="BoxShape3D" id="BoxShape3D_eupo4"]
 size = Vector3(1, 1, 5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kerkd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vsd1"]
 albedo_texture = ExtResource("4_4vsd1")
-uv1_scale = Vector3(1, 5, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 5.0
+emission_operator = 1
+emission_texture = ExtResource("3_4vsd1")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv2_world_triplanar = true
+texture_filter = 4
+grow_amount = 6.4
+proximity_fade_distance = 5.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_q7ijp"]
-material = SubResource("StandardMaterial3D_kerkd")
-size = Vector3(1, 1, 5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_q7ijp"]
-size = Vector3(1, 1, 5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3st6x"]
-albedo_texture = ExtResource("4_4vsd1")
-uv1_scale = Vector3(5, 25, 5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_kabis"]
-material = SubResource("StandardMaterial3D_3st6x")
+material = SubResource("StandardMaterial3D_4vsd1")
 size = Vector3(1, 1, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4oj7"]
@@ -86,18 +83,6 @@ size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_16v1w"]
 size = Vector3(2, 2, 2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vsd1"]
-albedo_texture = ExtResource("4_4vsd1")
-uv1_scale = Vector3(20, 20, 20)
-texture_filter = 4
-
-[sub_resource type="BoxMesh" id="BoxMesh_f4oj7"]
-material = SubResource("StandardMaterial3D_4vsd1")
-size = Vector3(8, 8, 40)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4vsd1"]
-size = Vector3(8, 8, 40)
 
 [node name="TestLevel1" type="Node"]
 script = ExtResource("1_otnkw")
@@ -138,16 +123,6 @@ debug_color = Color(0, 0.6, 0.701961, 0.784314)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Slope"]
 mesh = SubResource("BoxMesh_q7ijp")
 
-[node name="Ramp" type="StaticBody3D" parent="."]
-transform = Transform3D(1.41421, -1.41421, 0, 1.41421, 1.41421, 0, 0, 0, 2, -3, -0.5, -5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp"]
-shape = SubResource("BoxShape3D_q7ijp")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp"]
-mesh = SubResource("BoxMesh_kabis")
-skeleton = NodePath("../CollisionShape3D")
-
 [node name="Teleporter" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("6_f4oj7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, -5.5)
 destination = NodePath("../Teleporter_Exit")
@@ -162,11 +137,11 @@ shape = SubResource("BoxShape3D_16v1w")
 [node name="Teleporter_Exit" type="Node3D" parent="."]
 transform = Transform3D(-4.30473e-08, 7.5904e-09, -1, 0.173648, 0.984808, 0, 0.984808, -0.173648, -4.37114e-08, 0, 25, -60)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -15, -0.5, 0)
+[node name="ramp" parent="." instance=ExtResource("6_4vsd1")]
+transform = Transform3D(-9.44166e-07, 0, 5.4, 0, 5.4, 0, -21.6, 0, -2.36041e-07, -9, -0.6, -1.03478)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_f4oj7")
+[node name="Plane" parent="ramp" index="0"]
+transform = Transform3D(1, 0, -1.13646e-14, 0, 1, 0, 1.13646e-14, 0, 1, 0, 0, 0)
+surface_material_override/0 = ExtResource("7_4vsd1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_4vsd1")
+[editable path="ramp"]
