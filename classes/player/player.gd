@@ -57,7 +57,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Get player's inputs
 	var input_dir_raw = $Input_Controller.input_dir_raw();
-	$Camera_Controller.add_rotation(-$Input_Controller.incremental_rotation() * $Input_Controller.sensitivity / ProjectSettings.get_setting("display/window/size/viewport_width"));
+	$Camera_Controller.add_rotation(-$Input_Controller.incremental_rotation() / ProjectSettings.get_setting("display/window/size/viewport_width"));
 	
 	var input_dir = ($Head.transform.basis * input_dir_raw).normalized();
 	$Movement_Controller.jumping = $Input_Controller.is_trying_jump();

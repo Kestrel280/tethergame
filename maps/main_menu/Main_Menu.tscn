@@ -67,13 +67,18 @@ layout_mode = 2
 theme = ExtResource("2_pmqs8")
 alignment = 1
 
-[node name="Play" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
+[node name="Level1" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
 layout_mode = 2
-text = "Play"
+text = "Level 1"
+
+[node name="Level2" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
+layout_mode = 2
+text = "Level 2"
 
 [node name="Quit" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Level2" to="." method="_on_level_2_pressed"]
 [connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Quit" to="." method="_on_quit_pressed"]

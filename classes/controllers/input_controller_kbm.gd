@@ -2,13 +2,13 @@ class_name Input_Controller_Kbm
 extends Input_Controller_Base
 
 
-@export_range(1.0, 25.0) var sensitivity : float = 4.0;
+@export_range(0.5, 5.0) var sensitivity : float = 1.8;
 
 
 func handle_input(event) -> void:
 	if event is InputEventMouseMotion:
-		_rot_x += event.relative.x;
-		_rot_y += event.relative.y;
+		_rot_x += event.relative.x * sensitivity;
+		_rot_y += event.relative.y * sensitivity;
 
 
 func input_dir_raw() -> Vector3:

@@ -9,9 +9,13 @@ func spawn_player(player : Player):
 	player.queue_free();
 
 
-func _on_play_pressed() -> void:
+func _on_quit_pressed() -> void:
+	MessageBus.quit_requested.emit();
+
+
+func _on_level_1_pressed() -> void:
 	MessageBus.change_level_requested.emit("test_level_1");
 
 
-func _on_quit_pressed() -> void:
-	MessageBus.quit_requested.emit();
+func _on_level_2_pressed() -> void:
+	MessageBus.change_level_requested.emit("test_level_2");
