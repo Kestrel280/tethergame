@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://55gc1s30fd16"]
+
+[ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_cafxn"]
+[ext_resource type="PackedScene" uid="uid://cik6qg27hmqbt" path="res://maps/test_level_3/level_3.blend" id="2_hffis"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cafxn"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_hffis"]
+sky_material = SubResource("ProceduralSkyMaterial_cafxn")
+
+[sub_resource type="Environment" id="Environment_iaoln"]
+background_mode = 2
+sky = SubResource("Sky_hffis")
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level_3" type="Node"]
+script = ExtResource("1_cafxn")
+metadata/_custom_type_script = "uid://bn50xtepv757k"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.821785, 0.467715, -0.32544, -0.130181, 0.401928, 0.90637, 0.554727, 0.787208, -0.269411, 0, 0, 0)
+light_energy = 0.7
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iaoln")
+
+[node name="level_3" parent="." instance=ExtResource("2_hffis")]
+
+[editable path="level_3"]
