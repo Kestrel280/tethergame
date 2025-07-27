@@ -30,10 +30,15 @@ func shoot(weapon_carrier : Player, weapon : Weapon):
 		movement_controller_tethered.start(weapon_carrier);
 		# Then give the movement controller to the carrier
 		stored_movement_controller = weapon_carrier.swap_controller(movement_controller_tethered);
+		# Play a sound
+		Sound_Manager.play_sound(weapon.weapon_res.hit_sound);
+	else:
+		Sound_Manager.play_sound(weapon.weapon_res.miss_sound);
 
 
-func stop_shoot(weapon_carrier : Player):
+func stop_shoot(weapon_carrier : Player, weapon : Weapon):
 	if anchor_info:
+		Sound_Manager.play_sound(weapon.weapon_res.unshoot_sound);
 		weapon_carrier.remove_child(anchor_info);
 		anchor_info.queue_free();
 	if stored_movement_controller:
@@ -41,8 +46,8 @@ func stop_shoot(weapon_carrier : Player):
 		stored_movement_controller = null;
 
 
-func abort_shoot(weapon_carrier : Node3D):
-	stop_shoot(weapon_carrier);
+func abort_shoot(weapon_carrier : Node3D, weapon : Weapon):
+	stop_shoot(weapon_carrier, weapon);
 
 
 func _physics_update(dt : float):

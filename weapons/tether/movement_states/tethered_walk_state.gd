@@ -23,10 +23,10 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	
 	# If we're actually trying to walk, bypass friction
 	if wish_dir:
-		body.velocity.x = lerp(body.velocity.x, wish_dir.x * body.max_ground_speed, body.ground_accel);
-		body.velocity.z = lerp(body.velocity.z, wish_dir.z * body.max_ground_speed, body.ground_accel);
+		body.velocity.x = lerp(body.velocity.x, wish_dir.x * Player_Settings.max_ground_speed, Player_Settings.ground_accel);
+		body.velocity.z = lerp(body.velocity.z, wish_dir.z * Player_Settings.max_ground_speed, Player_Settings.ground_accel);
 	else:
-		body.velocity = body.velocity.move_toward(Vector3.ZERO, body.ground_friction);
+		body.velocity = body.velocity.move_toward(Vector3.ZERO, Player_Settings.ground_friction);
 		if body.velocity.is_zero_approx(): return Tethered_Idle_State.state_name;
 	
 	if body.position.distance_squared_to(anchor_info.anchor_point) > anchor_info.sqdist:

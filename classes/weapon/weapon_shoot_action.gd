@@ -14,9 +14,9 @@ func shoot(weapon_carrier : Player, weapon : Weapon):
 	else: print("default_shoot_action missed");
 
 
-func stop_shoot(weapon_carrier : Player):
+func stop_shoot(weapon_carrier : Player, weapon : Weapon):
 	pass;
 
 
-func abort_shoot(weapon_carrier : Player):
+func abort_shoot(weapon_carrier : Player, weapon : Weapon):
 	pass;

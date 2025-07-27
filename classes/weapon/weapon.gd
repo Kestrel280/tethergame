@@ -33,8 +33,8 @@ func try_shoot() -> bool:
 
 
 func stop_shoot() -> void:
-	shoot_action.stop_shoot(carrier);
+	shoot_action.stop_shoot(carrier, self);
 
 
 func abort_shoot() -> void:
-	shoot_action.abort_shoot(carrier);
+	shoot_action.abort_shoot(carrier, self);

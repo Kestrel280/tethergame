@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c11owkl1l0frn"
-path="res://.godot/imported/pinglow_3.wav-985ce5a9af0513cdab7172504294e84d.sample"
+path="res://.godot/imported/tether_miss.wav-6026f0ca98034bf410dd0e9803f98443.sample"
 
 [deps]
 
-source_file="res://assets/audio/pinglow_3.wav"
-dest_files=["res://.godot/imported/pinglow_3.wav-985ce5a9af0513cdab7172504294e84d.sample"]
+source_file="res://weapons/tether/sounds/tether_miss.wav"
+dest_files=["res://.godot/imported/tether_miss.wav-6026f0ca98034bf410dd0e9803f98443.sample"]
 
 [params]
 
