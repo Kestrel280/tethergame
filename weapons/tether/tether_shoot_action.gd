@@ -24,7 +24,8 @@ func shoot(weapon_carrier : Player, weapon : Weapon):
 	var result = space_state.intersect_ray(query);
 	if result:
 		# First, create the anchor
-		anchor_info = Anchor_Info.new(weapon.mesh, result.collider, result.position, rope.instantiate(), true);
+		var sqdist : float = weapon_carrier.global_position.distance_squared_to(result.position);
+		anchor_info = Anchor_Info.new(weapon.mesh, result.collider, result.position, sqdist, rope.instantiate(), true);
 		anchor_info.name = "Tether_Anchor_Info";
 		# Then add it to the carrier
 		weapon_carrier.add_child(anchor_info);

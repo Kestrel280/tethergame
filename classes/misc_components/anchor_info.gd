@@ -11,12 +11,12 @@ var debug_sphere : MeshInstance3D = null;
 var rope : MeshInstance3D = null;
 
 
-func _init(counterweight : Node3D, embedded_object : Node3D, anchor_point : Vector3, rope : MeshInstance3D = null, draw_debug_sphere : bool = false):
+func _init(counterweight : Node3D, embedded_object : Node3D, anchor_point : Vector3, sqdist : float, rope : MeshInstance3D = null, draw_debug_sphere : bool = false):
 	self.counterweight = counterweight;
 	self.anchor_point = anchor_point;
 	self.embedded_object = embedded_object;
 	self.rope_material = rope_material;
-	self.sqdist = counterweight.global_position.distance_squared_to(anchor_point);
+	self.sqdist = sqdist;
 	
 	if rope:
 		self.rope = rope;
@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		rope.global_position = lerp(anchor_point, counterweight.global_position, 0.5);
 		rope.look_at(anchor_point);
 		rope.rotate_object_local(Vector3.RIGHT, PI / 2);
-	if debug_sphere: 
+	if debug_sphere:
 		debug_sphere.mesh.radius = sqrt(self.sqdist);
 		debug_sphere.mesh.height = sqrt(self.sqdist) * 2;
 

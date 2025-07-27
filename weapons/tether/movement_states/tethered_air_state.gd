@@ -23,17 +23,21 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 		# If we landed, but we have velocity, go to walk
 		else: return Tethered_Walk_State.state_name;
 	
-	body.velocity += body.get_gravity() * dt;
-	
+	# Test movement
+	var wish_new_pos = body.global_position + body.velocity * dt;
+
 	# If body is along the surface of the hook's sphere of influence:
 	# (1) keep body from exceeding range of hook
 	# (2) slide body's movement vector along the surface of the sphere
 	# (3) if sliding smoothly along the sphere, apply adjustment factor to preserve speed 
-	if body.global_position.distance_squared_to(anchor_info.anchor_point) > anchor_info.sqdist:
+	if wish_new_pos.distance_squared_to(anchor_info.anchor_point) > anchor_info.sqdist:
 		var anchor_to_body_unit_vector = (body.position - anchor_info.anchor_point).normalized();
 		var sq_pre_adjust_speed = body.velocity.length_squared();
 		body.position = anchor_info.anchor_point + anchor_to_body_unit_vector * sqrt(anchor_info.sqdist); # (1)
 		body.velocity = body.velocity.slide(anchor_to_body_unit_vector); # (2)
 		var sq_speed_loss_ratio = body.velocity.length_squared() / sq_pre_adjust_speed;
 		if sq_speed_loss_ratio > 0.9: body.velocity /= sqrt(sq_speed_loss_ratio); # (3)
+	
+	body.velocity += body.get_gravity() * dt;
+	
 	return self.state_name;
