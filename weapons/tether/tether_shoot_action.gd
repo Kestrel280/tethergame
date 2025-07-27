@@ -4,7 +4,7 @@ extends Weapon_Shoot_Action
 var anchor_info : Anchor_Info;
 var stored_movement_controller : Movement_Controller_Base;
 var movement_controller_tethered : Movement_Controller_State_Machine = Movement_Controller_State_Machine.construct([Tethered_Idle_State.new(), Tethered_Walk_State.new(), Tethered_Air_State.new()]);
-var rope_material : BaseMaterial3D = preload("rope_material.tres");
+var rope = preload("res://weapons/tether/rope.tscn");
 
 
 ## Tether:
@@ -24,7 +24,7 @@ func shoot(weapon_carrier : Player, weapon : Weapon):
 	var result = space_state.intersect_ray(query);
 	if result:
 		# First, create the anchor
-		anchor_info = Anchor_Info.new(weapon.mesh, result.collider, result.position, rope_material, true);
+		anchor_info = Anchor_Info.new(weapon.mesh, result.collider, result.position, rope.instantiate(), true);
 		anchor_info.name = "Tether_Anchor_Info";
 		# Then add it to the carrier
 		weapon_carrier.add_child(anchor_info);

@@ -29,7 +29,7 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	# (1) keep body from exceeding range of hook
 	# (2) slide body's movement vector along the surface of the sphere
 	# (3) if sliding smoothly along the sphere, apply adjustment factor to preserve speed 
-	if body.position.distance_squared_to(anchor_info.anchor_point) > anchor_info.sqdist:
+	if body.global_position.distance_squared_to(anchor_info.anchor_point) > anchor_info.sqdist:
 		var anchor_to_body_unit_vector = (body.position - anchor_info.anchor_point).normalized();
 		var sq_pre_adjust_speed = body.velocity.length_squared();
 		body.position = anchor_info.anchor_point + anchor_to_body_unit_vector * sqrt(anchor_info.sqdist); # (1)
