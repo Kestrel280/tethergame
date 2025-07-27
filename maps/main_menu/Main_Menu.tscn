@@ -79,6 +79,10 @@ text = "Level 2"
 layout_mode = 2
 text = "Level 3"
 
+[node name="Level4" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
+layout_mode = 2
+text = "Level 4"
+
 [node name="Quit" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
 layout_mode = 2
 text = "Quit"
@@ -86,4 +90,5 @@ text = "Quit"
 [connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Level1" to="." method="_on_level_1_pressed"]
 [connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Level2" to="." method="_on_level_2_pressed"]
 [connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Level4" to="." method="_on_level_4_pressed"]
 [connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Quit" to="." method="_on_quit_pressed"]

@@ -23,3 +23,7 @@ func _on_level_2_pressed() -> void:
 
 func _on_level_3_pressed() -> void:
 	Message_Bus.change_level_requested.emit("test_level_3");
+
+
+func _on_level_4_pressed() -> void:
+	Message_Bus.change_level_requested.emit("test_level_4");

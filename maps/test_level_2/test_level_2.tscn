@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5fvsif3u55py"]
+[gd_scene load_steps=16 format=3 uid="uid://c5fvsif3u55py"]
 
 [ext_resource type="Script" uid="uid://dujnx3y301phw" path="res://maps/test_level_2/test_level_2.gd" id="1_8bkor"]
+[ext_resource type="LightmapGIData" uid="uid://bqcueoiojisnw" path="res://maps/test_level_2/test_level_2.lmbake" id="2_5l6c7"]
 [ext_resource type="Material" uid="uid://d3e031uj0u37s" path="res://assets/materials/debug/debug_grid_material.tres" id="2_dp7p2"]
 [ext_resource type="Texture2D" uid="uid://ce45t1drxubax" path="res://maps/test_level_2/NightSkyHDRI008_4K-TONEMAPPED.jpg" id="3_dp7p2"]
 [ext_resource type="PackedScene" uid="uid://b86jn1jcuhnvx" path="res://assets/models/ramp.glb" id="4_bw0ct"]
@@ -10,7 +11,9 @@
 size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5l6c7"]
+lightmap_size_hint = Vector2i(204, 116)
 material = ExtResource("2_dp7p2")
+add_uv2 = true
 size = Vector3(20, 1, 20)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bw0ct"]
@@ -26,13 +29,30 @@ ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.0
+glow_enabled = true
+glow_intensity = 3.0
+glow_strength = 1.2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.219559, 0.241539, 0.276094, 1)
+fog_light_energy = 0.2
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_depth_begin = 100.0
+fog_depth_end = 300.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.004
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bw0ct"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_2ghx6"]
+lightmap_size_hint = Vector2i(17, 9)
 material = ExtResource("5_2ghx6")
+add_uv2 = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ghx6"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
 disable_receive_shadows = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_5l6c7"]
@@ -43,6 +63,13 @@ height = 4.0
 [node name="Test_Level_2" type="Node"]
 script = ExtResource("1_8bkor")
 metadata/_custom_type_script = "uid://bn50xtepv757k"
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 2
+supersampling = true
+interior = true
+generate_probes_subdiv = 1
+light_data = ExtResource("2_5l6c7")
 
 [node name="giant_room" type="Node3D" parent="."]
 
@@ -256,7 +283,7 @@ shape = SubResource("BoxShape3D_2ghx6")
 mesh = SubResource("BoxMesh_5l6c7")
 
 [node name="Wall32" type="StaticBody3D" parent="room4"]
-transform = Transform3D(1.41735e-14, 1.5299e-08, 10.9789, -12.8579, 1.77636e-15, -2.02825e-14, 0, -0.35, 4.79901e-07, 0, -110.705, -287.351)
+transform = Transform3D(1.41735e-14, 1.5299e-08, 10.9789, -12.8579, 1.77636e-15, -2.02825e-14, 0, -0.35, 4.79901e-07, 0, -110.705, -286.78)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="room4/Wall32"]
 shape = SubResource("BoxShape3D_2ghx6")
@@ -312,7 +339,7 @@ shape = SubResource("BoxShape3D_2ghx6")
 mesh = SubResource("BoxMesh_5l6c7")
 
 [node name="Wall23" type="StaticBody3D" parent="room3"]
-transform = Transform3D(-2.9168e-07, -0.35, 4.23933e-07, 2.91009e-14, -3.0598e-08, -4.84923, 6.67286, -1.5299e-08, 1.40122e-13, 37.7382, -94.9507, -76.2835)
+transform = Transform3D(-2.9168e-07, -0.35, 4.41743e-07, 2.91009e-14, -3.0598e-08, -5.05295, 6.67286, -1.5299e-08, 1.46009e-13, 37.7382, -94.9507, -76.2835)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="room3/Wall23"]
 shape = SubResource("BoxShape3D_2ghx6")
@@ -410,34 +437,36 @@ mesh = SubResource("BoxMesh_5l6c7")
 [node name="lights" type="Node3D" parent="."]
 
 [node name="light3" type="Node3D" parent="lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.64675, 12.2661, -57.4205)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.7186, -5.1097, -33.0075)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lights/light3"]
 light_energy = 16.0
-omni_range = 100.405
-omni_attenuation = 0.618
+shadow_enabled = true
+omni_range = 105.868
+omni_attenuation = 0.88
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="lights/light3"]
 mesh = SubResource("SphereMesh_5l6c7")
 
 [node name="light4" type="Node3D" parent="lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4684, -67.1907, -57.4205)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264961, -144.241, -57.4205)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lights/light4"]
-light_energy = 16.0
-omni_range = 111.628
-omni_attenuation = 0.618
+light_energy = 24.0
+shadow_enabled = true
+omni_range = 220.0
+omni_attenuation = 0.9
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="lights/light4"]
 mesh = SubResource("SphereMesh_5l6c7")
 
 [node name="light5" type="Node3D" parent="lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.25, -143.61, -246.697)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.323711, -100.488, -272.826)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lights/light5"]
-light_energy = 16.0
+light_energy = 64.0
+shadow_enabled = true
 omni_range = 222.272
-omni_attenuation = 0.618
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="lights/light5"]
 mesh = SubResource("SphereMesh_5l6c7")
@@ -446,20 +475,22 @@ mesh = SubResource("SphereMesh_5l6c7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92, 110.568)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lights/light6"]
-light_energy = 16.0
-omni_range = 234.365
-omni_attenuation = 0.108
+light_energy = 32.0
+shadow_enabled = true
+omni_range = 442.585
+omni_attenuation = 0.8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="lights/light6"]
 mesh = SubResource("SphereMesh_5l6c7")
 
 [node name="light2" type="Node3D" parent="lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7601, -14.2828, -248.464)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.1425, -14.2828, -248.464)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lights/light2"]
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 137.977
-omni_attenuation = 0.363
+omni_attenuation = 0.8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="lights/light2"]
 mesh = SubResource("SphereMesh_5l6c7")

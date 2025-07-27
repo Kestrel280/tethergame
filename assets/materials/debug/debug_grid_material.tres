@@ -7,7 +7,7 @@
 albedo_texture = ExtResource("1_ra3su")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 5.0
+emission_energy_multiplier = 2.0
 emission_operator = 1
 emission_texture = ExtResource("2_vmq0n")
 uv1_triplanar = true
