@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dp17d65koquyh"]
+[gd_scene load_steps=16 format=4 uid="uid://dp17d65koquyh"]
 
 [ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_ot8qe"]
 [ext_resource type="PackedScene" uid="uid://cfs5dmkcumq85" path="res://maps/test_level_4/test_level_4.blend" id="2_vsp43"]
@@ -117,6 +117,8 @@ material = SubResource("StandardMaterial3D_aapy3")
 radius = 10.0
 height = 20.0
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_ii1pq"]
+
 [node name="Test_Level_4" type="Node"]
 script = ExtResource("1_ot8qe")
 metadata/_custom_type_script = "uid://bn50xtepv757k"
@@ -168,5 +170,9 @@ light_energy = 16.0
 shadow_enabled = true
 omni_range = 1000.0
 omni_attenuation = 1.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.1924, 268.473, -63.8708)
+mesh = SubResource("CylinderMesh_ii1pq")
 
 [editable path="test_level_4"]
