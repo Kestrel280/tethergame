@@ -4,18 +4,18 @@ extends Node
 @export var player : GDScript;
 
 
-func _unhandled_input(event) -> void:
-	if event is InputEventKey:
-		if event.is_action_pressed("debug_quit_to_main_menu"):
-			MessageBus.quit_to_menu_requested.emit();
-
-
 func _ready() -> void:
 	# Connect signals
-	MessageBus.change_level_requested.connect(change_level);
-	MessageBus.quit_requested.connect(close_game);
-	MessageBus.quit_to_menu_requested.connect(func(): change_level("main_menu"));
+	Message_Bus.change_level_requested.connect(change_level);
+	Message_Bus.quit_requested.connect(close_game);
+	Message_Bus.pause_requested.connect(try_pause);
 	change_level("main_menu");
+
+
+func try_pause():
+	var pmenu : Node = preload("res://pause_menu.tscn").instantiate();
+	add_child(pmenu);
+	move_child(pmenu, 0);
 
 
 func change_level(level_name : String):

@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://24rgbt5r16ye"]
+
+[ext_resource type="Script" uid="uid://b3utanryomjj8" path="res://pause_menu.gd" id="1_hdmo1"]
+
+[node name="Pause_Menu" type="Control"]
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hdmo1")
+metadata/_custom_type_script = "uid://d1cktkjuaj1f7"
+
+[node name="Paused_Text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+offset_left = -28.5
+offset_right = 28.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Center_Screen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Center_Screen"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button_Resume" type="Button" parent="Center_Screen/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Button_Main_Menu" type="Button" parent="Center_Screen/VBoxContainer"]
+layout_mode = 2
+text = "Quit to Menu"
+
+[node name="Button_Quit" type="Button" parent="Center_Screen/VBoxContainer"]
+layout_mode = 2
+text = "Quit to Desktop"
+
+[node name="Haze" type="ColorRect" parent="."]
+z_index = -4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.196078)
+
+[connection signal="pressed" from="Center_Screen/VBoxContainer/Button_Resume" to="." method="_on_button_resume_pressed"]
+[connection signal="pressed" from="Center_Screen/VBoxContainer/Button_Main_Menu" to="." method="_on_button_main_menu_pressed"]
+[connection signal="pressed" from="Center_Screen/VBoxContainer/Button_Quit" to="." method="_on_button_quit_pressed"]

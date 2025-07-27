@@ -87,6 +87,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("10_wc7k0")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://d1cktkjuaj1f7"
@@ -100,6 +101,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Kinetics_Console" type="VBoxContainer" parent="Player_Ui/Center_Screen"]
 layout_mode = 1
@@ -111,6 +113,7 @@ offset_top = 50.0
 offset_right = 50.0
 offset_bottom = 103.0
 grow_horizontal = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="Speed_Label" type="Label" parent="Player_Ui/Center_Screen/Kinetics_Console"]
@@ -148,4 +151,5 @@ offset_right = 15.0
 offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("12_wc7k0")

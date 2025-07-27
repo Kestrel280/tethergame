@@ -11,3 +11,4 @@ player = ExtResource("2_1bvp3")
 [node name="Level_Container" type="Node" parent="."]
 
 [node name="Debug_Panel" parent="." instance=ExtResource("3_h2yge")]
+mouse_filter = 2

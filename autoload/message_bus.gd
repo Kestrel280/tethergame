@@ -1,13 +1,17 @@
 extends Node
 
 
-# Something is trying to change the level.
+# Something (Player) is trying to change the level.
 signal change_level_requested(map_name : String);
 
 
-# Attempting to close the game.
+# Something (Player) is attempting to close the game.
 signal quit_requested();
 
 
-# Attempting to return to main menu.
+# Something (Player) is attempting to return to main menu.
 signal quit_to_menu_requested();
+
+
+# Something (Player) tried to pause.
+signal pause_requested();
