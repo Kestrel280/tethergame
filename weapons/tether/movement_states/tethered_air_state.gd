@@ -3,6 +3,8 @@ extends Movement_State
 
 
 static var state_name : StringName = "Tethered_Air_State";
+var perfect_angle_threshold : float = deg_to_rad(5); # Higher values = easier to hit a perfect tether
+var catch_punish_exp : float = 1.5; # Higher values = higher punishment for bad tethers
 var anchor_info : Anchor_Info;
 
 
@@ -29,14 +31,16 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	# If body is along the surface of the hook's sphere of influence:
 	# (1) keep body from exceeding range of hook
 	# (2) slide body's movement vector along the surface of the sphere
-	# (3) if sliding smoothly along the sphere, apply adjustment factor to preserve speed 
+	# (3) apply speed adjustment factor which punishes rough landings and rewards smooth ones
 	if wish_new_pos.distance_squared_to(anchor_info.anchor_point) > anchor_info.sqdist:
 		var anchor_to_body_unit_vector = (body.position - anchor_info.anchor_point).normalized();
-		var sq_pre_adjust_speed = body.velocity.length_squared();
+		var pre_slide_velocity : Vector3 = body.velocity;
 		body.position = anchor_info.anchor_point + anchor_to_body_unit_vector * sqrt(anchor_info.sqdist); # (1)
 		body.velocity = body.velocity.slide(anchor_to_body_unit_vector); # (2)
-		var sq_speed_loss_ratio = body.velocity.length_squared() / sq_pre_adjust_speed;
-		if sq_speed_loss_ratio > 0.9: body.velocity /= sqrt(sq_speed_loss_ratio); # (3)
+		var angle_of_impact : float = pre_slide_velocity.angle_to(body.velocity);
+		var speed_adjust_ratio = 1.0 if angle_of_impact < perfect_angle_threshold else pow(cos(angle_of_impact), catch_punish_exp);
+		if speed_adjust_ratio < 1.0: print("%.3f | %.5f" % [rad_to_deg(angle_of_impact), speed_adjust_ratio])
+		body.velocity = body.velocity.normalized() * pre_slide_velocity.length() * speed_adjust_ratio;
 	
 	body.velocity += body.get_gravity() * dt;
 	
