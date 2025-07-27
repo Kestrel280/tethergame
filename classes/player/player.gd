@@ -16,7 +16,7 @@ func _ready() -> void:
 	$Movement_Controller.start(self);
 
 
-# TODO all of this is temporary/debug
+# TODO all of this is temporary/debug, needs to be moved to appropriate spots
 func _input(event) -> void:
 	$Input_Controller.handle_input(event);
 	if event is InputEventKey:

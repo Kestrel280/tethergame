@@ -15,11 +15,14 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 		do_jump(Player_Settings.jump_impulse);
 		return Player_Flymode_Air_State.state_name;
 	
-	# If we're actually trying to walk, bypass friction
-	if wish_dir:
-		body.velocity.x = lerp(body.velocity.x, wish_dir.x * Player_Settings.max_ground_speed, Player_Settings.ground_accel);
-		body.velocity.z = lerp(body.velocity.z, wish_dir.z * Player_Settings.max_ground_speed, Player_Settings.ground_accel);
-	else:
-		body.velocity = body.velocity.move_toward(Vector3.ZERO, Player_Settings.ground_friction);
-		if body.velocity.is_zero_approx(): return Player_Flymode_Idle_State.state_name;
+	# First apply friction
+	var overspeed : float = max(body.velocity.length() - Player_Settings.max_ground_speed, 0.0);
+	body.velocity = body.velocity.move_toward(Vector3.ZERO, Player_Settings.ground_friction * (1 + overspeed / Player_Settings.max_ground_speed));
+	
+	# Then apply input
+	var cur_speed_in_wish_dir : float = body.velocity.dot(wish_dir);
+	var max_add_speed : float = max(0.0, Player_Settings.max_ground_speed - cur_speed_in_wish_dir)
+	var add_speed : float = clampf(Player_Settings.ground_accel * Player_Settings.max_ground_speed, 0, max_add_speed);
+	body.velocity += add_speed * wish_dir;
+	
 	return Player_Flymode_Walk_State.state_name;
