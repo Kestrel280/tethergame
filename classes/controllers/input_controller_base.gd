@@ -3,8 +3,7 @@ extends Controller_Base
 
 
 # Amount of x/y rotation since last fetched by rotation()
-var _rot_x : float = 0.0;
-var _rot_y : float = 0.0;
+var _rot : Vector2 = Vector2.ZERO;
 
 # Whether or not the controller is currently enabled
 # (For example, when paused, we probably want to disable any active input controllers)
@@ -22,11 +21,9 @@ func get_controller_name():
 
 
 func incremental_rotation() -> Vector2:
-	var x = _rot_x;
-	var y = _rot_y;
-	_rot_x = 0;
-	_rot_y = 0;
-	return Vector2(x, y);
+	var inc = _rot;
+	_rot = Vector2.ZERO;
+	return inc;
 
 
 func enable():

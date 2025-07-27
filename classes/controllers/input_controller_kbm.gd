@@ -7,8 +7,9 @@ extends Input_Controller_Base
 
 func handle_input_impl(event) -> void:
 	if event is InputEventMouseMotion:
-		_rot_x += event.relative.x * sensitivity;
-		_rot_y += event.relative.y * sensitivity;
+		_rot.x += event.relative.x * sensitivity;
+		_rot.y += event.relative.y * sensitivity;
+		_rot /= ProjectSettings.get_setting("display/window/size/viewport_width")
 	elif event is InputEventKey:
 		if Input.is_action_just_pressed("pause"):
 			Message_Bus.pause_requested.emit();

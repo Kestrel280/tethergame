@@ -38,6 +38,7 @@ mesh = SubResource("CapsuleMesh_ki74y")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+fov = 90.0
 
 [node name="Teleportable" type="Node" parent="."]
 script = ExtResource("5_vqdx7")
