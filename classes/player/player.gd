@@ -6,18 +6,15 @@ var _rot : Vector2 = Vector2.ZERO; # Cumulative rotation of the player
 var weapon : Weapon; # Currently equipped weapon
 
 
-# TODO find a better place for these; referenced in movement states
-@export_range(2.0, 10.0) var max_ground_speed = 5.0;
-@export_range(0.1, 1.0) var ground_accel = 0.3;
-@export_range(0.1, 1.0) var ground_friction = 0.3;
-@export_range(2.0, 10.0) var jump_impulse = 4.0;
-@export_range(1.0, 3.0) var air_speed_cap = 0.5; # Per-frame max speed to add
-@export_range(10, 500.0) var air_accel = 150.0; # How aggressively to apply air_speed_cap
-
-
 static func construct() -> Player:
-	print("hi");
 	return preload("Player.tscn").instantiate();
+
+
+func _ready() -> void:
+	var head : Node3D = find_child("Head");
+	var camera : Camera3D = head.find_child("Camera3D") if head else null;
+	$Camera_Controller.start(self, head, camera);
+	$Movement_Controller.start(self);
 
 
 func _input(event) -> void:
@@ -49,19 +46,10 @@ func _input(event) -> void:
 		if weapon: weapon.stop_shoot();
 
 
-func _ready() -> void:
-	$Camera_Controller.start(self, $Head, $Head/Camera3D);
-	$Movement_Controller.start(self);
-
-
 func _physics_process(delta: float) -> void:
-	# Get player's inputs
-	var input_dir_raw = $Input_Controller.input_dir_raw();
 	$Camera_Controller.add_rotation(-$Input_Controller.incremental_rotation());
-	
-	var input_dir = ($Head.transform.basis * input_dir_raw).normalized();
 	$Movement_Controller.jumping = $Input_Controller.is_trying_jump();
-	$Movement_Controller.move(delta, (self.transform.basis * input_dir).normalized());
+	$Movement_Controller.move(delta, (self.transform.basis * $Head.transform.basis *  $Input_Controller.input_dir_raw()).normalized());
 	
 	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
 	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);

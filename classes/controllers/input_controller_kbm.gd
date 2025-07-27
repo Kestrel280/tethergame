@@ -9,7 +9,7 @@ func handle_input_impl(event) -> void:
 	if event is InputEventMouseMotion:
 		_rot.x += event.relative.x * sensitivity;
 		_rot.y += event.relative.y * sensitivity;
-		_rot /= ProjectSettings.get_setting("display/window/size/viewport_width")
+		_rot = _rot * 2 / ProjectSettings.get_setting("display/window/size/viewport_width");
 	elif event is InputEventKey:
 		if Input.is_action_just_pressed("pause"):
 			Message_Bus.pause_requested.emit();

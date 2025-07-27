@@ -15,5 +15,5 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	pass;
 
 
-func do_jump():
-	body.velocity.y = body.jump_impulse;
+func do_jump(jump_impulse : float):
+	body.velocity.y = jump_impulse;

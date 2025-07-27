@@ -2,7 +2,7 @@ class_name Input_Controller_Base
 extends Controller_Base
 
 
-# Amount of x/y rotation since last fetched by rotation()
+# Amount of x/y rotation since last fetched by incremental_rotation()
 var _rot : Vector2 = Vector2.ZERO;
 
 # Whether or not the controller is currently enabled

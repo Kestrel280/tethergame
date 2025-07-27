@@ -10,7 +10,7 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool):
 		
 	# If trying to jump, just jump and transition to air state
 	if trying_jump and body.is_on_floor():
-		body.velocity.y = body.jump_impulse;
+		if trying_jump: do_jump(Player_Settings.jump_impulse);
 		return Player_Flymode_Air_State.state_name;
 	
 	# Not doing anything at all

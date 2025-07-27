@@ -15,7 +15,7 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	if body.is_on_floor():
 		
 		# If we landed, but we're trying to jump, immediately re-jump and stay in airmove
-		if trying_jump: do_jump();
+		if trying_jump: do_jump(Player_Settings.jump_impulse);
 		
 		# If we landed, and our velocity is 0 now, go to idle
 		elif body.velocity.is_zero_approx(): return Tethered_Idle_State.state_name;

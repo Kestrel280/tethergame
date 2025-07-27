@@ -18,7 +18,7 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	
 	# If trying to jump, just jump and transition to air state
 	if trying_jump:
-		do_jump();
+		do_jump(Player_Settings.jump_impulse);
 		return Tethered_Air_State.state_name;
 	
 	# If we're actually trying to walk, bypass friction

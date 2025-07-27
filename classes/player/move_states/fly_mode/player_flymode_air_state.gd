@@ -14,9 +14,9 @@ func update_velocity(dt : float, wish_dir : Vector3, jumping : bool) -> StringNa
 		else: return Player_Flymode_Walk_State.state_name;
 	
 	if wish_dir:
-		body.velocity = lerp(body.velocity, wish_dir * body.max_ground_speed * 15.0, body.ground_accel / 2.0);
+		body.velocity = lerp(body.velocity, wish_dir * Player_Settings.max_ground_speed * 15.0, Player_Settings.ground_accel / 2.0);
 	else:
-		body.velocity = lerp(body.velocity, Vector3.ZERO, body.ground_friction / 2.0);
+		body.velocity = lerp(body.velocity, Vector3.ZERO, Player_Settings.ground_friction / 2.0);
 		if body.velocity.is_zero_approx(): return Player_Flymode_Idle_State.state_name;
 	
 	
