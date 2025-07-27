@@ -2,7 +2,6 @@ class_name Player
 extends CharacterBody3D
 
 
-var _rot : Vector2 = Vector2.ZERO; # Cumulative rotation of the player
 var weapon : Weapon; # Currently equipped weapon
 
 
