@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Weapon_Resource" load_steps=7 format=3 uid="uid://dhys71jnwrv8j"]
 
 [ext_resource type="Script" uid="uid://dumbt6yqtdj6q" path="res://classes/weapon/weapon_resource.gd" id="1_j4x3t"]
-[ext_resource type="AudioStream" uid="uid://b4lcrk0hglav1" path="res://weapons/tether/sounds/tether_hit.wav" id="1_qbmnw"]
+[ext_resource type="AudioStream" uid="uid://d15e2rqrq14ie" path="res://weapons/tether/sounds/mz.wav" id="1_qbmnw"]
 [ext_resource type="Script" uid="uid://dj1phfmhmn2gu" path="res://weapons/tether/tether_shoot_action.gd" id="2_mpja1"]
 [ext_resource type="AudioStream" uid="uid://c11owkl1l0frn" path="res://weapons/tether/sounds/tether_miss.wav" id="2_qbmnw"]
-[ext_resource type="AudioStream" uid="uid://orbbyojelxnx" path="res://weapons/tether/sounds/tether_release.wav" id="5_6jiml"]
+[ext_resource type="AudioStream" uid="uid://bblwivxbu1xv5" path="res://weapons/tether/sounds/nyn.wav" id="5_qbmnw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xx77b"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -16,7 +16,7 @@ position = Vector3(0.2, -0.08, -0.25)
 orientation = Vector3(45, 45, 45)
 hit_sound = ExtResource("1_qbmnw")
 miss_sound = ExtResource("2_qbmnw")
-unshoot_sound = ExtResource("5_6jiml")
+unshoot_sound = ExtResource("5_qbmnw")
 single_shot = true
 shot_cooldown = 0.2
 shoot_script = ExtResource("2_mpja1")
