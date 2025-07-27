@@ -15,7 +15,7 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool):
 	
 	# We have some velocity; could happen if we enter this state machine from another, for example
 	if !body.velocity.is_equal_approx(Vector3.ZERO):
-		return Player_Walk_State.state_name;
+		return Player_Flymode_Walk_State.state_name;
 	
 	# Not doing anything at all
 	if wish_dir == Vector3.ZERO: return Player_Flymode_Idle_State.state_name;
