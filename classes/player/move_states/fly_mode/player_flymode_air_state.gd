@@ -8,7 +8,7 @@ static var state_name : StringName = "Player_Flymode_Air_State";
 func update_velocity(dt : float, wish_dir : Vector3, jumping : bool) -> StringName:
 	if body.is_on_floor():
 		# If we landed, and our velocity is 0 now, go to idle
-		if body.velocity.is_zero_approx(): return Player_Idle_State.state_name;
+		if body.velocity.is_zero_approx(): return Player_Flymode_Idle_State.state_name;
 		
 		# If we landed, but we have velocity, go to walk
 		else: return Player_Flymode_Walk_State.state_name;

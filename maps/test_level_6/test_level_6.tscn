@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://opnab1b6u7sr"]
+[gd_scene load_steps=15 format=4 uid="uid://opnab1b6u7sr"]
 
 [ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_saw7f"]
 [ext_resource type="PackedScene" uid="uid://baq8d06ii0lst" path="res://maps/test_level_6/test_level_6.blend" id="2_abntm"]
+[ext_resource type="Material" uid="uid://dyydkcraeoan0" path="res://maps/test_level_6/debug_material.tres" id="3_8o3su"]
+[ext_resource type="Material" uid="uid://ca07n888i7dm6" path="res://maps/test_level_6/debug_material_floor.tres" id="3_kbjs5"]
 [ext_resource type="PackedScene" uid="uid://tl2aentxvhia" path="res://classes/level/teleporter/teleporter.tscn" id="3_r3ind"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_abntm"]
@@ -14,8 +16,52 @@ sky_material = SubResource("ProceduralSkyMaterial_abntm")
 [sub_resource type="Environment" id="Environment_8o3su"]
 background_mode = 2
 sky = SubResource("Sky_r3ind")
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_sky_affect = 0.1
+fog_depth_begin = 300.0
+fog_depth_end = 2048.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.004
+volumetric_fog_albedo = Color(1, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_htbbb"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_01s6a"]
+_surfaces = [{
+"aabb": AABB(-490, -2, -320, 1300, 2, 570),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAgADAAUAAgAFAAAAAAAGAAQAAAAFAAYABAAHAAEAAQAHAAMABAAGAAcABQADAAcABQAHAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD1wwAAAAAAAHpDAIBKRAAAAAAAAKDDAIBKRAAAAAAAAHpDAIBKRAAAAMAAAHpDAAD1wwAAAAAAAKDDAAD1wwAAAMAAAHpDAAD1wwAAAMAAAKDDAIBKRAAAAMAAAKDD")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kbjs5"]
+resource_name = "test_level_6_Plane"
+lightmap_size_hint = Vector2i(1024, 1024)
+_surfaces = [{
+"aabb": AABB(-490, -2, -320, 1300, 2, 570),
+"attribute_data": PackedByteArray("AAAAAAAAgD/KdX8/uOoePwAAgD8AAAAA6zp9PvQanz4AAIA/AACAP+s6fT646h4/AAAAAAAAAADKdX8/9BqfPgAAAAAAAIA/Ei1AP83Fnj4AAIA/AAAAAB1LwDjn+bQ4AACAPwAAgD8SLUA/5/m0OAAAAAAAAAAAHUvAOM3Fnj4AAAAAAACAP20/HT9dBng/AACAPwAAAADXeLo9UnN3PwAAgD8AAIA/13i6PV0GeD8AAAAAAAAAAG0/HT9Sc3c/AACAP4aNfz8fEnY/7fdCPwAAAAAAAIA/P6xXPlqbQj8AAAAAho1/Pz+sVz7t90I/AACAPwAAgD8fEnY/WptCPwAAAACGjX8/KgXaPXIpez8AAIA/AACAP/cwIT99vHs/AACAP4aNfz/3MCE/cil7PwAAAAAAAIA/KgXaPX28ez8AAIA/iI1/Pzb8fz9Y+n8/AAAAAAAAgD/YmX8/wESWPgAAAACIjX8/Nvx/P8BElj4AAIA/AACAP9iZfz9Y+n8/"),
+"format": 34359742519,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_htbbb"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAD1wwAAAAAAAHpDAIBKRAAAAAAAAKDDAIBKRAAAAAAAAHpDAAD1wwAAAAAAAKDDAAD1wwAAAMAAAHpDAIBKRAAAAMAAAKDDAAD1wwAAAMAAAKDDAIBKRAAAAMAAAHpDAAD1wwAAAAAAAHpDAAD1wwAAAMAAAKDDAAD1wwAAAAAAAKDDAAD1wwAAAMAAAHpDAIBKRAAAAAAAAHpDAAD1wwAAAMAAAHpDAAD1wwAAAAAAAHpDAIBKRAAAAMAAAHpDAIBKRAAAAAAAAKDDAIBKRAAAAMAAAHpDAIBKRAAAAAAAAHpDAIBKRAAAAMAAAKDDAAD1wwAAAAAAAKDDAIBKRAAAAMAAAKDDAIBKRAAAAAAAAKDDAAD1wwAAAMAAAKDD/3///////7//f///////v/9///////+//3///////7//fwAA//////9/AAD//////38AAP//////fwAA/////wAA/3//////AAD/f/////8AAP9//////wAA/3///////3//f////7//f/9/////v/9//3////+//3//f////7////9//3//P////3//f/8/////f/9//z////9//3//P/////8AAP+//////wAA/7//////AAD/v/////8AAP+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_01s6a")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8o3su"]
 size = Vector3(1, 30, 60)
@@ -33,8 +79,16 @@ script = ExtResource("1_saw7f")
 metadata/_custom_type_script = "uid://bn50xtepv757k"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.64011, -0.545151, 0.541359, 0, 0.704634, 0.709571, -0.768284, 0.454203, -0.451043, 0, 0, 0)
-light_energy = 0.7
+transform = Transform3D(-0.126556, -0.986759, 0.101443, -0.355777, 0.140614, 0.923932, -0.925962, 0.0808378, -0.368862, 0, 0, 0)
+light_color = Color(0.952941, 0.882353, 0.709804, 1)
+light_energy = 0.3
+shadow_enabled = true
+directional_shadow_max_distance = 1024.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.509054, -0.801056, -0.314918, 0.200029, -0.245757, 0.948469, -0.837169, -0.545815, 0.0351316, 0, 0, 0)
+light_color = Color(0.662745, 0.878431, 1, 1)
+light_energy = 0.3
 shadow_enabled = true
 directional_shadow_max_distance = 1024.0
 
@@ -42,7 +96,89 @@ directional_shadow_max_distance = 1024.0
 environment = SubResource("Environment_8o3su")
 
 [node name="test_level_6" parent="." instance=ExtResource("2_abntm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130.352, -2.89023, -214.143)
+
+[node name="Plane" parent="test_level_6" index="0"]
+mesh = SubResource("ArrayMesh_kbjs5")
+surface_material_override/0 = ExtResource("3_kbjs5")
+
+[node name="10deg" parent="test_level_6" index="1"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="15deg_001" parent="test_level_6" index="2"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="20deg_002" parent="test_level_6" index="3"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="25deg_003" parent="test_level_6" index="4"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="30deg_004" parent="test_level_6" index="5"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="35deg_005" parent="test_level_6" index="6"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="40deg_006" parent="test_level_6" index="7"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="45deg_007" parent="test_level_6" index="8"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="50deg_008" parent="test_level_6" index="9"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="55deg_009" parent="test_level_6" index="10"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="60deg_001" parent="test_level_6" index="11"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="70deg_003" parent="test_level_6" index="12"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="75deg_001" parent="test_level_6" index="13"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="80deg_002" parent="test_level_6" index="14"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="85deg_004" parent="test_level_6" index="15"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="65deg_002" parent="test_level_6" index="16"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="40deg_001" parent="test_level_6" index="17"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="45deg_001" parent="test_level_6" index="18"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="50deg_001" parent="test_level_6" index="19"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="55deg_001" parent="test_level_6" index="20"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="60deg_003" parent="test_level_6" index="21"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="65deg_001" parent="test_level_6" index="22"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="70deg_001" parent="test_level_6" index="23"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="75deg_002" parent="test_level_6" index="24"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="80deg_001" parent="test_level_6" index="25"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
+[node name="85deg_001" parent="test_level_6" index="26"]
+surface_material_override/0 = ExtResource("3_8o3su")
 
 [node name="Teleporter_Exit2" type="Node3D" parent="test_level_6"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -130, 100, -250)
@@ -214,3 +350,5 @@ shape = SubResource("BoxShape3D_8o3su")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Teleporter2"]
 mesh = SubResource("BoxMesh_r3ind")
 skeleton = NodePath("")
+
+[editable path="test_level_6"]

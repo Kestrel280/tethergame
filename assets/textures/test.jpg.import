@@ -2,26 +2,27 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f50qriypwnex"
-path="res://.godot/imported/ramp.jpg-99c12f6ce29ecec1486675e6f8da1b91.ctex"
+uid="uid://fpq7asaji7ry"
+path.s3tc="res://.godot/imported/test.jpg-5c09471e6d1a13a873e55de2f97a6ca0.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://maps/test_level_3/textures/ramp.jpg"
-dest_files=["res://.godot/imported/ramp.jpg-99c12f6ce29ecec1486675e6f8da1b91.ctex"]
+source_file="res://assets/textures/test.jpg"
+dest_files=["res://.godot/imported/test.jpg-5c09471e6d1a13a873e55de2f97a6ca0.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
