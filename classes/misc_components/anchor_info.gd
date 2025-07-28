@@ -5,34 +5,33 @@ extends Node3D
 var counterweight : Node3D; # The object which created the anchor; e.g. the weapon that the player shot
 var embedded_object : Node3D; # The object the anchor is embedded in
 var anchor_point : Vector3; # Where the anchor is in global space
-var rope_material : BaseMaterial3D;
 var sqdist : float; # At initialization, square distance from the counterweight to anchor_point
 var debug_sphere : MeshInstance3D = null;
 var rope : MeshInstance3D = null;
 
 
-func _init(counterweight : Node3D, embedded_object : Node3D, anchor_point : Vector3, sqdist : float, rope : MeshInstance3D = null, draw_debug_sphere : bool = false):
-	self.counterweight = counterweight;
-	self.anchor_point = anchor_point;
-	self.embedded_object = embedded_object;
-	self.rope_material = rope_material;
-	self.sqdist = sqdist;
+func _init(_counterweight : Node3D, _embedded_object : Node3D, _anchor_point : Vector3, _sqdist : float, _rope : MeshInstance3D = null, draw_debug_sphere : bool = false):
+	counterweight = _counterweight;
+	anchor_point = _anchor_point;
+	embedded_object = _embedded_object;
+	sqdist = _sqdist;
 	
-	if rope:
-		self.rope = rope;
-		self.rope.top_level = true;
-		self.counterweight.add_child(self.rope);
+	if _rope:
+		rope = _rope;
+		rope.top_level = true;
+		counterweight.add_child(rope);
 	if draw_debug_sphere:
 		debug_sphere = MeshInstance3D.new();
 		debug_sphere.top_level = true;
-		debug_sphere.global_position = anchor_point;
 		debug_sphere.mesh = SphereMesh.new();
-		debug_sphere.mesh.radius = sqrt(self.sqdist);
-		debug_sphere.mesh.height = sqrt(self.sqdist) * 2;
+		debug_sphere.mesh.radius = sqrt(sqdist);
+		debug_sphere.mesh.height = sqrt(sqdist) * 2;
 		debug_sphere.mesh.material = preload("res://assets/materials/debug/debug_transparent_grid_material.tres");
-		self.embedded_object.add_child(debug_sphere);
+		embedded_object.add_child(debug_sphere);
+		debug_sphere.global_position = anchor_point;
 
 
+@warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	if rope:
 		rope.mesh.height = (counterweight.global_position - anchor_point).length();
@@ -40,8 +39,8 @@ func _physics_process(delta: float) -> void:
 		rope.look_at(anchor_point);
 		rope.rotate_object_local(Vector3.RIGHT, PI / 2);
 	if debug_sphere:
-		debug_sphere.mesh.radius = sqrt(self.sqdist);
-		debug_sphere.mesh.height = sqrt(self.sqdist) * 2;
+		debug_sphere.mesh.radius = sqrt(sqdist);
+		debug_sphere.mesh.height = sqrt(sqdist) * 2;
 
 
 # Clean up after ourselves: when we're freed, delete the debug sphere

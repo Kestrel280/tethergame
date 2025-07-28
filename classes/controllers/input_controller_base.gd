@@ -43,6 +43,7 @@ func input_dir_raw() -> Vector3:
 
 
 # Override these
+@warning_ignore_start("unused_parameter")
 func handle_input_impl(event):
 	pass;
 
@@ -53,3 +54,4 @@ func input_dir_raw_impl() -> Vector3:
 
 func is_trying_jump() -> bool:
 	return false;
+@warning_ignore_restore("unused_parameter")

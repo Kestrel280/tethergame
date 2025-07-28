@@ -46,6 +46,7 @@ func _input(event) -> void:
 		if weapon: weapon.stop_shoot();
 
 
+@warning_ignore("unused_parameter")
 func _process(delta : float) -> void:
 	# TODO: Manual camera control / interpolation per-frame, to avoid jittery motion at lower tickrates
 	# https://docs.godotengine.org/en/3.5/tutorials/physics/interpolation/advanced_physics_interpolation.html#cameras
@@ -77,7 +78,7 @@ func swap_controller(new_controller : Controller_Base) -> Node:
 	return old_controller;
 
 
-func equip_weapon(weapon : Weapon):
-	if self.weapon: self.weapon.queue_free();
-	$Camera_Controller.get_head().add_child(weapon);
-	self.weapon = weapon;
+func equip_weapon(_weapon : Weapon):
+	if weapon: weapon.queue_free();
+	$Camera_Controller.get_head().add_child(_weapon);
+	weapon = _weapon;

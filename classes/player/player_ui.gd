@@ -3,7 +3,7 @@ extends Tether_Ui
 
 @export var player : Player;
 
-
+@warning_ignore("unused_parameter")
 func _physics_process(dt : float):
 	var real_velocity = player.get_real_velocity();
 	var xy_speed : float = Vector2(real_velocity.x, real_velocity.z).length();

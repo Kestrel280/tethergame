@@ -42,7 +42,6 @@ func shoot(weapon_carrier : Player, weapon : Weapon):
 func stop_shoot(weapon_carrier : Player, weapon : Weapon):
 	if anchor_info:
 		Sound_Manager.play_sound(weapon.weapon_res.unshoot_sound);
-		weapon_carrier.remove_child(anchor_info);
 		anchor_info.queue_free();
 	if stored_movement_controller:
 		weapon_carrier.swap_controller(stored_movement_controller);
@@ -53,6 +52,7 @@ func abort_shoot(weapon_carrier : Node3D, weapon : Weapon):
 	stop_shoot(weapon_carrier, weapon);
 
 
+@warning_ignore("unused_parameter")
 func _physics_update(dt : float):
 	print("hello");
 	pass;

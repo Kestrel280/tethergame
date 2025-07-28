@@ -16,10 +16,10 @@ func get_controller_name():
 	return "Camera_Controller";
 
 
-func start(body : Node3D, head : Node3D, camera : Camera3D, initial_rot = Vector2.ZERO):
-	self.body = body;
-	self.head = head;
-	self.camera = camera;
+func start(_body : Node3D, _head : Node3D, _camera : Camera3D, initial_rot = Vector2.ZERO):
+	self.body = _body;
+	self.head = _head;
+	self.camera = _camera;
 	self.rot = initial_rot;
 
 

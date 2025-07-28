@@ -9,14 +9,14 @@ var in_shot_cooldown : bool = false;
 var weapon_res : Weapon_Resource;
 
 
-func _init(carrier : Node3D, weapon_res : Weapon_Resource):
-	self.carrier = carrier;
+func _init(_carrier : Node3D, _weapon_res : Weapon_Resource):
+	self.carrier = _carrier;
+	self.weapon_res = _weapon_res;
 	mesh = MeshInstance3D.new();
 	mesh.mesh = weapon_res.mesh;
 	mesh.position = weapon_res.position;
 	mesh.rotation_degrees = weapon_res.orientation;
 	shoot_action = weapon_res.shoot_script.new();
-	self.weapon_res = weapon_res;
 
 
 func _ready() -> void:

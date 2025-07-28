@@ -8,11 +8,12 @@ var catch_punish_exp : float = 1.5; # Higher values = higher punishment for bad 
 var anchor_info : Anchor_Info;
 
 
-func start(body : CharacterBody3D):
-	super(body);
-	anchor_info = body.get_node("Tether_Anchor_Info");
+func start(_body : CharacterBody3D):
+	super(_body);
+	anchor_info = _body.get_node("Tether_Anchor_Info");
 
 
+@warning_ignore("unused_parameter")
 func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 	if body.is_on_floor():
 		

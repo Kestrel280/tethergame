@@ -23,6 +23,7 @@ func _ready():
 	add_child(shape_cast);
 
 
+@warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	# Update the transform of the shape cast manually, since it's
 	# parented to us and not the head

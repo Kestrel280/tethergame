@@ -5,6 +5,7 @@ extends Movement_State
 static var state_name : StringName = "Player_Walk_State";
 
 
+@warning_ignore("unused_parameter")
 func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 	if !body.is_on_floor(): return Player_Air_State.state_name;
 	

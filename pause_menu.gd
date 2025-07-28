@@ -4,6 +4,7 @@ extends Tether_Ui
 var stored_mouse_mode : Input.MouseMode;
 
 
+@warning_ignore("unused_parameter")
 func _input(event):
 	if Input.is_action_just_pressed("pause"):
 		unpause();

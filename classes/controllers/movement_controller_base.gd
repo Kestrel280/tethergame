@@ -7,6 +7,7 @@ extends Controller_Base
 ## They should also define a get_current_move_state()->StringName function,
 ## but it is not strictly necessary.
 
+@warning_ignore("unused_signal")
 signal movement_state_changed(new_state : StringName);
 
 
@@ -22,8 +23,8 @@ func get_controller_name():
 	return "Movement_Controller";
 
 
-func start(body : Node3D):
-	self.body = body;
+func start(_body : Node3D):
+	self.body = _body;
 
 
 func set_jumping(j : bool):
@@ -31,9 +32,11 @@ func set_jumping(j : bool):
 
 
 # Override these
+@warning_ignore_start("unused_parameter")
 func move(dt : float, wish_dir : Vector3):
 	pass;
 
 
 func get_current_move_state() -> StringName:
 	return "Unknown_Move_State";
+@warning_ignore_restore("unused_parameter")
