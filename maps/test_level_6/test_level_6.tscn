@@ -1,0 +1,216 @@
+[gd_scene load_steps=10 format=3 uid="uid://opnab1b6u7sr"]
+
+[ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_saw7f"]
+[ext_resource type="PackedScene" uid="uid://baq8d06ii0lst" path="res://maps/test_level_6/test_level_6.blend" id="2_abntm"]
+[ext_resource type="PackedScene" uid="uid://tl2aentxvhia" path="res://classes/level/teleporter/teleporter.tscn" id="3_r3ind"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_abntm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_r3ind"]
+sky_material = SubResource("ProceduralSkyMaterial_abntm")
+
+[sub_resource type="Environment" id="Environment_8o3su"]
+background_mode = 2
+sky = SubResource("Sky_r3ind")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8o3su"]
+size = Vector3(1, 30, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3ind"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.686275)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r3ind"]
+material = SubResource("StandardMaterial3D_r3ind")
+size = Vector3(1, 30, 60)
+
+[node name="Test_Level_6" type="Node"]
+script = ExtResource("1_saw7f")
+metadata/_custom_type_script = "uid://bn50xtepv757k"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.64011, -0.545151, 0.541359, 0, 0.704634, 0.709571, -0.768284, 0.454203, -0.451043, 0, 0, 0)
+light_energy = 0.7
+shadow_enabled = true
+directional_shadow_max_distance = 1024.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8o3su")
+
+[node name="test_level_6" parent="." instance=ExtResource("2_abntm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
+
+[node name="Teleporter_Exit2" type="Node3D" parent="test_level_6"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -130, 100, -250)
+
+[node name="Ramp_Section" type="Node3D" parent="test_level_6"]
+
+[node name="Teleporter_Exits" type="Node3D" parent="test_level_6/Ramp_Section"]
+
+[node name="Teleporter_Exit3" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -30, 100, -250)
+
+[node name="Teleporter_Exit4" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 40, 100, -250)
+
+[node name="Teleporter_Exit5" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 110, 100, -250)
+
+[node name="Teleporter_Exit6" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 180, 100, -250)
+
+[node name="Teleporter_Exit7" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 250, 100, -250)
+
+[node name="Teleporter_Exit8" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 320, 100, -250)
+
+[node name="Teleporter_Exit9" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 390, 100, -250)
+
+[node name="Teleporter_Exit10" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 460, 100, -250)
+
+[node name="Teleporter_Exit11" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 530, 100, -250)
+
+[node name="Teleporter_Exit12" type="Node3D" parent="test_level_6/Ramp_Section/Teleporter_Exits"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 600, 100, -250)
+
+[node name="Teleporters" type="Node3D" parent="test_level_6/Ramp_Section"]
+
+[node name="Teleporter3" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -30, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit3")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter3"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter3"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter4" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 40, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit4")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter4"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter4"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter5" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 110, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit5")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter5"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter5"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter6" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 180, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit6")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter6"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter6"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter7" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 250, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit7")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter7"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter7"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter8" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 320, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit8")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter8"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter8"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter9" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 390, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit9")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter9"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter9"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter10" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 460, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit10")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter10"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter10"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter11" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 530, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit11")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter11"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter11"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter12" parent="test_level_6/Ramp_Section/Teleporters" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 600, 15, 200)
+destination = NodePath("../../Teleporter_Exits/Teleporter_Exit12")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter12"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Ramp_Section/Teleporters/Teleporter12"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")
+
+[node name="Teleporter2" parent="test_level_6" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -170, 15, 200)
+destination = NodePath("../Teleporter_Exit2")
+add_speed = 40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Teleporter2"]
+shape = SubResource("BoxShape3D_8o3su")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Teleporter2"]
+mesh = SubResource("BoxMesh_r3ind")
+skeleton = NodePath("")

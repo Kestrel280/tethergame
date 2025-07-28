@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://55gc1s30fd16"]
 
 [ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_cafxn"]
-[ext_resource type="PackedScene" uid="uid://cik6qg27hmqbt" path="res://maps/test_level_3/level_3.blend" id="2_hffis"]
+[ext_resource type="PackedScene" uid="uid://cik6qg27hmqbt" path="res://maps/test_level_3/test_level_3.blend" id="2_hffis"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cafxn"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,7 +18,7 @@ ambient_light_energy = 0.0
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Level_3" type="Node"]
+[node name="Test_Level_3" type="Node"]
 script = ExtResource("1_cafxn")
 metadata/_custom_type_script = "uid://bn50xtepv757k"
 
@@ -30,6 +30,6 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iaoln")
 
-[node name="level_3" parent="." instance=ExtResource("2_hffis")]
+[node name="test_level_3" parent="." instance=ExtResource("2_hffis")]
 
-[editable path="level_3"]
+[editable path="test_level_3"]
