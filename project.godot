@@ -94,3 +94,5 @@ pause={
 [physics]
 
 common/physics_ticks_per_second=67
+common/physics_jitter_fix=0.0
+common/physics_interpolation=true
