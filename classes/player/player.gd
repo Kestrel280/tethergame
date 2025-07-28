@@ -46,8 +46,12 @@ func _input(event) -> void:
 		if weapon: weapon.stop_shoot();
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta : float) -> void:
+	# TODO: Manual camera control / interpolation per-frame, to avoid jittery motion at lower tickrates
+	# https://docs.godotengine.org/en/3.5/tutorials/physics/interpolation/advanced_physics_interpolation.html#cameras
 	$Camera_Controller.add_rotation(-$Input_Controller.incremental_rotation());
+
+func _physics_process(delta: float) -> void:
 	$Movement_Controller.jumping = $Input_Controller.is_trying_jump();
 	$Movement_Controller.move(delta, (self.transform.basis * $Head.transform.basis *  $Input_Controller.input_dir_raw()).normalized());
 	

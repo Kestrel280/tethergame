@@ -90,3 +90,7 @@ pause={
 3d_physics/layer_2="player"
 3d_physics/layer_3="teleportable"
 3d_physics/layer_4="teleporter"
+
+[physics]
+
+common/physics_ticks_per_second=30
