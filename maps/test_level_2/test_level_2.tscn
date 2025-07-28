@@ -72,6 +72,7 @@ generate_probes_subdiv = 1
 light_data = ExtResource("2_5l6c7")
 
 [node name="giant_room" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.00182, 0)
 
 [node name="Wall7" type="StaticBody3D" parent="giant_room"]
 transform = Transform3D(-5.68248e-07, 1, -7.10242e-14, -13, -4.37114e-08, -5.68248e-07, -5.68248e-07, 3.55271e-15, 13, 109.176, -110.034, -140.945)
@@ -143,6 +144,7 @@ mesh = SubResource("BoxMesh_5l6c7")
 environment = SubResource("Environment_5l6c7")
 
 [node name="ramps" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.00182, 0)
 
 [node name="ramp" parent="ramps" instance=ExtResource("4_bw0ct")]
 transform = Transform3D(-1.02723e-06, 8.02604e-08, -7.09431, 6.29687, 6.85258, -5.04081e-15, 23.5003, -1.83614, -3.10102e-07, 7.69746e-07, -12.7173, -31.6919)
@@ -163,6 +165,7 @@ transform = Transform3D(32.3732, -1.72311e-07, 1.52733e-08, -1.71383e-21, 10.254
 surface_material_override/0 = ExtResource("2_dp7p2")
 
 [node name="start_room" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.00182, 0)
 
 [node name="Start_Platform" type="StaticBody3D" parent="start_room"]
 
@@ -200,7 +203,7 @@ shape = SubResource("BoxShape3D_2ghx6")
 mesh = SubResource("BoxMesh_5l6c7")
 
 [node name="GrapplePoint" type="StaticBody3D" parent="."]
-transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, -37.4538, -79.0354, -124.643)
+transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, -37.4538, -82.0372, -124.643)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GrapplePoint"]
 shape = SubResource("SphereShape3D_bw0ct")
@@ -209,7 +212,7 @@ shape = SubResource("SphereShape3D_bw0ct")
 mesh = SubResource("SphereMesh_2ghx6")
 
 [node name="GrapplePoint2" type="StaticBody3D" parent="."]
-transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, -3.81249, -165.018, -149.876)
+transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, -3.81249, -168.02, -149.876)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GrapplePoint2"]
 shape = SubResource("SphereShape3D_bw0ct")
@@ -218,7 +221,7 @@ shape = SubResource("SphereShape3D_bw0ct")
 mesh = SubResource("SphereMesh_2ghx6")
 
 [node name="GrapplePoint4" type="StaticBody3D" parent="."]
-transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 38.0551, -66.8072, -219.57)
+transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 38.0551, -69.809, -219.57)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GrapplePoint4"]
 shape = SubResource("SphereShape3D_bw0ct")
@@ -227,7 +230,7 @@ shape = SubResource("SphereShape3D_bw0ct")
 mesh = SubResource("SphereMesh_2ghx6")
 
 [node name="GrapplePoint3" type="StaticBody3D" parent="."]
-transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 0, -161.219, 54.2049)
+transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 0, -164.221, 54.2049)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GrapplePoint3"]
 shape = SubResource("SphereShape3D_bw0ct")
@@ -236,6 +239,7 @@ shape = SubResource("SphereShape3D_bw0ct")
 mesh = SubResource("SphereMesh_2ghx6")
 
 [node name="room4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.00182, 0)
 
 [node name="Wall25" type="StaticBody3D" parent="room4"]
 transform = Transform3D(-1.6714e-07, -0.35, 1.35148e-15, -1.66755e-14, 1.91219e-15, 0.707325, -3.82371, 1.5299e-08, -7.68405e-15, -38, -84.5401, -181.223)
@@ -310,6 +314,7 @@ shape = SubResource("BoxShape3D_2ghx6")
 mesh = SubResource("BoxMesh_5l6c7")
 
 [node name="room3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.00182, 0)
 
 [node name="Wall19" type="StaticBody3D" parent="room3"]
 transform = Transform3D(3.63818, 1.77636e-15, 7.81011e-14, 1.50836e-14, 0.35, -3.14254e-07, -1.58664e-14, 1.5299e-08, 7.18929, -74.2959, -77.4662, -214.66)
@@ -367,6 +372,7 @@ shape = SubResource("BoxShape3D_2ghx6")
 mesh = SubResource("BoxMesh_5l6c7")
 
 [node name="room2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.00182, 0)
 
 [node name="Wall15" type="StaticBody3D" parent="room2"]
 transform = Transform3D(-1.49843e-07, 0.35, 2.12437e-07, 0, -1.5299e-08, 4.86, 3.428, 1.5299e-08, 9.28593e-15, 37.8624, -29.5528, -253.223)
@@ -406,6 +412,7 @@ shape = SubResource("BoxShape3D_2ghx6")
 mesh = SubResource("BoxMesh_5l6c7")
 
 [node name="Room1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.00182, 0)
 
 [node name="Wall12" type="StaticBody3D" parent="Room1"]
 transform = Transform3D(3.8276, 1.5304e-15, 4.5744e-07, -1.67364e-14, 0.35, -3.71791e-14, -1.6731e-07, 1.24345e-15, 10.465, 0, -46.8846, -114.571)
@@ -435,6 +442,7 @@ shape = SubResource("BoxShape3D_2ghx6")
 mesh = SubResource("BoxMesh_5l6c7")
 
 [node name="lights" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.00182, 0)
 
 [node name="light3" type="Node3D" parent="lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.7186, -5.1097, -33.0075)
