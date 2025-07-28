@@ -20,6 +20,10 @@ Message_Bus="*res://autoload/message_bus.gd"
 Globals="*res://autoload/globals.gd"
 Sound_Manager="*res://autoload/sound_manager.gd"
 
+[debug]
+
+settings/physics_interpolation/enable_warnings=false
+
 [file_customization]
 
 folder_colors={
@@ -95,4 +99,5 @@ pause={
 
 common/physics_ticks_per_second=67
 common/physics_jitter_fix=0.0
+3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
