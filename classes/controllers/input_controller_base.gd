@@ -2,63 +2,58 @@ class_name Input_Controller_Base
 extends Controller_Base
 
 
-# Amount of x/y rotation since last fetched by incremental_rotation()
-var _rot : Vector2 = Vector2.ZERO;
+signal pressed_jump;
+signal pressed_crouch;
+signal pressed_shoot;
+signal released_shoot;
+signal pressed_interact;
+signal pressed_change_weapon(weapon_type : int);
+signal pressed_toggle_movemode(movemode : int);
+signal pressed_toggle_viewmode(viewmode : int);
+signal changed_view(dt_rot : Vector2);
 
-# Whether or not the controller is currently enabled
-# (For example, when paused, we probably want to disable any active input controllers)
-var enabled : bool = true;
 
-# Sensitivity of the controller
-var sensitivity : float = 1.0;
+func _input(event : InputEvent):
+	if !enabled: return;
+	# Not if/elif's, because actions might be bound to the same keys
+	if Input.is_action_just_pressed("jump"): pressed_jump.emit();
+	if Input.is_action_just_pressed("crouch"): pressed_crouch.emit();
+	if Input.is_action_just_pressed("shoot"): pressed_shoot.emit();
+	if Input.is_action_just_released("shoot"): released_shoot.emit();
+	if Input.is_action_just_pressed("interact"): pressed_interact.emit();
+	if Input.is_action_just_pressed("equip_weapon_1"): pressed_change_weapon.emit(1);
+	if Input.is_action_just_pressed("equip_weapon_2"): pressed_change_weapon.emit(2);
+	if Input.is_action_just_pressed("toggle_movemode"): pressed_toggle_movemode.emit();
+	if Input.is_action_just_pressed("toggle_viewmode"): pressed_toggle_viewmode.emit();
+
+
+
+var incremental_rotation : Vector2 = Vector2.ZERO; # Amount of x/y rotation since last fetched by get_incremental_rotation()
+var enabled : bool = true; # Whether or not the controller is currently enabled (input controllers are disabled while paused)
+var view_sensitivity : float = 1.0; # Sensitivity of the controller to view events
 
 
 # Don't override these, or at least call super()
-func start(_sensitivity : float):
-	sensitivity = _sensitivity;
-
-
+func start(_view_sensitivity : float): view_sensitivity = _view_sensitivity;
+func get_controller_name() -> StringName: return "Input_Controller";
+func enable(): enabled = true;
+func disable(): enabled = false;
 func _ready():
 	super();
 	add_to_group("input_controllers");
 
 
-func get_controller_name():
-	return "Input_Controller";
+func get_jumping() -> bool: return Input.is_action_pressed("jump");
+func get_crouching() -> bool: return Input.is_action_pressed("crouch");
+
+func get_incremental_rotation() -> Vector2:
+	var ret = incremental_rotation;
+	incremental_rotation = Vector2.ZERO;
+	return ret;
 
 
-func incremental_rotation() -> Vector2:
-	var inc = _rot;
-	_rot = Vector2.ZERO;
-	return inc;
-
-
-func enable():
-	enabled = true;
-func disable():
-	enabled = false;
-
-
-func handle_input(event):
-	if !enabled: return;
-	handle_input_impl(event);
-
-
-func input_dir_raw() -> Vector3:
+func get_input_dir() -> Vector3:
 	if !enabled: return Vector3.ZERO;
-	return input_dir_raw_impl();
-
-
-# Override these
-@warning_ignore_start("unused_parameter")
-func handle_input_impl(event):
-	pass;
-
-
-func input_dir_raw_impl() -> Vector3:
-	return Vector3.ZERO;
-
-
-func is_trying_jump() -> bool:
-	return false;
-@warning_ignore_restore("unused_parameter")
+	var input_dir_2d = Input.get_vector("move_left", "move_right", "move_forward", "move_backward");
+	var ret = Vector3(input_dir_2d.x, 0.0, input_dir_2d.y);
+	return ret;

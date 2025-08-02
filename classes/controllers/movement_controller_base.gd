@@ -7,9 +7,6 @@ extends Controller_Base
 ## They should also define a get_current_move_state()->StringName function,
 ## but it is not strictly necessary.
 
-@warning_ignore("unused_signal")
-signal movement_state_changed(new_state : StringName);
-
 
 var jumping : bool;
 var aux : Dictionary = {};

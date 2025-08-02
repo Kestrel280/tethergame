@@ -103,10 +103,8 @@ offset_right = 372.0
 offset_bottom = 428.0
 text = "Controls:
 WASD/Space: Move
-E: Switch to fly mode
-Q: Switch to normal mode
-Z: 3rd person
-C: 1st person
+V: Toggle between normal/flying mode
+Z: Toggle between 1st/3rd person
 2: Equip Tether
 LMB: Shoot tether"
 

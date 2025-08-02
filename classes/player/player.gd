@@ -13,47 +13,19 @@ func _ready() -> void:
 	var head : Node3D = find_child("Head");
 	var camera : Camera3D = head.find_child("Camera3D") if head else null;
 	$Input_Controller.start(Player_Settings.kbm_sensitivity);
+	install_input_controller($Input_Controller);
 	$Camera_Controller.start(self, head, camera);
 	$Movement_Controller.start(self);
 
 
-# TODO all of this is temporary/debug, needs to be moved to appropriate spots
-func _input(event) -> void:
-	$Input_Controller.handle_input(event);
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_Q:
-			var test = Movement_Controller_State_Machine.construct([Player_Idle_State.new(), Player_Walk_State.new(), Player_Air_State.new()]);
-			test.start(self);
-			swap_controller(test);
-		elif event.pressed and event.keycode == KEY_E:
-			var test = Movement_Controller_State_Machine.construct([Player_Flymode_Idle_State.new(), Player_Flymode_Walk_State.new(), Player_Flymode_Air_State.new()]);
-			test.start(self);
-			swap_controller(test);
-		elif event.pressed and event.keycode == KEY_Z:
-			var test = Camera_Controller_3rd_Person.new();
-			test.start(self, $Head, $Head/Camera3D, $Camera_Controller.rot);
-			swap_controller(test);
-		elif event.pressed and event.keycode == KEY_C:
-			var test = Camera_Controller_1st_Person.new();
-			test.start(self, $Head, $Head/Camera3D, $Camera_Controller.rot);
-			swap_controller(test);
-		elif event.pressed and event.keycode == KEY_1:
-			equip_weapon(Weapon.new(self, preload("res://weapons/pistol/pistol.tres")));
-		elif event.pressed and event.keycode == KEY_2:
-			equip_weapon(Weapon.new(self, preload("res://weapons/tether/tether.tres")));
-	elif Input.is_action_just_pressed("shoot"):
-		if weapon: weapon.try_shoot();
-	elif Input.is_action_just_released("shoot"):
-		if weapon: weapon.stop_shoot();
-
-
 @warning_ignore("unused_parameter")
 func _process(delta : float) -> void:
-	$Camera_Controller.add_rotation(-$Input_Controller.incremental_rotation());
+	$Camera_Controller.add_rotation(-$Input_Controller.get_incremental_rotation());
+
 
 func _physics_process(delta: float) -> void:
-	$Movement_Controller.jumping = $Input_Controller.is_trying_jump();
-	$Movement_Controller.move(delta, (self.transform.basis * $Head.transform.basis *  $Input_Controller.input_dir_raw()).normalized());
+	$Movement_Controller.jumping = $Input_Controller.get_jumping();
+	$Movement_Controller.move(delta, (self.transform.basis * $Head.transform.basis * $Input_Controller.get_input_dir()).normalized());
 	
 	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
 	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);
@@ -74,6 +46,7 @@ func swap_controller(new_controller : Controller_Base) -> Node:
 				old_controller = child;
 				remove_child(old_controller);
 	add_child(new_controller);
+	if new_controller is Input_Controller_Base: install_input_controller(new_controller);
 	return old_controller;
 
 
@@ -81,3 +54,38 @@ func equip_weapon(_weapon : Weapon):
 	if weapon: weapon.queue_free();
 	$Camera_Controller.get_head().add_child(_weapon);
 	weapon = _weapon;
+
+
+func on_input_controller_pressed_toggle_viewmode():
+	var new_cc : Camera_Controller_Base;
+	if $Camera_Controller is Camera_Controller_1st_Person: new_cc = Camera_Controller_3rd_Person.new();
+	else: new_cc = Camera_Controller_1st_Person.new();
+	new_cc.start(self, $Head, $Head/Camera3D, $Camera_Controller.rot);
+	swap_controller(new_cc);
+
+
+func on_input_controller_pressed_toggle_movemode():
+	var new_mc : Movement_Controller_State_Machine;
+	print($Movement_Controller.get_current_move_state());
+	print($Movement_Controller.get_current_move_state().get_slice("_", 0));
+	print($Movement_Controller.get_current_move_state().split("_"));
+	if $Movement_Controller.get_current_move_state().get_slice("_", 0) != "Player": return;
+	if $Movement_Controller.get_current_move_state().split("_").has("Flymode"):
+		new_mc = Movement_Controller_State_Machine.construct([Player_Idle_State.new(), Player_Walk_State.new(), Player_Air_State.new()]);
+	else: new_mc = Movement_Controller_State_Machine.construct([Player_Flymode_Idle_State.new(), Player_Flymode_Walk_State.new(), Player_Flymode_Air_State.new()]);
+	new_mc.start(self);
+	swap_controller(new_mc);
+
+
+func on_input_controller_pressed_change_weapon(weapon_num : int):
+	match weapon_num:
+		1: equip_weapon(Weapon.new(self, preload("res://weapons/pistol/pistol.tres")));
+		2: equip_weapon(Weapon.new(self, preload("res://weapons/tether/tether.tres")));
+
+
+func install_input_controller(ic : Input_Controller_Base):
+	ic.pressed_toggle_viewmode.connect(on_input_controller_pressed_toggle_viewmode);
+	ic.pressed_toggle_movemode.connect(on_input_controller_pressed_toggle_movemode);
+	ic.pressed_change_weapon.connect(on_input_controller_pressed_change_weapon);
+	ic.pressed_shoot.connect(func(): if weapon: weapon.try_shoot());
+	ic.released_shoot.connect(func(): if weapon: weapon.stop_shoot());

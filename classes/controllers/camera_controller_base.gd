@@ -5,6 +5,11 @@ extends Controller_Base
 var rot : Vector2 = Vector2.ZERO;
 
 
+## Camera Controllers expose methods to safely update the rotation of the
+##	controlled node and its "head", as well as the position of its camera.
+## This base class defines those methods: 
+
+
 # Users of the component must set these! (using start())
 var body : Node3D;
 var head : Node3D;
@@ -41,6 +46,8 @@ func apply_rotation():
 	head.rotate_object_local(Vector3(1, 0, 0), rot.y);
 
 
+# Similar functionality to Node3D.look_at(), but using our rotation scheme
+# (We extend from Node, so we're not overriding any built-ins)
 func look_at(dir : Vector3):
 	rot.x = -atan2(dir.z, dir.x) - PI/2; # Rotation about y axis
 	rot.y = PI/2 - acos(dir.y); # Inclination from xz plane
