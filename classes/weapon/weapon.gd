@@ -17,6 +17,7 @@ func _init(_carrier : Node3D, _weapon_res : Weapon_Resource):
 	mesh.position = weapon_res.position;
 	mesh.rotation_degrees = weapon_res.orientation;
 	shoot_action = weapon_res.shoot_script.new();
+	add_child(shoot_action);
 
 
 func _ready() -> void:
