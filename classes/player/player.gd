@@ -12,6 +12,7 @@ static func construct() -> Player:
 func _ready() -> void:
 	var head : Node3D = find_child("Head");
 	var camera : Camera3D = head.find_child("Camera3D") if head else null;
+	$Input_Controller.start(Player_Settings.kbm_sensitivity);
 	$Camera_Controller.start(self, head, camera);
 	$Movement_Controller.start(self);
 

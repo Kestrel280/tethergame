@@ -9,8 +9,15 @@ var _rot : Vector2 = Vector2.ZERO;
 # (For example, when paused, we probably want to disable any active input controllers)
 var enabled : bool = true;
 
+# Sensitivity of the controller
+var sensitivity : float = 1.0;
+
 
 # Don't override these; if you MUST, make sure to call super()
+func start(_sensitivity : float):
+	sensitivity = _sensitivity;
+
+
 func _ready():
 	super();
 	add_to_group("input_controllers");
