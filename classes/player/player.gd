@@ -66,9 +66,6 @@ func on_input_controller_pressed_toggle_viewmode():
 
 func on_input_controller_pressed_toggle_movemode():
 	var new_mc : Movement_Controller_State_Machine;
-	print($Movement_Controller.get_current_move_state());
-	print($Movement_Controller.get_current_move_state().get_slice("_", 0));
-	print($Movement_Controller.get_current_move_state().split("_"));
 	if $Movement_Controller.get_current_move_state().get_slice("_", 0) != "Player": return;
 	if $Movement_Controller.get_current_move_state().split("_").has("Flymode"):
 		new_mc = Movement_Controller_State_Machine.construct([Player_Idle_State.new(), Player_Walk_State.new(), Player_Air_State.new()]);
