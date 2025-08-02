@@ -34,7 +34,7 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 		var anchor_to_body_unit_vector = (body.position - sm.aux["anchor_position"]).normalized();
 		body.position = sm.aux["anchor_position"] + anchor_to_body_unit_vector * sqrt(sm.aux["anchor_sqdist"]); # (1)
 		#body.velocity = body.velocity.slide(anchor_to_body_unit_vector); # (2)
-
 	
+	if body.velocity.is_zero_approx(): return Tethered_Idle_State.state_name;
 	return Tethered_Walk_State.state_name;
 	

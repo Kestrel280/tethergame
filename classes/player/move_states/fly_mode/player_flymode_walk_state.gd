@@ -26,4 +26,5 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	var add_speed : float = clampf(Player_Settings.ground_accel * Player_Settings.max_ground_speed, 0, max_add_speed);
 	body.velocity += add_speed * wish_dir;
 	
+	if body.velocity.is_zero_approx(): return Player_Flymode_Idle_State.state_name;
 	return Player_Flymode_Walk_State.state_name;
