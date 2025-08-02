@@ -4,6 +4,11 @@ extends Node
 
 @export var current_state : State;
 var states : Dictionary = {};
+var aux : Dictionary = {};
+
+
+func start(_aux : Dictionary = {}):
+	aux = _aux;
 
 
 func _ready() -> void:

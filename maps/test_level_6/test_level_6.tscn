@@ -143,6 +143,9 @@ surface_material_override/0 = ExtResource("3_8o3su")
 [node name="80deg_001" parent="test_level_6" index="27"]
 surface_material_override/0 = ExtResource("3_8o3su")
 
+[node name="85deg_001" parent="test_level_6" index="28"]
+surface_material_override/0 = ExtResource("3_8o3su")
+
 [node name="Teleporter_Exit2" type="Node3D" parent="test_level_6"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -130, 100, -250)
 
@@ -313,8 +316,5 @@ shape = SubResource("BoxShape3D_8o3su")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Teleporter2"]
 mesh = SubResource("BoxMesh_r3ind")
 skeleton = NodePath("")
-
-[node name="85deg_001" parent="test_level_6" index="31"]
-surface_material_override/0 = ExtResource("3_8o3su")
 
 [editable path="test_level_6"]

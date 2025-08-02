@@ -25,10 +25,10 @@ static func construct(states : Array[Movement_State]) -> Movement_Controller_Sta
 	return me;
 
 
-func start(_body : Node3D):
-	super(_body);
-	assert(_body is CharacterBody3D, "Movement_Controller_Player must be applied to a CharacterBody3D");
+func start(_body : Node3D, _aux : Dictionary = {}):
+	super(_body, _aux);
 	
+	$State_Machine.start(aux);
 	for movement_state in $State_Machine.get_children():
 		movement_state.start(body);
 	

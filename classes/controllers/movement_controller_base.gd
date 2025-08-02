@@ -12,19 +12,21 @@ signal movement_state_changed(new_state : StringName);
 
 
 var jumping : bool;
+var aux : Dictionary = {};
 
 
 # Users of the component must set this!
 var body : CharacterBody3D;
 
 
-# Don't override these
+# Don't override these, or at least call super()
 func get_controller_name():
 	return "Movement_Controller";
 
 
-func start(_body : Node3D):
-	self.body = _body;
+func start(_body : Node3D, _aux : Dictionary = {}):
+	body = _body;
+	aux = _aux;
 
 
 func set_jumping(j : bool):

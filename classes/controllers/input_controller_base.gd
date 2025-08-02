@@ -13,7 +13,7 @@ var enabled : bool = true;
 var sensitivity : float = 1.0;
 
 
-# Don't override these; if you MUST, make sure to call super()
+# Don't override these, or at least call super()
 func start(_sensitivity : float):
 	sensitivity = _sensitivity;
 

@@ -11,7 +11,7 @@ var head : Node3D;
 var camera : Camera3D;
 
 
-# Don't override these
+# Don't override these, or at least call super()
 func get_controller_name():
 	return "Camera_Controller";
 

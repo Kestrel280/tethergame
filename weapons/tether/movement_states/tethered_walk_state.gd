@@ -3,12 +3,10 @@ extends Movement_State
 
 
 static var state_name : StringName = "Tethered_Walk_State";
-var anchor_info : Anchor_Info;
 
 
 func start(_body : CharacterBody3D):
 	super(_body);
-	anchor_info = _body.get_node("Tether_Anchor_Info");
 
 
 @warning_ignore("unused_parameter")
@@ -32,9 +30,9 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	var add_speed : float = clampf(Player_Settings.ground_accel * Player_Settings.max_ground_speed, 0, max_add_speed);
 	body.velocity += add_speed * wish_dir;
 	
-	if body.position.distance_squared_to(anchor_info.anchor_point) > anchor_info.sqdist:
-		var anchor_to_body_unit_vector = (body.position - anchor_info.anchor_point).normalized();
-		body.position = anchor_info.anchor_point + anchor_to_body_unit_vector * sqrt(anchor_info.sqdist); # (1)
+	if body.position.distance_squared_to(sm.aux["anchor_position"]) > sm.aux["anchor_sqdist"]:
+		var anchor_to_body_unit_vector = (body.position - sm.aux["anchor_position"]).normalized();
+		body.position = sm.aux["anchor_position"] + anchor_to_body_unit_vector * sqrt(sm.aux["anchor_sqdist"]); # (1)
 		#body.velocity = body.velocity.slide(anchor_to_body_unit_vector); # (2)
 
 	
