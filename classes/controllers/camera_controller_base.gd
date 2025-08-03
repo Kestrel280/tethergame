@@ -35,7 +35,7 @@ func get_head():
 func add_rotation(r : Vector2):
 	rot += r;
 	rot.x = wrapf(rot.x, -PI, PI);
-	rot.y = clampf(rot.y, -PI/2, PI/2);
+	rot.y = clampf(rot.y, -PI/2 + 0.001, PI/2 - 0.001);
 	apply_rotation();
 	
 
