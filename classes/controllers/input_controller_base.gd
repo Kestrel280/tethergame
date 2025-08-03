@@ -2,6 +2,7 @@ class_name Input_Controller_Base
 extends Controller_Base
 
 
+@warning_ignore_start("unused_signal")
 signal pressed_jump;
 signal pressed_crouch;
 signal pressed_shoot;
@@ -11,8 +12,10 @@ signal pressed_change_weapon(weapon_type : int);
 signal pressed_toggle_movemode(movemode : int);
 signal pressed_toggle_viewmode(viewmode : int);
 signal changed_view(dt_rot : Vector2);
+@warning_ignore_restore("unused_signal")
 
 
+@warning_ignore("unused_parameter")
 func _input(event : InputEvent):
 	if !enabled: return;
 	# Not if/elif's, because actions might be bound to the same keys

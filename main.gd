@@ -12,6 +12,7 @@ func _ready() -> void:
 	change_level("main_menu");
 
 
+@warning_ignore("unused_parameter")
 func _unhandled_input(event : InputEvent):
 	if Input.is_action_just_pressed("pause"): try_pause();
 		
