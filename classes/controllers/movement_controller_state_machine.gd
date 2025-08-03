@@ -52,6 +52,7 @@ func move(dt : float, wish_dir : Vector3):
 		if acos(collision.get_normal().y) < body.floor_max_angle: body.apply_floor_snap();
 		else: body.velocity = body.velocity.slide(collision.get_normal());
 	
+	$State_Machine.set_meta("last_velocity", body.velocity);
 	body.move_and_slide();
 
 

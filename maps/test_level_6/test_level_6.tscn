@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://opnab1b6u7sr"]
+[gd_scene load_steps=14 format=3 uid="uid://opnab1b6u7sr"]
 
 [ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_saw7f"]
 [ext_resource type="PackedScene" uid="uid://baq8d06ii0lst" path="res://maps/test_level_6/test_level_6.blend" id="2_abntm"]
@@ -40,6 +40,13 @@ albedo_color = Color(1, 1, 1, 0.686275)
 [sub_resource type="BoxMesh" id="BoxMesh_r3ind"]
 material = SubResource("StandardMaterial3D_r3ind")
 size = Vector3(1, 30, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fadhj"]
+size = Vector3(1, 8, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kbjs5"]
+material = SubResource("StandardMaterial3D_r3ind")
+size = Vector3(1, 8, 8)
 
 [node name="Test_Level_6" type="Node"]
 script = ExtResource("1_saw7f")
@@ -316,5 +323,96 @@ shape = SubResource("BoxShape3D_8o3su")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Teleporter2"]
 mesh = SubResource("BoxMesh_r3ind")
 skeleton = NodePath("")
+
+[node name="Slope_Bounce_Tests" type="Node3D" parent="test_level_6"]
+
+[node name="Teleporter3" parent="test_level_6/Slope_Bounce_Tests" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -240, 4, 200)
+destination = NodePath("../Teleporter_Exit_Slope_Bounce_Tests1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter3"]
+shape = SubResource("BoxShape3D_fadhj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter3"]
+mesh = SubResource("BoxMesh_kbjs5")
+skeleton = NodePath("")
+
+[node name="Teleporter4" parent="test_level_6/Slope_Bounce_Tests" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -250, 4, 200)
+destination = NodePath("../Teleporter_Exit_Slope_Bounce_Tests1")
+add_speed = 2.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter4"]
+shape = SubResource("BoxShape3D_fadhj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter4"]
+mesh = SubResource("BoxMesh_kbjs5")
+skeleton = NodePath("")
+
+[node name="Teleporter5" parent="test_level_6/Slope_Bounce_Tests" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -260, 4, 200)
+destination = NodePath("../Teleporter_Exit_Slope_Bounce_Tests1")
+add_speed = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter5"]
+shape = SubResource("BoxShape3D_fadhj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter5"]
+mesh = SubResource("BoxMesh_kbjs5")
+skeleton = NodePath("")
+
+[node name="Teleporter6" parent="test_level_6/Slope_Bounce_Tests" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -270, 4, 200)
+destination = NodePath("../Teleporter_Exit_Slope_Bounce_Tests1")
+add_speed = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter6"]
+shape = SubResource("BoxShape3D_fadhj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter6"]
+mesh = SubResource("BoxMesh_kbjs5")
+skeleton = NodePath("")
+
+[node name="Teleporter8" parent="test_level_6/Slope_Bounce_Tests" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, -275, 4, 174)
+destination = NodePath("../Teleporter_Exit_Slope_Bounce_Tests2")
+add_speed = 30.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter8"]
+shape = SubResource("BoxShape3D_fadhj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter8"]
+mesh = SubResource("BoxMesh_kbjs5")
+skeleton = NodePath("")
+
+[node name="Teleporter9" parent="test_level_6/Slope_Bounce_Tests" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, -275, 4, 184)
+destination = NodePath("../Teleporter_Exit_Slope_Bounce_Tests2")
+add_speed = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter9"]
+shape = SubResource("BoxShape3D_fadhj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter9"]
+mesh = SubResource("BoxMesh_kbjs5")
+skeleton = NodePath("")
+
+[node name="Teleporter10" parent="test_level_6/Slope_Bounce_Tests" node_paths=PackedStringArray("destination") instance=ExtResource("3_r3ind")]
+transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, -275, 4, 194)
+destination = NodePath("../Teleporter_Exit_Slope_Bounce_Tests2")
+add_speed = 2.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter10"]
+shape = SubResource("BoxShape3D_fadhj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="test_level_6/Slope_Bounce_Tests/Teleporter10"]
+mesh = SubResource("BoxMesh_kbjs5")
+skeleton = NodePath("")
+
+[node name="Teleporter_Exit_Slope_Bounce_Tests1" type="Node3D" parent="test_level_6/Slope_Bounce_Tests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -288, 79, 135)
+
+[node name="Teleporter_Exit_Slope_Bounce_Tests2" type="Node3D" parent="test_level_6/Slope_Bounce_Tests"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -288, 79, 115)
 
 [editable path="test_level_6"]

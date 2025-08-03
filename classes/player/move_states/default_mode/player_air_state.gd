@@ -6,16 +6,20 @@ static var state_name : StringName = "Player_Air_State";
 
 
 func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
+	# If we're on the floor this frame, first "bounce" along the floor. Then, multiple cases:
+	#	Slidemove if our projected velocity has a y component greater than our jump impulse
+	#	OR, if we're jumping, immediately rejump
+	#	OR, if we have no velocity, transition to idle
+	#	OR, if we have some velocity, transition to walk
 	if body.is_on_floor():
-		
-		# If we landed, but we're trying to jump, immediately re-jump and stay in airmove
-		if trying_jump: do_jump(Player_Settings.jump_impulse);
-		
-		# If we landed, and our velocity is 0 now, go to idle
-		elif body.velocity.is_zero_approx(): return Player_Idle_State.state_name;
-		
-		# If we landed, but we have velocity, go to walk
-		else: return Player_Walk_State.state_name;
+		var floor_projected_velocity = body.get_real_velocity().slide(body.get_floor_normal());
+		var bounce_speed = -sm.get_meta("last_velocity").dot(body.get_floor_normal());
+		body.velocity += body.get_floor_normal().slide(Vector3.UP) * bounce_speed;
+
+		if floor_projected_velocity.y > Player_Settings.jump_impulse: body.velocity = floor_projected_velocity; # Slidemove
+		elif trying_jump: do_jump(Player_Settings.jump_impulse); # Immediate re-jump
+		elif body.velocity.is_zero_approx(): return Player_Idle_State.state_name; # Go idle
+		else: return Player_Walk_State.state_name; # Go to walk
 	
 	wish_dir = Vector3(wish_dir.x, 0, wish_dir.z).normalized();
 	var cur_speed_in_wish_dir = wish_dir.dot(body.velocity);

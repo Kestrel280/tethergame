@@ -2,6 +2,11 @@ class_name Movement_State
 extends State
 
 
+# Movement states can access a "last_velocity" metadata attribute of their controlling state machine,
+# which is set by the ancestor Movement_Controller_State_Machine.
+# It contains the velocity of the body which was used for last frame's movement.
+
+
 var body : CharacterBody3D;
 
 
