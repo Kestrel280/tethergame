@@ -36,7 +36,7 @@ func shoot():
 		# Then start the movement controller
 		movement_controller_tethered.start(weapon_carrier, anchor_data);
 		# Then give the movement controller to the carrier
-		stored_movement_controller = weapon_carrier.swap_controller(movement_controller_tethered);
+		stored_movement_controller = weapon_carrier.swap_controller(movement_controller_tethered, false);
 		# Play a sound
 		Sound_Manager.play_sound(weapon.weapon_res.hit_sound);
 		# Create the rope mesh and add it as a child of the weapon
@@ -65,7 +65,7 @@ func stop_shoot():
 		if debug_sphere: debug_sphere.queue_free();
 		
 	if stored_movement_controller:
-		weapon_carrier.swap_controller(stored_movement_controller);
+		weapon_carrier.swap_controller(stored_movement_controller, false);
 		stored_movement_controller = null;
 
 

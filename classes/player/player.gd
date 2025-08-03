@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	Globals.debug_panel.add_property("movement_state", $Movement_Controller.get_current_move_state());
 
 
-func swap_controller(new_controller : Controller_Base) -> Node:
+func swap_controller(new_controller : Controller_Base, delete_old_controller : bool = true) -> Node:
 	var old_controller : Node = null;
 	# Scan children for a controller of matching type
 	# If there is one, remove it and return it
@@ -47,6 +47,7 @@ func swap_controller(new_controller : Controller_Base) -> Node:
 				remove_child(old_controller);
 	add_child(new_controller);
 	if new_controller is Input_Controller_Base: install_input_controller(new_controller);
+	if delete_old_controller: old_controller.queue_free();
 	return old_controller;
 
 
