@@ -24,6 +24,14 @@ Sound_Manager="*res://autoload/sound_manager.gd"
 
 settings/physics_interpolation/enable_warnings=false
 
+[display]
+
+window/size/viewport_width=3840
+window/size/viewport_height=2160
+window/energy_saving/keep_screen_on=false
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [file_customization]
 
 folder_colors={

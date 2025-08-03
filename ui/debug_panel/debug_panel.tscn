@@ -16,6 +16,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [sub_resource type="Theme" id="Theme_mil25"]
+default_font_size = 36
 Label/styles/normal = SubResource("StyleBoxFlat_ieq6c")
 VBoxContainer/constants/separation = 2
 

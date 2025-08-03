@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://24rgbt5r16ye"]
+[gd_scene load_steps=3 format=3 uid="uid://24rgbt5r16ye"]
 
 [ext_resource type="Script" uid="uid://b3utanryomjj8" path="res://pause_menu.gd" id="1_hdmo1"]
+[ext_resource type="Theme" uid="uid://cp7oojxyjnbs7" path="res://ui/themes/buttons_theme.tres" id="2_nwcfo"]
 
 [node name="Pause_Menu" type="Control"]
 z_index = 5
@@ -24,6 +25,7 @@ offset_left = -28.5
 offset_right = 28.5
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 128
 text = "Paused"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -46,6 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_nwcfo")
 
 [node name="Button_Resume" type="Button" parent="Center_Screen/VBoxContainer"]
 layout_mode = 2
