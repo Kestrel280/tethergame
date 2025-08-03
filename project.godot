@@ -125,4 +125,5 @@ equip_weapon_2={
 common/physics_ticks_per_second=67
 common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
+3d/default_gravity=20.32
 common/physics_interpolation=true
