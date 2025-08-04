@@ -52,6 +52,7 @@ func swap_controller(new_controller : Controller_Base, delete_old_controller : b
 
 
 func equip_weapon(_weapon : Weapon):
+	if weapon: weapon.abort_shoot();
 	if weapon: weapon.queue_free();
 	$Camera_Controller.get_head().add_child(_weapon);
 	weapon = _weapon;
