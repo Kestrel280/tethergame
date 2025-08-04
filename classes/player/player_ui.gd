@@ -1,4 +1,4 @@
-extends Tether_Ui
+extends Control
 
 
 @export var player : Player;

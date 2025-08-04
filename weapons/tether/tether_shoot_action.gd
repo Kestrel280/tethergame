@@ -10,6 +10,8 @@ var debug_sphere : MeshInstance3D;
 var anchor_position : Vector3;
 var anchor_sqdist : float;
 var anchored : bool;
+var raycast : Dictionary;
+@onready var in_range_indicator = weapon_ui.get_node("Center_Screen/In_Range_Indicator");
 
 
 ## Tether:
@@ -21,14 +23,10 @@ var anchored : bool;
 ## On stop_shoot:
 ## 	Swap back in the original movement controller
 func shoot():
-	var space_state = weapon_carrier.get_world_3d().direct_space_state;
-	var query = PhysicsRayQueryParameters3D.create(weapon.global_position, weapon.global_position - cast_length * weapon.global_transform.basis.z);
-	query.exclude = [weapon_carrier];
-	var result = space_state.intersect_ray(query);
-	if result:
+	if raycast:
 		anchored = true;
-		anchor_position = result.position;
-		anchor_sqdist = weapon_carrier.global_position.distance_squared_to(result.position);
+		anchor_position = raycast.position;
+		anchor_sqdist = weapon_carrier.global_position.distance_squared_to(raycast.position);
 		var anchor_data : Dictionary = {
 			"anchor_position": anchor_position,
 			"anchor_sqdist": anchor_sqdist
@@ -53,8 +51,8 @@ func shoot():
 			debug_sphere.top_level = true;
 			debug_sphere.mesh.radius = sqrt(anchor_sqdist);
 			debug_sphere.mesh.height = sqrt(anchor_sqdist) * 2;
-			result.collider.add_child(debug_sphere);
-			debug_sphere.global_position = result.position;
+			raycast.collider.add_child(debug_sphere);
+			debug_sphere.global_position = raycast.position;
 
 
 func stop_shoot():
@@ -75,6 +73,12 @@ func abort_shoot():
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
+	var space_state = weapon_carrier.get_world_3d().direct_space_state;
+	var query = PhysicsRayQueryParameters3D.create(weapon.global_position, weapon.global_position - cast_length * weapon.global_transform.basis.z);
+	query.exclude = [weapon_carrier];
+	raycast = space_state.intersect_ray(query);
+	if raycast: in_range_indicator.visible = true;
+	else: in_range_indicator.visible = false;
 	if anchored:
 		update_rope();
 		if debug_sphere:

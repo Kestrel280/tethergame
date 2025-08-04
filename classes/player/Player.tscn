@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cmu3p2dw8cim5"]
+[gd_scene load_steps=16 format=3 uid="uid://cmu3p2dw8cim5"]
 
 [ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player/player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cug1n1avxre40" path="res://classes/controllers/movement_controller_state_machine.gd" id="5_nqxhk"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://7kl4mh5of1t7" path="res://classes/player/player_ui.gd" id="10_wc7k0"]
 [ext_resource type="LabelSettings" uid="uid://c3c3rcs4527d" path="res://ui/label_kinetic/kinetic_label_setting.tres" id="11_4kxxt"]
 [ext_resource type="Script" uid="uid://mqoi0xuptywi" path="res://ui/label_kinetic/label_kinetic.gd" id="12_4kxxt"]
-[ext_resource type="Texture2D" uid="uid://f425rgeqtr4c" path="res://assets/textures/plus_32px.png" id="12_wc7k0"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wc7k0"]
 
@@ -92,7 +91,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("10_wc7k0")
 player = NodePath("..")
-metadata/_custom_type_script = "uid://d1cktkjuaj1f7"
 
 [node name="Center_Screen" type="Control" parent="Player_Ui"]
 layout_mode = 1
@@ -140,20 +138,3 @@ max_gain = 0.2
 max_loss = -0.35
 smoothing_factor = 0.4
 metadata/_custom_type_script = "uid://mqoi0xuptywi"
-
-[node name="Crosshair" type="TextureRect" parent="Player_Ui/Center_Screen"]
-texture_filter = 2
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("12_wc7k0")

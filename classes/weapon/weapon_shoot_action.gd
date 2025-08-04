@@ -5,11 +5,13 @@ extends Node
 const cast_length : float = 100.0;
 var weapon_carrier : Node3D;
 var weapon : Weapon;
+var weapon_ui : Control;
 
 
-func _init(_weapon_carrier : Node3D, _weapon : Weapon):
+func _init(_weapon_carrier : Node3D, _weapon : Weapon, _weapon_ui : Control = null):
 	weapon_carrier = _weapon_carrier;
 	weapon = _weapon;
+	weapon_ui = _weapon_ui;
 
 
 @warning_ignore_start("unused_parameter")

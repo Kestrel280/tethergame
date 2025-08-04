@@ -5,6 +5,7 @@ extends Resource
 @export var mesh : Mesh;
 @export var position : Vector3;
 @export var orientation : Vector3;
+@export var ui_scene : PackedScene;
 @export_subgroup("Sounds")
 @export var shoot_sound : AudioStream;
 @export var hit_sound : AudioStream;

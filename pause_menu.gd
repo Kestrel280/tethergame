@@ -1,4 +1,4 @@
-extends Tether_Ui
+extends Control
 
 
 var stored_mouse_mode : Input.MouseMode;
