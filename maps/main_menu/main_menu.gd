@@ -1,6 +1,10 @@
 extends Level
 
 
+func _input(event : InputEvent):
+	if Input.is_action_just_pressed("pause"): get_viewport().set_input_as_handled();
+
+
 func do_intro():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
 
