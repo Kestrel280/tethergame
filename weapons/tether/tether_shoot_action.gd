@@ -77,8 +77,10 @@ func _process(delta: float) -> void:
 	var query = PhysicsRayQueryParameters3D.create(weapon.global_position, weapon.global_position - cast_length * weapon.global_transform.basis.z);
 	query.exclude = [weapon_carrier];
 	raycast = space_state.intersect_ray(query);
-	if raycast: in_range_indicator.visible = true;
-	else: in_range_indicator.visible = false;
+	if raycast: 
+		in_range_indicator.visible = true;
+	else: 
+		in_range_indicator.visible = false;
 	if anchored:
 		update_rope();
 		if debug_sphere:
