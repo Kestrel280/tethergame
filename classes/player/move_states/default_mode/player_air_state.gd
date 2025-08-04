@@ -12,9 +12,9 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	#	OR, if we have no velocity, transition to idle
 	#	OR, if we have some velocity, transition to walk
 	if body.is_on_floor():
-		var floor_projected_velocity = body.get_real_velocity().slide(body.get_floor_normal());
-		var bounce_speed = -sm.get_meta("last_velocity").dot(body.get_floor_normal());
-		body.velocity += body.get_floor_normal().slide(Vector3.UP) * bounce_speed;
+		var floor_projected_velocity = body.velocity.slide(body.get_floor_normal());
+		body.velocity = sm.get_meta("last_velocity").bounce(body.get_floor_normal());
+		body.velocity.y = 0;
 
 		if floor_projected_velocity.y > Player_Settings.jump_impulse: body.velocity = floor_projected_velocity; # Slidemove
 		elif trying_jump: do_jump(Player_Settings.jump_impulse); # Immediate re-jump
