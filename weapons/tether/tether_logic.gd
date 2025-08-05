@@ -11,7 +11,7 @@ var anchor_position : Vector3;
 var anchor_sqdist : float;
 var anchored : bool;
 var raycast : Dictionary;
-@onready var in_range_indicator = weapon_ui.get_node("Center_Screen/In_Range_Indicator");
+@onready var in_range_indicator = weapon.ui_scene.get_node("Center_Screen/In_Range_Indicator");
 
 
 ## Tether:
@@ -19,24 +19,24 @@ var raycast : Dictionary;
 ##	Raycast to find anchor point & anchored_object
 ## 	Create a tethered movement controller
 ## 	Start the tethered movement controller, passing anchor location as aux info
-##	Swap out weapon_carrier's movement controller for tethered movement controller
+##	Swap out carrier's movement controller for tethered movement controller
 ## On stop_shoot:
 ## 	Swap back in the original movement controller
 func shoot():
 	if raycast:
 		anchored = true;
 		anchor_position = raycast.position;
-		anchor_sqdist = weapon_carrier.global_position.distance_squared_to(raycast.position);
+		anchor_sqdist = weapon.carrier.global_position.distance_squared_to(raycast.position);
 		var anchor_data : Dictionary = {
 			"anchor_position": anchor_position,
 			"anchor_sqdist": anchor_sqdist
 		};
 		# Then start the movement controller
-		movement_controller_tethered.start(weapon_carrier, anchor_data);
+		movement_controller_tethered.start(weapon.carrier, anchor_data);
 		# Then give the movement controller to the carrier
-		stored_movement_controller = weapon_carrier.swap_controller(movement_controller_tethered, false);
+		stored_movement_controller = weapon.carrier.swap_controller(movement_controller_tethered, false);
 		# Play a sound
-		Sound_Manager.play_sound(weapon.weapon_res.hit_sound);
+		Sound_Manager.play_sound(weapon.res.hit_sound);
 		# Create the rope mesh and add it as a child of the weapon
 		rope = rope_scene.instantiate();
 		rope.top_level = true;
@@ -58,12 +58,12 @@ func shoot():
 func stop_shoot():
 	if anchored:
 		anchored = false;
-		Sound_Manager.play_sound(weapon.weapon_res.unshoot_sound);
+		Sound_Manager.play_sound(weapon.res.unshoot_sound);
 		rope.queue_free();
 		if debug_sphere: debug_sphere.queue_free();
 		
 	if stored_movement_controller:
-		weapon_carrier.swap_controller(stored_movement_controller, false);
+		weapon.carrier.swap_controller(stored_movement_controller, false);
 		stored_movement_controller = null;
 
 
@@ -73,9 +73,9 @@ func abort_shoot():
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
-	var space_state = weapon_carrier.get_world_3d().direct_space_state;
-	var query = PhysicsRayQueryParameters3D.create(weapon.global_position, weapon.global_position - cast_length * weapon.global_transform.basis.z);
-	query.exclude = [weapon_carrier];
+	var space_state = weapon.carrier.get_world_3d().direct_space_state;
+	var query = PhysicsRayQueryParameters3D.create(weapon.global_position, weapon.global_position - weapon.res.max_range * weapon.global_transform.basis.z);
+	query.exclude = [weapon.carrier];
 	raycast = space_state.intersect_ray(query);
 	if raycast: 
 		in_range_indicator.visible = true;
