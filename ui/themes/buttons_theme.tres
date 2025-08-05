@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://cp7oojxyjnbs7"]
 
-[ext_resource type="FontFile" uid="uid://basd7o274qy5k" path="res://maps/main_menu/themes/JupiteroidBoldItalic.ttf" id="1_q7ora"]
+[ext_resource type="FontFile" uid="uid://basd7o274qy5k" path="res://ui/fonts/JupiteroidBoldItalic.ttf" id="1_q7ora"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8h7b"]
 content_margin_left = 10.0
@@ -61,9 +61,12 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [resource]
+default_font_size = 32
 Button/colors/font_color = Color(0.341872, 0.613919, 0.999995, 1)
 Button/font_sizes/font_size = 96
 Button/fonts/font = ExtResource("1_q7ora")
 Button/styles/hover = SubResource("StyleBoxFlat_n8h7b")
 Button/styles/normal = SubResource("StyleBoxFlat_2irug")
 Button/styles/pressed = SubResource("StyleBoxFlat_y7ec6")
+Label/font_sizes/font_size = 36
+Label/fonts/font = ExtResource("1_q7ora")

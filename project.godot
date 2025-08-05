@@ -28,6 +28,8 @@ settings/physics_interpolation/enable_warnings=false
 
 window/size/viewport_width=3840
 window/size/viewport_height=2160
+window/size/window_width_override=2560
+window/size/window_height_override=1440
 window/energy_saving/keep_screen_on=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"

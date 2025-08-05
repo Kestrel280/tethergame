@@ -33,14 +33,12 @@ func _input(event : InputEvent):
 
 var incremental_rotation : Vector2 = Vector2.ZERO; # Amount of x/y rotation since last fetched by get_incremental_rotation()
 var enabled : bool = true; # Whether or not the controller is currently enabled (input controllers are disabled while paused)
-var view_sensitivity : float = 1.0; # Sensitivity of the controller to view events
 
 
 # Don't override these, or at least call super()
 func _ready():
 	super();
 	add_to_group("input_controllers");
-func start(_view_sensitivity : float): view_sensitivity = _view_sensitivity;
 func get_controller_name() -> StringName: return "Input_Controller";
 func enable(): enabled = true;
 func disable(): enabled = false;

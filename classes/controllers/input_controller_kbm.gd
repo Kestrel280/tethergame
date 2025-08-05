@@ -13,7 +13,7 @@ func _input(event : InputEvent):
 		var dt : Vector2 = Vector2(event.relative.x, event.relative.y);
 		dt *= 0.00000033;
 		dt *= Vector2(get_window().size);
-		dt *= view_sensitivity;
+		dt *= Player_Settings.kbm_sensitivity;
 		incremental_rotation += dt;
 		changed_view.emit(dt);
 		# print("%2.4f | %.8f, %10.2f" % [event.relative.x, dt.x, event.relative.x / dt.x]);

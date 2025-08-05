@@ -15,7 +15,9 @@ func _ready():
 	stored_mouse_mode = Input.get_mouse_mode();
 	get_tree().call_group("input_controllers", "disable");
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
-	
+	print(Player_Settings.kbm_sensitivity);
+	$Center_Screen/Sensitivity_Container/Sensitivity_Slider.value = Player_Settings.kbm_sensitivity;
+	$Center_Screen/Sensitivity_Container/Sensitivity_Slider/Sensitivity_Input.value = Player_Settings.kbm_sensitivity;
 
 
 func unpause():
@@ -35,3 +37,13 @@ func _on_button_main_menu_pressed() -> void:
 
 func _on_button_quit_pressed() -> void:
 	Message_Bus.quit_requested.emit();
+
+
+func _on_sensitivity_slider_value_changed(value: float) -> void:
+	$Center_Screen/Sensitivity_Container/Sensitivity_Slider/Sensitivity_Input.set_value_no_signal(value);
+	Player_Settings.kbm_sensitivity = value;
+
+
+func _on_sensitivity_input_value_changed(value: float) -> void:
+	$Center_Screen/Sensitivity_Container/Sensitivity_Slider.set_value_no_signal(value);
+	Player_Settings.kbm_sensitivity = value;
