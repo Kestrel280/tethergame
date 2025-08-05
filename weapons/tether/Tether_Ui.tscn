@@ -89,4 +89,5 @@ offset_right = 96.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("5_s53ck")
