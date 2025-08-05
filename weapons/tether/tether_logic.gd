@@ -1,4 +1,4 @@
-extends Weapon_Shoot_Action
+extends Weapon_Logic
 
 
 var stored_movement_controller : Movement_Controller_Base;

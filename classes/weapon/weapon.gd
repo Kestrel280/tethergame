@@ -4,7 +4,7 @@ extends Node3D
 
 var weapon_carrier : Node3D;
 var mesh : MeshInstance3D;
-var shoot_action : Weapon_Shoot_Action;
+var weapon_logic : Weapon_Logic;
 var ui_scene : Control;
 var in_shot_cooldown : bool = false;
 var weapon_res : Weapon_Resource;
@@ -18,8 +18,8 @@ func _init(_weapon_carrier : Node3D, _weapon_res : Weapon_Resource):
 	mesh.mesh = weapon_res.mesh;
 	mesh.position = weapon_res.position;
 	mesh.rotation_degrees = weapon_res.orientation;
-	shoot_action = weapon_res.shoot_script.new(weapon_carrier, self, ui_scene);
-	add_child(shoot_action);
+	weapon_logic = weapon_res.weapon_logic.new(weapon_carrier, self, ui_scene);
+	add_child(weapon_logic);
 	add_child(ui_scene);
 
 
@@ -31,14 +31,14 @@ func try_shoot() -> bool:
 	if in_shot_cooldown: return false;
 	
 	in_shot_cooldown = true;
-	shoot_action.shoot();
+	weapon_logic.shoot();
 	get_tree().create_timer(weapon_res.shot_cooldown).timeout.connect(func(): in_shot_cooldown = false);
 	return true;
 
 
 func stop_shoot() -> void:
-	shoot_action.stop_shoot();
+	weapon_logic.stop_shoot();
 
 
 func abort_shoot() -> void:
-	shoot_action.abort_shoot();
+	weapon_logic.abort_shoot();

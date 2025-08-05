@@ -1,4 +1,4 @@
-class_name Weapon_Shoot_Action
+class_name Weapon_Logic
 extends Node
 
 
@@ -20,14 +20,14 @@ func shoot() -> void:
 	var query = PhysicsRayQueryParameters3D.create(weapon.global_position, weapon.global_position - cast_length * weapon.global_transform.basis.z);
 	query.exclude = [weapon_carrier];
 	var result = space_state.intersect_ray(query);
-	if result: print("default shoot action hit %s at %s" % [result.collider, result.position]);
-	else: print("default shoot action missed");
+	if result: print("default weapon_logic hit %s at %s" % [result.collider, result.position]);
+	else: print("default weapon_logic missed");
 
 
 func stop_shoot() -> void:
-	print("default shoot action stop_shoot()");
+	print("default weapon_logic stop_shoot()");
 
 
 func abort_shoot() -> void:
-	print("default shoot action abort_shoot");
+	print("default weapon_logic abort_shoot");
 @warning_ignore_restore("unused_parameter")
