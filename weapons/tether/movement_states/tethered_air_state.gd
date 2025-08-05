@@ -42,7 +42,6 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	#	For angles of impact less than perfect_angle_threshold, we give maximum forgiveness
 	#		(that is, divide by cos(A); or set p == 1.0; they're equivalent).
 	if wish_new_pos.distance_squared_to(sm.aux["anchor_position"]) > sm.aux["anchor_sqdist"]:
-		var dbg_pre_speed : float = body.velocity.length();
 		var anchor_to_body_unit_vector = (body.position - sm.aux["anchor_position"]).normalized();
 		var angle_of_impact : float = abs(PI/2 - acos(body.velocity.normalized().dot(anchor_to_body_unit_vector))); # (0.1)
 		body.position = sm.aux["anchor_position"] + anchor_to_body_unit_vector * sqrt(sm.aux["anchor_sqdist"]); # (1)

@@ -37,24 +37,19 @@ var view_sensitivity : float = 1.0; # Sensitivity of the controller to view even
 
 
 # Don't override these, or at least call super()
+func _ready():
+	super();
+	add_to_group("input_controllers");
 func start(_view_sensitivity : float): view_sensitivity = _view_sensitivity;
 func get_controller_name() -> StringName: return "Input_Controller";
 func enable(): enabled = true;
 func disable(): enabled = false;
-func _ready():
-	super();
-	add_to_group("input_controllers");
-
-
 func get_jumping() -> bool: return Input.is_action_pressed("jump");
 func get_crouching() -> bool: return Input.is_action_pressed("crouch");
-
 func get_incremental_rotation() -> Vector2:
 	var ret = incremental_rotation;
 	incremental_rotation = Vector2.ZERO;
 	return ret;
-
-
 func get_input_dir() -> Vector3:
 	if !enabled: return Vector3.ZERO;
 	var input_dir_2d = Input.get_vector("move_left", "move_right", "move_forward", "move_backward");
