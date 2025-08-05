@@ -1,5 +1,9 @@
+class_name Tether_Logic
 extends Weapon_Logic
 
+
+static var perfect_angle_threshold : float = deg_to_rad(5); # Higher values = easier to hit a perfect tether
+static var catch_forgiveness_curve_exp : float = 0.5; # Higher values = less punishment for bad tethers
 
 var stored_movement_controller : Movement_Controller_Base;
 var movement_controller_tethered : Movement_Controller_State_Machine = Movement_Controller_State_Machine.construct([Tethered_Idle_State.new(), Tethered_Walk_State.new(), Tethered_Air_State.new()]);
@@ -79,8 +83,16 @@ func _process(delta: float) -> void:
 	raycast = space_state.intersect_ray(query);
 	if raycast: 
 		in_range_indicator.visible = true;
+		
+		# Update "tether accuracy" meter
+		var anchor_to_body_unit_vector = (weapon.carrier.position - raycast.position).normalized();
+		var angle_of_impact : float = PI/2 - acos(weapon.carrier.velocity.normalized().dot(anchor_to_body_unit_vector));
+		var accuracy = pow(cos(angle_of_impact), 1.0 - catch_forgiveness_curve_exp if angle_of_impact > perfect_angle_threshold else 1.0);
+		Globals.debug_panel.add_property("tether_accuracy", "%.1f" % (accuracy * 100.0));
+		weapon.ui_scene.get_node("Center_Screen/Accuracy_Indicator").get_material().set_shader_parameter("fillRatio", accuracy);
 	else: 
 		in_range_indicator.visible = false;
+		weapon.ui_scene.get_node("Center_Screen/Accuracy_Indicator").get_material().set_shader_parameter("fillRatio", 0.0);
 	if anchored:
 		update_rope();
 		if debug_sphere:

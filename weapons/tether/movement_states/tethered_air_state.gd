@@ -3,8 +3,6 @@ extends Movement_State
 
 
 static var state_name : StringName = "Tethered_Air_State";
-var perfect_angle_threshold : float = deg_to_rad(5); # Higher values = easier to hit a perfect tether
-var catch_forgiveness_curve_exp : float = 0.5; # Higher values = less punishment for bad tethers
 
 
 func start(_body : CharacterBody3D):
@@ -48,7 +46,7 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 		var angle_of_impact : float = PI/2 - acos(body.velocity.normalized().dot(anchor_to_body_unit_vector)); # (0.1)
 		body.position = sm.aux["anchor_position"] + anchor_to_body_unit_vector * sqrt(sm.aux["anchor_sqdist"]); # (1)
 		body.velocity = body.velocity.slide(anchor_to_body_unit_vector); # (2)
-		body.velocity /= pow(cos(angle_of_impact), catch_forgiveness_curve_exp if angle_of_impact > perfect_angle_threshold else 1.0);
+		body.velocity /= pow(cos(angle_of_impact), Tether_Logic.catch_forgiveness_curve_exp if angle_of_impact > Tether_Logic.perfect_angle_threshold else 1.0);
 	
 	body.velocity += body.get_gravity() * dt;
 	
