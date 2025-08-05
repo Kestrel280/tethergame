@@ -46,11 +46,8 @@ func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> Stri
 	if wish_new_pos.distance_squared_to(sm.aux["anchor_position"]) > sm.aux["anchor_sqdist"]:
 		var anchor_to_body_unit_vector = (body.position - sm.aux["anchor_position"]).normalized();
 		var angle_of_impact : float = PI/2 - acos(body.velocity.normalized().dot(anchor_to_body_unit_vector)); # (0.1)
-		var speed_loss_factor : float;
-		if angle_of_impact > deg_to_rad(perfect_angle_threshold): speed_loss_factor = cos(angle_of_impact);
 		body.position = sm.aux["anchor_position"] + anchor_to_body_unit_vector * sqrt(sm.aux["anchor_sqdist"]); # (1)
 		body.velocity = body.velocity.slide(anchor_to_body_unit_vector); # (2)
-		var speed_adjust_ratio = pow(cos(angle_of_impact), catch_forgiveness_curve_exp);
 		body.velocity /= pow(cos(angle_of_impact), catch_forgiveness_curve_exp if angle_of_impact > perfect_angle_threshold else 1.0);
 	
 	body.velocity += body.get_gravity() * dt;
