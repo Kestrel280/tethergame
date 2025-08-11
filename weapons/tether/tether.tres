@@ -22,4 +22,5 @@ unshoot_sound = ExtResource("5_cvds7")
 single_shot = true
 shot_cooldown = 0.2
 weapon_logic = ExtResource("6_cvds7")
+max_range = 100.0
 metadata/_custom_type_script = "uid://dumbt6yqtdj6q"
