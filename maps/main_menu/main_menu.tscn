@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://bafvmi2dg38db"]
 
-[ext_resource type="Script" uid="uid://ej3bxyssnqma" path="res://maps/main_menu/main_menu.gd" id="1_mwchs"]
-[ext_resource type="Theme" uid="uid://2v8ny3qxt58g" path="res://maps/main_menu/themes/logo_theme.tres" id="1_n4bl2"]
-[ext_resource type="Theme" uid="uid://cp7oojxyjnbs7" path="res://ui/themes/buttons_theme.tres" id="2_pmqs8"]
+[ext_resource type="Script" uid="uid://ej3bxyssnqma" path="res://maps/main_menu/main_menu.gd" id="1_n07wi"]
+[ext_resource type="Theme" uid="uid://2v8ny3qxt58g" path="res://maps/main_menu/themes/logo_theme.tres" id="2_aggk5"]
+[ext_resource type="Theme" uid="uid://cp7oojxyjnbs7" path="res://ui/themes/buttons_theme.tres" id="3_4766h"]
 
 [node name="Main_Menu" type="Node"]
-script = ExtResource("1_mwchs")
+script = ExtResource("1_n07wi")
 
 [node name="Ui" type="Control" parent="."]
 layout_mode = 3
@@ -33,7 +33,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
-theme = ExtResource("1_n4bl2")
+theme = ExtResource("2_aggk5")
 
 [node name="Label" type="Label" parent="Ui/Logo_Container"]
 layout_mode = 1
@@ -64,7 +64,7 @@ grow_vertical = 2
 
 [node name="Buttons_Level1" type="VBoxContainer" parent="Ui/Buttons_Hierarchy"]
 layout_mode = 2
-theme = ExtResource("2_pmqs8")
+theme = ExtResource("3_4766h")
 alignment = 1
 
 [node name="Level1" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
