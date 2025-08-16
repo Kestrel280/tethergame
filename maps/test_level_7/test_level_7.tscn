@@ -13,8 +13,33 @@ sky_material = SubResource("ProceduralSkyMaterial_k4vmj")
 [sub_resource type="Environment" id="Environment_uxb1g"]
 background_mode = 2
 sky = SubResource("Sky_gs5ej")
+ambient_light_color = Color(0.238721, 0.762399, 0.993095, 1)
+ambient_light_sky_contribution = 0.25
 tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 5.0
+ssil_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_cascades = 6
+sdfgi_min_cell_size = 0.05
+sdfgi_cascade0_distance = 3.2
 glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.278667, 0.38, 0.228, 1)
+fog_sun_scatter = 1.0
+fog_sky_affect = 0.05
+fog_height = -25.0
+fog_height_density = 0.005
+fog_depth_begin = 750.0
+fog_depth_end = 1500.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0023
+volumetric_fog_albedo = Color(0.68, 0.435653, 0.3808, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_length = 512.0
+volumetric_fog_sky_affect = 0.5
+adjustment_brightness = 2.58
 
 [node name="Test_Level_7" type="Node"]
 script = ExtResource("1_flf2k")
@@ -24,9 +49,12 @@ metadata/_custom_type_script = "uid://bn50xtepv757k"
 environment = SubResource("Environment_uxb1g")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.560819, -0.341899, 0.754047, 0.308581, 0.758815, 0.573566, -0.768283, 0.554351, -0.320055, 0, 0, 0)
-light_energy = 0.4
+transform = Transform3D(0.909202, -0.0581081, -0.412279, 0.308581, 0.758815, 0.573566, 0.279515, -0.64871, 0.707847, 0, 0, 0)
+light_energy = 0.5
+light_bake_mode = 1
 shadow_enabled = true
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 1024.0
 
 [node name="test_level_7" parent="." instance=ExtResource("2_k4vmj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
