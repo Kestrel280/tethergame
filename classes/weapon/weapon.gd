@@ -20,7 +20,7 @@ func _init(_weapon_carrier : Node3D, _weapon_res : Weapon_Resource):
 	mesh.rotation_degrees = res.orientation;
 	logic = res.weapon_logic.new(self);
 	add_child(logic);
-	add_child(ui_scene);
+	if ui_scene: add_child(ui_scene);
 
 
 func _ready() -> void:
