@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c36osqq6pwud7"]
+[gd_scene load_steps=13 format=3 uid="uid://c36osqq6pwud7"]
 
 [ext_resource type="Script" uid="uid://bn50xtepv757k" path="res://classes/level/level.gd" id="1_flf2k"]
 [ext_resource type="PackedScene" uid="uid://dmoxurs22l2ql" path="res://maps/test_level_7/test_level_7.blend" id="2_k4vmj"]
 [ext_resource type="Script" uid="uid://ctw4wusd0qrol" path="res://classes/mission/mission.gd" id="3_gs5ej"]
 [ext_resource type="Material" uid="uid://btqt43i0hm3t0" path="res://assets/materials/debug/debug_transparent_grid_material.tres" id="4_uxb1g"]
+[ext_resource type="Script" uid="uid://1cf78skxy5tm" path="res://classes/trigger/trigger.gd" id="5_pdou2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k4vmj"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -44,19 +45,19 @@ volumetric_fog_length = 512.0
 volumetric_fog_sky_affect = 0.5
 adjustment_brightness = 2.58
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_pdou2"]
-size = Vector3(15, 5, 15)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wrh6d"]
-material = ExtResource("4_uxb1g")
-size = Vector3(15, 5, 15)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_uxb1g"]
 size = Vector3(200, 30, 200)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pdou2"]
 material = ExtResource("4_uxb1g")
-size = Vector3(3, 3, 3)
+size = Vector3(200, 30, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wrh6d"]
+size = Vector3(15, 5, 15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wrh6d"]
+material = ExtResource("4_uxb1g")
+size = Vector3(15, 5, 15)
 
 [node name="Test_Level_7" type="Node"]
 script = ExtResource("1_flf2k")
@@ -76,45 +77,54 @@ directional_shadow_max_distance = 1024.0
 [node name="test_level_7" parent="." instance=ExtResource("2_k4vmj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
 
-[node name="scratchMission" type="Node3D" parent="."]
-
-[node name="Start trigger" type="Node3D" parent="scratchMission"]
-
-[node name="End trigger" type="Node3D" parent="scratchMission"]
-
-[node name="Mission ui" type="Control" parent="scratchMission"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Mission" type="Node" parent="."]
+[node name="Mission" type="Node" parent="." node_paths=PackedStringArray("start_trigger", "end_trigger")]
 script = ExtResource("3_gs5ej")
+start_trigger = NodePath("../Start_Platform_Zone/Exit_Trigger")
+end_trigger = NodePath("../End_Platform_Zone/Enter_Trigger")
 metadata/_custom_type_script = "uid://ctw4wusd0qrol"
 
-[node name="Start_Zone" type="Area3D" parent="Mission"]
+[node name="End_Platform_Zone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -322, -100, -591.5)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mission/Start_Zone"]
-shape = SubResource("BoxShape3D_pdou2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mission/Start_Zone"]
-mesh = SubResource("BoxMesh_wrh6d")
-
-[node name="End_Zone" type="Area3D" parent="Mission"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -319.831, -113.231, -596.144)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mission/End_Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 13, 5)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="End_Platform_Zone"]
 shape = SubResource("BoxShape3D_uxb1g")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mission/End_Zone"]
-mesh = SubResource("BoxMesh_pdou2")
+[node name="Enter_Trigger" type="Node3D" parent="End_Platform_Zone"]
+script = ExtResource("5_pdou2")
+metadata/_custom_type_script = "uid://1cf78skxy5tm"
 
-[connection signal="body_exited" from="Mission/Start_Zone" to="Mission" method="_on_start_trigger_triggered"]
-[connection signal="body_entered" from="Mission/End_Zone" to="Mission" method="_on_end_trigger_triggered"]
+[node name="Exit_Trigger" type="Node3D" parent="End_Platform_Zone"]
+script = ExtResource("5_pdou2")
+metadata/_custom_type_script = "uid://1cf78skxy5tm"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="End_Platform_Zone"]
+mesh = SubResource("BoxMesh_pdou2")
+skeleton = NodePath("../Enter_Trigger")
+
+[node name="Start_Platform_Zone" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Start_Platform_Zone"]
+shape = SubResource("BoxShape3D_wrh6d")
+
+[node name="Enter_Trigger" type="Node3D" parent="Start_Platform_Zone"]
+script = ExtResource("5_pdou2")
+metadata/_custom_type_script = "uid://1cf78skxy5tm"
+
+[node name="Exit_Trigger" type="Node3D" parent="Start_Platform_Zone"]
+script = ExtResource("5_pdou2")
+metadata/_custom_type_script = "uid://1cf78skxy5tm"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Start_Platform_Zone"]
+mesh = SubResource("BoxMesh_wrh6d")
+skeleton = NodePath("../Enter_Trigger")
+
+[connection signal="body_entered" from="End_Platform_Zone" to="End_Platform_Zone/Enter_Trigger" method="trigger"]
+[connection signal="body_exited" from="End_Platform_Zone" to="End_Platform_Zone/Exit_Trigger" method="trigger"]
+[connection signal="body_entered" from="Start_Platform_Zone" to="Start_Platform_Zone/Enter_Trigger" method="trigger"]
+[connection signal="body_exited" from="Start_Platform_Zone" to="Start_Platform_Zone/Exit_Trigger" method="trigger"]
 
 [editable path="test_level_7"]
