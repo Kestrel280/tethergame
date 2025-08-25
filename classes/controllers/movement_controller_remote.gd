@@ -1,0 +1,2 @@
+class_name Movement_Controller_Remote
+extends Movement_Controller_Base

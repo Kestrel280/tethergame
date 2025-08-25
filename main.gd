@@ -15,7 +15,6 @@ func _ready() -> void:
 @warning_ignore("unused_parameter")
 func _unhandled_input(event : InputEvent):
 	if Input.is_action_just_pressed("pause"): try_pause();
-		
 
 
 func try_pause():
@@ -36,7 +35,7 @@ func change_level(level_name : String):
 	var level : Level = level_scn.instantiate();
 	$Level_Container.add_child(level);
 	level.do_intro();
-	level.spawn_player(player.construct());
+	level.spawn_player(Player.construct());
 
 
 func close_game():

@@ -1,0 +1,2 @@
+class_name Camera_Controller_Remote
+extends Camera_Controller_Base

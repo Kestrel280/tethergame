@@ -5,7 +5,7 @@ extends CharacterBody3D
 var weapon : Weapon; # Currently equipped weapon
 
 
-static func construct() -> Player:
+static func construct(remote_controlled : bool = false) -> Player:
 	return preload("Player.tscn").instantiate();
 
 

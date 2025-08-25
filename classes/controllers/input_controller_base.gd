@@ -30,7 +30,6 @@ func _input(event : InputEvent):
 	if Input.is_action_just_pressed("toggle_viewmode"): pressed_toggle_viewmode.emit();
 
 
-
 var incremental_rotation : Vector2 = Vector2.ZERO; # Amount of x/y rotation since last fetched by get_incremental_rotation()
 var enabled : bool = true; # Whether or not the controller is currently enabled (input controllers are disabled while paused)
 
