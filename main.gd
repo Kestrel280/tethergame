@@ -10,6 +10,18 @@ func _ready() -> void:
 	Message_Bus.quit_requested.connect(close_game);
 	Message_Bus.pause_requested.connect(try_pause);
 	change_level("main_menu");
+	
+	if OS.has_feature("dedicated_server"):
+		var peer = ENetMultiplayerPeer.new();
+		peer.create_server(Networking.port, Networking.server_max_clients);
+		multiplayer.multiplayer_peer = peer;
+		multiplayer.peer_connected.connect(func(x): print("client id %d connected" % x));
+		print("server running on port %d" % Networking.port);
+	else:
+		var peer = ENetMultiplayerPeer.new();
+		peer.create_client("127.0.0.1", Networking.port);
+		multiplayer.multiplayer_peer = peer;
+		print("client running");
 
 
 @warning_ignore("unused_parameter")
