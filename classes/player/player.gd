@@ -5,8 +5,14 @@ extends CharacterBody3D
 var weapon : Weapon; # Currently equipped weapon
 
 
-static func construct(remote_controlled : bool = false) -> Player:
+static func construct() -> Player:
 	return preload("Player.tscn").instantiate();
+
+
+func _unhandled_input(event : InputEvent):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_J:
+		Globals.client.stop();
+		Globals.client.start();
 
 
 func _ready() -> void:
@@ -22,9 +28,13 @@ func _process(delta : float) -> void:
 	$Camera_Controller.add_rotation(-$Input_Controller.get_incremental_rotation());
 
 
+var i : int = 0;
 func _physics_process(delta: float) -> void:
 	$Movement_Controller.jumping = $Input_Controller.get_jumping();
 	$Movement_Controller.move(delta, (self.transform.basis * $Head.transform.basis * $Input_Controller.get_input_dir()).normalized());
+	
+	if (multiplayer.multiplayer_peer is not OfflineMultiplayerPeer) and (not multiplayer.is_server()):
+		print(multiplayer.multiplayer_peer.get_unique_id());
 	
 	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
 	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);

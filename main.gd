@@ -12,16 +12,12 @@ func _ready() -> void:
 	change_level("main_menu");
 	
 	if OS.has_feature("dedicated_server"):
-		var peer = ENetMultiplayerPeer.new();
-		peer.create_server(Networking.port, Networking.server_max_clients);
-		multiplayer.multiplayer_peer = peer;
-		multiplayer.peer_connected.connect(func(x): print("client id %d connected" % x));
-		print("server running on port %d" % Networking.port);
+		Globals.server = Server.new();
+		get_tree().root.add_child.call_deferred(Globals.server);
+		Globals.server.start.call_deferred();
 	else:
-		var peer = ENetMultiplayerPeer.new();
-		peer.create_client("127.0.0.1", Networking.port);
-		multiplayer.multiplayer_peer = peer;
-		print("client running");
+		Globals.client = Client.new();
+		get_tree().root.add_child.call_deferred(Globals.client);
 
 
 @warning_ignore("unused_parameter")
@@ -46,8 +42,9 @@ func change_level(level_name : String):
 	if !level_scn: assert(false, "No level named %s" % level_name);
 	var level : Level = level_scn.instantiate();
 	$Level_Container.add_child(level);
-	level.do_intro();
-	level.spawn_player(Player.construct());
+	if not OS.has_feature("dedicated_server"):
+		level.do_intro();
+		level.spawn_player(Player.construct());
 
 
 func close_game():

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://cmu3p2dw8cim5"]
 
-[ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player/player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player/player.gd" id="1_wc7k0"]
 [ext_resource type="Script" uid="uid://cug1n1avxre40" path="res://classes/controllers/movement_controller_state_machine.gd" id="5_nqxhk"]
 [ext_resource type="Script" uid="uid://c0xife0bt2mo4" path="res://classes/level/teleporter/teleportable.gd" id="5_vqdx7"]
 [ext_resource type="Script" uid="uid://cnfr7v75ouaag" path="res://classes/state/state_machine.gd" id="6_loolv"]
@@ -25,7 +25,7 @@ collision_layer = 6
 collision_mask = 9
 floor_constant_speed = true
 floor_max_angle = 0.698132
-script = ExtResource("1_xhfnw")
+script = ExtResource("1_wc7k0")
 metadata/_custom_type_script = "uid://bxc7aus4hrchs"
 
 [node name="Collision_Mesh" type="CollisionShape3D" parent="."]
