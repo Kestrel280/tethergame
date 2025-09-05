@@ -9,10 +9,23 @@ static func construct() -> Player:
 	return preload("Player.tscn").instantiate();
 
 
+# Helper function which returns a JSON string with notable player state information
+func get_player_data():
+	var pd : Dictionary;
+	pd.position = position;
+	pd.velocity = velocity;
+	pd.rotation = $Camera_Controller.get_rotation();
+	pd.look_basis = $Camera_Controller.get_look_basis();
+	pd.input_dir = $Input_Controller.get_input_dir();
+	return JSON.stringify(pd);
+
+
 func _unhandled_input(event : InputEvent):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_J:
 		Globals.client.stop();
 		Globals.client.start();
+	elif event is InputEventKey and event.pressed and event.keycode == KEY_K:
+		print(get_player_data());
 
 
 func _ready() -> void:
@@ -28,19 +41,18 @@ func _process(delta : float) -> void:
 	$Camera_Controller.add_rotation(-$Input_Controller.get_incremental_rotation());
 
 
-var i : int = 0;
 func _physics_process(delta: float) -> void:
+	if Globals.client.connected:
+		Globals.client.socket.send_text(get_player_data())
 	$Movement_Controller.jumping = $Input_Controller.get_jumping();
-	$Movement_Controller.move(delta, (self.transform.basis * $Head.transform.basis * $Input_Controller.get_input_dir()).normalized());
-	
-	if (multiplayer.multiplayer_peer is not OfflineMultiplayerPeer) and (not multiplayer.is_server()):
-		print(multiplayer.multiplayer_peer.get_unique_id());
+	$Movement_Controller.move(delta, ($Camera_Controller.get_look_basis() * $Input_Controller.get_input_dir()).normalized());
 	
 	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
 	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);
 	Globals.debug_panel.add_property("xy_speed", "%3.2f" % Vector2(get_real_velocity().x, get_real_velocity().z).length());
 	Globals.debug_panel.add_property("energy", "%3.2f" % (get_real_velocity().length_squared() / 2 + position.y * ProjectSettings.get_setting("physics/3d/default_gravity")));
-	Globals.debug_panel.add_property("rotation", "%3.1f, %3.1f" % [rad_to_deg($Camera_Controller.rot.x), rad_to_deg($Camera_Controller.rot.y)]);
+	Globals.debug_panel.add_property("rotation", "%3.1f, %3.1f" % [$Camera_Controller.get_rotation().x, $Camera_Controller.get_rotation().y]);
+	Globals.debug_panel.add_property("look_dir", str(-$Camera_Controller.get_look_basis().z));
 	Globals.debug_panel.add_property("movement_state", $Movement_Controller.get_current_move_state());
 
 

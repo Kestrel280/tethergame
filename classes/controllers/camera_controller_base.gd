@@ -46,6 +46,15 @@ func apply_rotation():
 	head.rotate_object_local(Vector3(1, 0, 0), rot.y);
 
 
+func get_rotation() -> Vector2:
+	return Vector2(rot.x, rot.y);
+
+
+func get_look_basis() -> Basis:
+	return body.transform.basis * head.transform.basis;
+
+
+
 # Similar functionality to Node3D.look_at(), but using our rotation scheme
 # (We extend from Node, so we're not overriding any built-ins)
 func look_at(dir : Vector3):
