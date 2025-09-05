@@ -33,7 +33,8 @@ func _process(_delta: float) -> void:
 			deregister_player(pid);
 			continue;
 		while pc.socket.get_available_packet_count():
-			print(pc.socket.get_packet().get_string_from_ascii())
+			var pp : Player_Packet = bytes_to_var_with_objects(pc.socket.get_packet());
+			print(pp.position);
 
 
 func register_player(conn : StreamPeerTCP) -> int:

@@ -9,23 +9,25 @@ static func construct() -> Player:
 	return preload("Player.tscn").instantiate();
 
 
-# Helper function which returns a JSON string with notable player state information
-func get_player_data():
-	var pd : Dictionary;
-	pd.position = position;
-	pd.velocity = velocity;
+func get_player_data() -> Player_Packet:
+	# Snapshot current state of player
+	# Can be serialized using var_to_bytes_with_objects(Player_Packet) -> deserialized with bytes_to_var_with_objects()
+	var pd : Player_Packet = Player_Packet.new();
+	pd.position = self.position;
+	pd.velocity = self.velocity;
 	pd.rotation = $Camera_Controller.get_rotation();
 	pd.look_basis = $Camera_Controller.get_look_basis();
 	pd.input_dir = $Input_Controller.get_input_dir();
-	return JSON.stringify(pd);
+	return pd;
 
 
 func _unhandled_input(event : InputEvent):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_J:
 		Globals.client.stop();
 		Globals.client.start();
-	elif event is InputEventKey and event.pressed and event.keycode == KEY_K:
-		print(get_player_data());
+	elif event is InputEventKey and event.pressed and event.keycode == KEY_L:
+		var pd : Player_Packet = get_player_data();
+		var pba = var_to_bytes_with_objects(pd);
 
 
 func _ready() -> void:
@@ -43,7 +45,7 @@ func _process(delta : float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if Globals.client.connected:
-		Globals.client.socket.send_text(get_player_data())
+		Globals.client.socket.send(var_to_bytes_with_objects(get_player_data()));
 	$Movement_Controller.jumping = $Input_Controller.get_jumping();
 	$Movement_Controller.move(delta, ($Camera_Controller.get_look_basis() * $Input_Controller.get_input_dir()).normalized());
 	

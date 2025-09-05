@@ -28,7 +28,6 @@ func start(ip : String = "127.0.0.1") -> bool:
 	
 	# Register
 	print("Client running");
-	socket.send_text("Hi, I am now connected");
 	connected = true;
 	return true;
 
