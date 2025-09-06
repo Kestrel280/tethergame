@@ -26,8 +26,9 @@ func _unhandled_input(event : InputEvent):
 		Globals.client.stop();
 		Globals.client.start();
 	elif event is InputEventKey and event.pressed and event.keycode == KEY_L:
-		var pd : Player_Packet = get_player_data();
-		var pba = var_to_bytes_with_objects(pd);
+		Globals.client.send(Server.Message_Type.DEBUG);
+	elif event is InputEventKey and event.pressed and event.keycode == KEY_K:
+		Globals.client.send(Server.Message_Type.UNHANDLED);
 
 
 func _ready() -> void:
@@ -44,8 +45,7 @@ func _process(delta : float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Globals.client.connected:
-		Globals.client.socket.send(var_to_bytes_with_objects(get_player_data()));
+	Globals.client.send(Server.Message_Type.PLAYER_PACKET, var_to_bytes_with_objects(get_player_data()));
 	$Movement_Controller.jumping = $Input_Controller.get_jumping();
 	$Movement_Controller.move(delta, ($Camera_Controller.get_look_basis() * $Input_Controller.get_input_dir()).normalized());
 	

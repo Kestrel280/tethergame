@@ -6,6 +6,13 @@ var players : Dictionary;
 var _id : int = 0;
 
 
+enum Message_Type {
+	PLAYER_PACKET,
+	DEBUG,
+	UNHANDLED
+}
+
+
 class Player_Connection:
 	var id : int;
 	var socket : WebSocketPeer;
@@ -33,8 +40,17 @@ func _process(_delta: float) -> void:
 			deregister_player(pid);
 			continue;
 		while pc.socket.get_available_packet_count():
-			var pp : Player_Packet = bytes_to_var_with_objects(pc.socket.get_packet());
-			print(pp.position);
+			var msg : PackedByteArray = pc.socket.get_packet();
+			var mtype : int = msg[0];
+			var payload : PackedByteArray = msg.slice(1);
+			match mtype:
+				Message_Type.PLAYER_PACKET:
+					var pp : Player_Packet = bytes_to_var_with_objects(payload);
+					print(pp.position);
+				Message_Type.DEBUG:
+					print("DEBUG msg received from client %d" % pid);
+				_:
+					print("Unknown message type %d received from client %d" % [mtype, pid]);
 
 
 func register_player(conn : StreamPeerTCP) -> int:

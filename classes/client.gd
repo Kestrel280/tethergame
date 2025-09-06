@@ -40,7 +40,16 @@ func stop() -> void:
 		await get_tree().create_timer(1.0).timeout;
 		socket.poll();
 	socket = null;
-	
+
+
+func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArray()) -> bool:
+	if !connected: return false;
+	var msg : PackedByteArray = PackedByteArray();
+	msg.append(mtype);
+	msg.append_array(payload);
+	socket.send(msg);
+	return true;
+
 
 func _process(dt : float) -> void:
 	if socket != null: socket.poll()
