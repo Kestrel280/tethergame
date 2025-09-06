@@ -18,6 +18,10 @@ func get_player_data() -> Player_Packet:
 	pd.rotation = $Camera_Controller.get_rotation();
 	pd.look_basis = $Camera_Controller.get_look_basis();
 	pd.input_dir = $Input_Controller.get_input_dir();
+	pd.jumping = $Input_Controller.get_jumping();
+	pd.crouching = $Input_Controller.get_crouching();
+	pd.shooting = weapon.shooting if weapon else false;
+	pd.interacting = $Input_Controller.get_interacting();
 	return pd;
 
 
@@ -45,7 +49,7 @@ func _process(delta : float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	Globals.client.send(Server.Message_Type.PLAYER_PACKET, var_to_bytes_with_objects(get_player_data()));
+	if Globals.client: Globals.client.send(Server.Message_Type.PLAYER_PACKET, var_to_bytes_with_objects(get_player_data()));
 	$Movement_Controller.jumping = $Input_Controller.get_jumping();
 	$Movement_Controller.move(delta, ($Camera_Controller.get_look_basis() * $Input_Controller.get_input_dir()).normalized());
 	
@@ -107,7 +111,13 @@ func on_input_controller_pressed_change_weapon(weapon_num : int):
 
 func install_input_controller(ic : Input_Controller_Base):
 	ic.pressed_toggle_viewmode.connect(on_input_controller_pressed_toggle_viewmode);
+	ic.pressed_toggle_viewmode.connect(func(): if Globals.client: Globals.client.send(Server.Message_Type.PLAYER_TOGGLED_VIEW_MODE));
+	
 	ic.pressed_toggle_movemode.connect(on_input_controller_pressed_toggle_movemode);
+	ic.pressed_toggle_movemode.connect(func(): if Globals.client: Globals.client.send(Server.Message_Type.PLAYER_TOGGLED_MOVE_MODE));
+	
 	ic.pressed_change_weapon.connect(on_input_controller_pressed_change_weapon);
+	ic.pressed_change_weapon.connect(func(wep : int): if Globals.client: Globals.client.send(Server.Message_Type.PLAYER_CHANGED_WEAPON, PackedByteArray([wep])));
+	
 	ic.pressed_shoot.connect(func(): if weapon: weapon.try_shoot());
 	ic.released_shoot.connect(func(): if weapon: weapon.stop_shoot());

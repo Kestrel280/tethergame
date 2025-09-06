@@ -42,6 +42,7 @@ func change_level(level_name : String):
 	if !level_scn: assert(false, "No level named %s" % level_name);
 	var level : Level = level_scn.instantiate();
 	$Level_Container.add_child(level);
+	Globals.level = level;
 	if not OS.has_feature("dedicated_server"):
 		level.do_intro();
 		level.spawn_player(Player.construct());

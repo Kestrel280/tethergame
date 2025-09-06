@@ -2,6 +2,7 @@ class_name Weapon
 extends Node3D
 
 
+var shooting : bool = false;
 var carrier : Node3D;
 var mesh : MeshInstance3D;
 var logic : Weapon_Logic;
@@ -28,6 +29,7 @@ func _ready() -> void:
 
 
 func try_shoot() -> bool:
+	shooting = true;
 	if in_shot_cooldown: return false;
 	
 	in_shot_cooldown = true;
@@ -37,8 +39,10 @@ func try_shoot() -> bool:
 
 
 func stop_shoot() -> void:
+	shooting = false;
 	logic.stop_shoot();
 
 
 func abort_shoot() -> void:
+	shooting = false;
 	logic.abort_shoot();

@@ -8,6 +8,9 @@ var _id : int = 0;
 
 enum Message_Type {
 	PLAYER_PACKET,
+	PLAYER_TOGGLED_MOVE_MODE,
+	PLAYER_TOGGLED_VIEW_MODE,
+	PLAYER_CHANGED_WEAPON,
 	DEBUG,
 	UNHANDLED
 }
@@ -46,9 +49,21 @@ func _process(_delta: float) -> void:
 			match mtype:
 				Message_Type.PLAYER_PACKET:
 					var pp : Player_Packet = bytes_to_var_with_objects(payload);
-					print(pp.position);
+					pc.player.get_node("Camera_Controller").look_at(-pp.look_basis.z);
+					pc.player.get_node("Input_Controller").inject(pp.input_dir, pp.jumping, pp.crouching, pp.shooting, pp.interacting);
+				Message_Type.PLAYER_TOGGLED_MOVE_MODE:
+					pc.player.on_input_controller_pressed_toggle_movemode();
+					print("Player toggled move mode");
+				Message_Type.PLAYER_TOGGLED_VIEW_MODE:
+					print("Player toggled view mode");
+					pc.player.on_input_controller_pressed_toggle_viewmode();
+				Message_Type.PLAYER_CHANGED_WEAPON:
+					var wep : int = payload.decode_s32(0);
+					print(payload);
+					print("Player %d changed weapon to %d" % [pid, wep]);
+					pc.player.on_input_controller_pressed_change_weapon(wep);
 				Message_Type.DEBUG:
-					print("DEBUG msg received from client %d" % pid);
+					print("DEBUG msg received from client %d: Input dir is %s, view dir is %s" % [pid, str(pc.player.get_player_data().input_dir), str(-pc.player.get_player_data().look_basis.z)]);
 				_:
 					print("Unknown message type %d received from client %d" % [mtype, pid]);
 
@@ -61,6 +76,7 @@ func register_player(conn : StreamPeerTCP) -> int:
 	players[pid] = Player_Connection.new();
 	players[pid].socket = socket;
 	var p : Player = Player.construct();
+	Globals.level.add_child(p);
 	var inpctl : Input_Controller_Base = Input_Controller_Remote.new();
 	p.swap_controller(inpctl);
 	players[pid].player = p;

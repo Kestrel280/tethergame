@@ -43,6 +43,7 @@ func enable(): enabled = true;
 func disable(): enabled = false;
 func get_jumping() -> bool: return Input.is_action_pressed("jump");
 func get_crouching() -> bool: return Input.is_action_pressed("crouch");
+func get_interacting() -> bool: return Input.is_action_pressed("interact");
 func get_incremental_rotation() -> Vector2:
 	var ret = incremental_rotation;
 	incremental_rotation = Vector2.ZERO;

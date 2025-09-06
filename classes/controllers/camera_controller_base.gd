@@ -54,7 +54,6 @@ func get_look_basis() -> Basis:
 	return body.transform.basis * head.transform.basis;
 
 
-
 # Similar functionality to Node3D.look_at(), but using our rotation scheme
 # (We extend from Node, so we're not overriding any built-ins)
 func look_at(dir : Vector3):
