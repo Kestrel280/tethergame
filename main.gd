@@ -11,7 +11,7 @@ func _ready() -> void:
 	Message_Bus.pause_requested.connect(try_pause);
 	change_level("main_menu");
 	
-	if OS.has_feature("dedicated_server"):
+	if OS.has_feature("dedicated_server") or OS.has_feature("dedicated_server_interactive"):
 		Globals.server = Server.new();
 		get_tree().root.add_child.call_deferred(Globals.server);
 		Globals.server.start.call_deferred();
