@@ -53,6 +53,7 @@ func move(dt : float, wish_dir : Vector3):
 		else: body.velocity = body.velocity.slide(collision.get_normal());
 	
 	$State_Machine.set_meta("last_velocity", body.velocity);
+	
 	body.move_and_slide();
 
 

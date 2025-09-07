@@ -3,13 +3,14 @@ extends CharacterBody3D
 
 
 var weapon : Weapon; # Currently equipped weapon
+var remote_controlled : bool = false;
 
 
 static func construct() -> Player:
 	return preload("Player.tscn").instantiate();
 
 
-func get_player_data() -> Player_Packet:
+func get_player_data(dt : float = 0.0) -> Player_Packet:
 	# Snapshot current state of player
 	# Can be serialized using var_to_bytes_with_objects(Player_Packet) -> deserialized with bytes_to_var_with_objects()
 	var pd : Player_Packet = Player_Packet.new();
@@ -22,6 +23,7 @@ func get_player_data() -> Player_Packet:
 	pd.crouching = $Input_Controller.get_crouching();
 	pd.shooting = weapon.shooting if weapon else false;
 	pd.interacting = $Input_Controller.get_interacting();
+	pd.tick_dt = dt;
 	return pd;
 
 
@@ -45,21 +47,26 @@ func _ready() -> void:
 
 @warning_ignore("unused_parameter")
 func _process(delta : float) -> void:
-	$Camera_Controller.add_rotation(-$Input_Controller.get_incremental_rotation());
+	if !remote_controlled: $Camera_Controller.add_rotation(-$Input_Controller.get_incremental_rotation());
 
 
-func _physics_process(delta: float) -> void:
-	if Globals.client: Globals.client.send(Server.Message_Type.PLAYER_PACKET, var_to_bytes_with_objects(get_player_data()));
+func tick(dt : float):
 	$Movement_Controller.jumping = $Input_Controller.get_jumping();
-	$Movement_Controller.move(delta, ($Camera_Controller.get_look_basis() * $Input_Controller.get_input_dir()).normalized());
-	
-	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
-	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);
-	Globals.debug_panel.add_property("xy_speed", "%3.2f" % Vector2(get_real_velocity().x, get_real_velocity().z).length());
-	Globals.debug_panel.add_property("energy", "%3.2f" % (get_real_velocity().length_squared() / 2 + position.y * ProjectSettings.get_setting("physics/3d/default_gravity")));
-	Globals.debug_panel.add_property("rotation", "%3.1f, %3.1f" % [$Camera_Controller.get_rotation().x, $Camera_Controller.get_rotation().y]);
-	Globals.debug_panel.add_property("look_dir", str(-$Camera_Controller.get_look_basis().z));
-	Globals.debug_panel.add_property("movement_state", $Movement_Controller.get_current_move_state());
+	$Movement_Controller.move(dt, ($Camera_Controller.get_look_basis() * $Input_Controller.get_input_dir()).normalized());
+
+
+func _physics_process(dt: float) -> void:
+	if !remote_controlled:
+		if Globals.client.connected: Globals.client.send(Server.Message_Type.PLAYER_PACKET, var_to_bytes_with_objects(get_player_data(dt)));
+		tick(dt);
+		
+		Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
+		Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);
+		Globals.debug_panel.add_property("xy_speed", "%3.2f" % Vector2(get_real_velocity().x, get_real_velocity().z).length());
+		Globals.debug_panel.add_property("energy", "%3.2f" % (get_real_velocity().length_squared() / 2 + position.y * ProjectSettings.get_setting("physics/3d/default_gravity")));
+		Globals.debug_panel.add_property("rotation", "%3.1f, %3.1f" % [$Camera_Controller.get_rotation().x, $Camera_Controller.get_rotation().y]);
+		Globals.debug_panel.add_property("look_dir", str(-$Camera_Controller.get_look_basis().z));
+		Globals.debug_panel.add_property("movement_state", $Movement_Controller.get_current_move_state());
 
 
 func swap_controller(new_controller : Controller_Base, delete_old_controller : bool = true) -> Node:

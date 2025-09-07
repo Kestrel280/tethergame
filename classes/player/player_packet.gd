@@ -10,3 +10,4 @@ extends Object
 @export var crouching : bool;
 @export var shooting : bool;
 @export var interacting : bool;
+@export var tick_dt : float;

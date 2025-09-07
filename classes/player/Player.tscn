@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://cmu3p2dw8cim5"]
+[gd_scene load_steps=17 format=3 uid="uid://cmu3p2dw8cim5"]
 
 [ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player/player.gd" id="1_wc7k0"]
+[ext_resource type="Texture2D" uid="uid://dvywqmcpt1odj" path="res://assets/textures/cap.png" id="2_4kxxt"]
 [ext_resource type="Script" uid="uid://cug1n1avxre40" path="res://classes/controllers/movement_controller_state_machine.gd" id="5_nqxhk"]
 [ext_resource type="Script" uid="uid://c0xife0bt2mo4" path="res://classes/level/teleporter/teleportable.gd" id="5_vqdx7"]
 [ext_resource type="Script" uid="uid://cnfr7v75ouaag" path="res://classes/state/state_machine.gd" id="6_loolv"]
@@ -16,6 +17,8 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wc7k0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_loolv"]
+albedo_texture = ExtResource("2_4kxxt")
+uv1_scale = Vector3(2.83, 2.83, 2.83)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ki74y"]
 material = SubResource("StandardMaterial3D_loolv")
