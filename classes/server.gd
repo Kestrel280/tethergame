@@ -20,6 +20,7 @@ class Player_Connection:
 	var id : int;
 	var socket : WebSocketPeer;
 	var player : Player;
+	var physics_queue : Array[Player_Packet];
 
 
 func start():
@@ -50,9 +51,7 @@ func _process(_delta: float) -> void:
 			match mtype:
 				Message_Type.PLAYER_PACKET:
 					var pp : Player_Packet = bytes_to_var_with_objects(payload);
-					pc.player.get_node("Camera_Controller").look_at(-pp.look_basis.z);
-					pc.player.get_node("Input_Controller").inject(pp.input_dir, pp.jumping, pp.crouching, pp.shooting, pp.interacting);
-					pc.player.tick(pp.tick_dt);
+					pc.physics_queue.push_back(pp);
 				Message_Type.PLAYER_TOGGLED_MOVE_MODE:
 					pc.player.on_input_controller_pressed_toggle_movemode();
 					print("Player toggled move mode");
@@ -68,6 +67,16 @@ func _process(_delta: float) -> void:
 					print("DEBUG msg received from client %d: Input dir is %s, view dir is %s, pos is %s, velocity is %s" % [pid, str(pc.player.get_player_data().input_dir), str(-pc.player.get_player_data().look_basis.z), str(pc.player.get_player_data().position), str(pc.player.get_player_data().velocity)]);
 				_:
 					print("Unknown message type %d received from client %d" % [mtype, pid]);
+
+
+func _physics_process(dt : float):
+	for pid : int in players.keys():
+		var pc : Player_Connection = players[pid];
+		while !pc.physics_queue.is_empty():
+			var pp : Player_Packet = pc.physics_queue.pop_front();
+			pc.player.get_node("Camera_Controller").look_at(-pp.look_basis.z);
+			pc.player.get_node("Input_Controller").inject(pp.input_dir, pp.jumping, pp.crouching, pp.shooting, pp.interacting);
+			pc.player.tick(pp.tick_dt);
 
 
 func register_player(conn : StreamPeerTCP) -> int:
