@@ -9,15 +9,14 @@ func _ready() -> void:
 	Message_Bus.change_level_requested.connect(change_level);
 	Message_Bus.quit_requested.connect(close_game);
 	Message_Bus.pause_requested.connect(try_pause);
+	Message_Bus.join_server_requested.connect(join_server);
 	change_level("main_menu");
 	
 	if OS.has_feature("dedicated_server") or OS.has_feature("dedicated_server_interactive"):
-		Globals.server = Server.new();
-		get_tree().root.add_child.call_deferred(Globals.server);
-		Globals.server.start.call_deferred();
-	else:
-		Globals.client = Client.new();
-		get_tree().root.add_child.call_deferred(Globals.client);
+		var server : Server = Server.new();
+		server.name = "Server";
+		add_child.call_deferred(server);
+		server.start.call_deferred();
 
 
 @warning_ignore("unused_parameter")
@@ -31,7 +30,13 @@ func try_pause():
 	move_child(pmenu, 0);
 
 
-func change_level(level_name : String):
+func change_level(level_name : String, network_manager : Client = null):
+	# If this changelevel-request was NOT created by a server, make sure we disconnect from any current server
+	# Set network_manager to our disconnected Client node
+	if network_manager == null:
+		$Client.stop();
+		network_manager = $Client;
+	
 	# Wipe the current level
 	for child in $Level_Container.get_children(): child.queue_free();
 	Globals.debug_panel.remove_all_properties();
@@ -45,7 +50,12 @@ func change_level(level_name : String):
 	Globals.level = level;
 	if not OS.has_feature("dedicated_server"):
 		level.do_intro();
-		level.spawn_player(Player.construct());
+		level.spawn_player(Player.construct(network_manager));
+
+
+func join_server(ip : String):
+	$Client.stop();
+	$Client.start(ip);
 
 
 func close_game():

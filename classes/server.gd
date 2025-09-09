@@ -4,6 +4,7 @@ extends Node
 var tcp_server : TCPServer = TCPServer.new();
 var players : Dictionary;
 var _id : int = 0;
+var level : String;
 
 
 enum Message_Type {
@@ -21,11 +22,19 @@ class Player_Connection:
 	var socket : WebSocketPeer;
 	var player : Player;
 	var physics_queue : Array[Player_Packet];
+	
+	func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArray()) -> bool:
+		var msg : PackedByteArray = PackedByteArray();
+		msg.append(mtype);
+		msg.append_array(payload);
+		socket.send(msg);
+		return true;
 
 
-func start():
+func start(_level : String = "test_level_6"):
+	level = _level;
 	if tcp_server.listen(Globals.server_port) != OK: assert(false, "Failed to start TCP server");
-	Message_Bus.change_level_requested.emit("test_level_6");
+	Message_Bus.change_level_requested.emit(_level);
 	print("Server running on port %d" % Globals.server_port);
 
 
@@ -53,16 +62,16 @@ func _process(_delta: float) -> void:
 					var pp : Player_Packet = bytes_to_var_with_objects(payload);
 					pc.physics_queue.push_back(pp);
 				Message_Type.PLAYER_TOGGLED_MOVE_MODE:
-					pc.player.on_input_controller_pressed_toggle_movemode();
+					pc.player.toggle_movemode();
 					print("Player toggled move mode");
 				Message_Type.PLAYER_TOGGLED_VIEW_MODE:
 					print("Player toggled view mode");
-					pc.player.on_input_controller_pressed_toggle_viewmode();
+					pc.player.toggle_viewmode();
 				Message_Type.PLAYER_CHANGED_WEAPON:
-					var wep : int = payload.decode_s32(0);
+					var wep : int = payload.decode_s8(0);
 					print(payload);
 					print("Player %d changed weapon to %d" % [pid, wep]);
-					pc.player.on_input_controller_pressed_change_weapon(wep);
+					pc.player.change_weapon(wep);
 				Message_Type.DEBUG:
 					print("DEBUG msg received from client %d: Input dir is %s, view dir is %s, pos is %s, velocity is %s" % [pid, str(pc.player.get_player_data().input_dir), str(-pc.player.get_player_data().look_basis.z), str(pc.player.get_player_data().position), str(pc.player.get_player_data().velocity)]);
 				_:
@@ -84,10 +93,13 @@ func register_player(conn : StreamPeerTCP) -> int:
 	var pid : int = _id;
 	var socket : WebSocketPeer = WebSocketPeer.new();
 	socket.accept_stream(conn);
+	while socket.get_ready_state() != socket.STATE_OPEN:
+		await get_tree().create_timer(1.0).timeout;
+		socket.poll();
 	players[pid] = Player_Connection.new();
 	players[pid].socket = socket;
+	players[pid].send(Client.Message_Type.CHANGELEVEL, level.to_ascii_buffer());
 	var p : Player = Player.construct();
-	p.remote_controlled = true;
 	Globals.level.add_child(p);
 	var inpctl : Input_Controller_Base = Input_Controller_Remote.new();
 	p.swap_controller(inpctl);

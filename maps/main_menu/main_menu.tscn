@@ -67,6 +67,10 @@ layout_mode = 2
 theme = ExtResource("3_4766h")
 alignment = 1
 
+[node name="Join Server" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
+layout_mode = 2
+text = "Join Server"
+
 [node name="Level1" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
 layout_mode = 2
 text = "Level 1"
@@ -113,6 +117,7 @@ Z: Toggle between 1st/3rd person
 2: Equip Tether
 LMB: Shoot tether"
 
+[connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Join Server" to="." method="_on_join_server_pressed"]
 [connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Level1" to="." method="_on_level_1_pressed"]
 [connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Level2" to="." method="_on_level_2_pressed"]
 [connection signal="pressed" from="Ui/Buttons_Hierarchy/Buttons_Level1/Level3" to="." method="_on_level_3_pressed"]

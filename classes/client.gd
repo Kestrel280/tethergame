@@ -1,9 +1,19 @@
 class_name Client
 extends Node
 
+
+signal connected;
+signal disconnected();
+
+
+enum Message_Type {
+	CHANGELEVEL,
+}
+
+
 const MAX_RETRY : int = 15;
 const RETRY_TIMEOUT : float = 1.0;
-var connected : bool = false;
+var is_connected : bool = false;
 var socket : WebSocketPeer = null;
 
 
@@ -28,22 +38,24 @@ func start(ip : String = "127.0.0.1") -> bool:
 	
 	# Register
 	print("Client running");
-	connected = true;
+	is_connected = true;
+	connected.emit();
 	return true;
 
 
 func stop() -> void:
 	if socket == null: return;
-	connected = false;
+	is_connected = false;
 	socket.close();
 	while socket.get_ready_state() != socket.STATE_CLOSED:
 		await get_tree().create_timer(1.0).timeout;
 		socket.poll();
 	socket = null;
+	disconnected.emit();
 
 
 func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArray()) -> bool:
-	if !connected: return false;
+	if !is_connected: return false;
 	var msg : PackedByteArray = PackedByteArray();
 	msg.append(mtype);
 	msg.append_array(payload);
@@ -54,12 +66,16 @@ func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArr
 func _process(dt : float) -> void:
 	if socket != null: socket.poll()
 	
-	if !connected: return;
+	if !is_connected: return;
 	
 	# Process packets
 	if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
 		while socket.get_available_packet_count():
-			print(socket.get_packet().get_string_from_ascii())
+			var msg : PackedByteArray = socket.get_packet();
+			var mtype : int = msg[0];
+			var payload : PackedByteArray = msg.slice(1);
+			match mtype:
+				Message_Type.CHANGELEVEL: Message_Bus.change_level_requested.emit(payload.get_string_from_ascii(), self);
 	else:
 		print("Lost connection to server");
 		stop();

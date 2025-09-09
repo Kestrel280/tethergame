@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2qka215r7qmw"]
+[gd_scene load_steps=5 format=3 uid="uid://b2qka215r7qmw"]
 
 [ext_resource type="Script" uid="uid://pm4m2rgx1dxu" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://bxc7aus4hrchs" path="res://classes/player/player.gd" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dvgiw3vbs5yok" path="res://ui/debug_panel/debug_panel.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://cyba6e6ou87x8" path="res://classes/client.gd" id="4_1bvp3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -12,3 +13,7 @@ player = ExtResource("2_h2yge")
 
 [node name="Debug_Panel" parent="." instance=ExtResource("3_h2yge")]
 mouse_filter = 2
+
+[node name="Client" type="Node" parent="."]
+script = ExtResource("4_1bvp3")
+metadata/_custom_type_script = "uid://cyba6e6ou87x8"
