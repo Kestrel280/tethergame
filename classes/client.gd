@@ -11,9 +11,9 @@ enum Message_Type {
 }
 
 
-const MAX_RETRY : int = 15;
+const MAX_RETRY : int = 5;
 const RETRY_TIMEOUT : float = 1.0;
-var is_connected : bool = false;
+var has_connection : bool = false; # "is_connected" is a reserved attribute in GDScript
 var socket : WebSocketPeer = null;
 
 
@@ -38,14 +38,14 @@ func start(ip : String = "127.0.0.1") -> bool:
 	
 	# Register
 	print("Client running");
-	is_connected = true;
+	has_connection = true;
 	connected.emit();
 	return true;
 
 
 func stop() -> void:
 	if socket == null: return;
-	is_connected = false;
+	has_connection = false;
 	socket.close();
 	while socket.get_ready_state() != socket.STATE_CLOSED:
 		await get_tree().create_timer(1.0).timeout;
@@ -55,7 +55,7 @@ func stop() -> void:
 
 
 func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArray()) -> bool:
-	if !is_connected: return false;
+	if !has_connection: return false;
 	var msg : PackedByteArray = PackedByteArray();
 	msg.append(mtype);
 	msg.append_array(payload);
@@ -66,7 +66,7 @@ func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArr
 func _process(dt : float) -> void:
 	if socket != null: socket.poll()
 	
-	if !is_connected: return;
+	if !has_connection: return;
 	
 	# Process packets
 	if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:

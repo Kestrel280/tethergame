@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cp7oojxyjnbs7"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cp7oojxyjnbs7"]
 
 [ext_resource type="FontFile" uid="uid://basd7o274qy5k" path="res://ui/fonts/JupiteroidBoldItalic.ttf" id="1_q7ora"]
 
@@ -8,7 +8,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(0.254206, 0.254206, 0.254206, 1)
-skew = Vector2(0.25, 0)
+skew = Vector2(0.18, 0)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -26,7 +26,7 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(0, 0, 0, 1)
-skew = Vector2(0.25, 0)
+skew = Vector2(0.18, 0)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -44,13 +44,8 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(0.489622, 0.489622, 0.489622, 1)
-skew = Vector2(0.25, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-border_blend = true
+skew = Vector2(0.18, 0)
+border_color = Color(0, 0, 0, 0)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -59,6 +54,10 @@ expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7ora"]
+content_margin_right = 15.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [resource]
 default_font_size = 32
@@ -70,3 +69,6 @@ Button/styles/normal = SubResource("StyleBoxFlat_2irug")
 Button/styles/pressed = SubResource("StyleBoxFlat_y7ec6")
 Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("1_q7ora")
+LineEdit/font_sizes/font_size = 40
+LineEdit/fonts/font = ExtResource("1_q7ora")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_q7ora")

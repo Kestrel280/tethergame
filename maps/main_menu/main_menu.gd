@@ -1,6 +1,9 @@
 extends Level
 
 
+@onready var server_entry_box : LineEdit = %ServerEntryBox;
+
+
 @warning_ignore("unused_parameter")
 func _input(event : InputEvent):
 	if Input.is_action_just_pressed("pause"): get_viewport().set_input_as_handled();
@@ -47,4 +50,4 @@ func _on_level_7_pressed() -> void:
 
 
 func _on_join_server_pressed() -> void:
-	Message_Bus.join_server_requested.emit("localhost");
+	Message_Bus.join_server_requested.emit(server_entry_box.text);

@@ -25,7 +25,7 @@ func _unhandled_input(event : InputEvent):
 
 
 func try_pause():
-	var pmenu : Node = preload("res://pause_menu.tscn").instantiate();
+	var pmenu : Node = preload("res://ui/pause_menu/pause_menu.tscn").instantiate();
 	add_child(pmenu);
 	move_child(pmenu, 0);
 
@@ -55,7 +55,15 @@ func change_level(level_name : String, network_manager : Client = null):
 
 func join_server(ip : String):
 	$Client.stop();
-	$Client.start(ip);
+	var pop_up : Control = preload("res://ui/pop_up.tscn").instantiate();
+	pop_up.get_node("Label").text = "Attempting to join server...";
+	add_child(pop_up);
+	await $Client.start(ip);
+	if !$Client.has_connection:
+		pop_up.get_node("Label").text = "Failed to join server!";
+		await get_tree().create_timer(3.0).timeout;
+	pop_up.queue_free();
+	print("closed");
 
 
 func close_game():
