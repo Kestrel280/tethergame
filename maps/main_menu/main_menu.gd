@@ -4,8 +4,7 @@ extends Level
 @onready var server_entry_box : LineEdit = %ServerEntryBox;
 
 
-@warning_ignore("unused_parameter")
-func _input(event : InputEvent):
+func _input(_event : InputEvent):
 	if Input.is_action_just_pressed("pause"): get_viewport().set_input_as_handled();
 
 

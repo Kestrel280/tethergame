@@ -19,8 +19,7 @@ func _ready() -> void:
 		server.start.call_deferred();
 
 
-@warning_ignore("unused_parameter")
-func _unhandled_input(event : InputEvent):
+func _unhandled_input(_event : InputEvent):
 	if Input.is_action_just_pressed("pause"): try_pause();
 
 

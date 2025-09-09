@@ -15,8 +15,7 @@ signal changed_view(dt_rot : Vector2);
 @warning_ignore_restore("unused_signal")
 
 
-@warning_ignore("unused_parameter")
-func _input(event : InputEvent):
+func _input(_event : InputEvent):
 	if !enabled: return;
 	# Not if/elif's, because actions might be bound to the same keys
 	if Input.is_action_just_pressed("jump"): pressed_jump.emit();

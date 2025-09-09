@@ -27,8 +27,7 @@ func inject(_input_dir : Vector3, _jumping : bool, _crouching : bool, _shooting 
 		interacting = _interacting;
 	input_dir = _input_dir;
 
-
-func _input(event : InputEvent): pass;
+func _input(_event : InputEvent): pass;
 func get_jumping() -> bool: return jumping;
 func get_crouching() -> bool: return crouching;
 func get_input_dir() -> Vector3: return input_dir;

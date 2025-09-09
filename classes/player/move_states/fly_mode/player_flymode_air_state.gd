@@ -5,8 +5,7 @@ extends Movement_State
 static var state_name : StringName = "Player_Flymode_Air_State";
 
 
-@warning_ignore("unused_parameter")
-func update_velocity(dt : float, wish_dir : Vector3, jumping : bool) -> StringName:
+func update_velocity(_dt : float, wish_dir : Vector3, _jumping : bool) -> StringName:
 	if body.is_on_floor():
 		# If we landed, and our velocity is 0 now, go to idle
 		if body.velocity.is_zero_approx(): return Player_Flymode_Idle_State.state_name;

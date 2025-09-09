@@ -9,8 +9,7 @@ func start(_body : CharacterBody3D):
 	super(_body);
 
 
-@warning_ignore("unused_parameter")
-func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
+func update_velocity(_dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
 	if !body.is_on_floor(): return Tethered_Air_State.state_name;
 	
 	wish_dir = Vector3(wish_dir.x, 0, wish_dir.z).normalized();

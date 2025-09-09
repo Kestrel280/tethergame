@@ -15,8 +15,7 @@ func start(_body : CharacterBody3D):
 
 
 # Should update 'velocity' of body and return a state name.
-@warning_ignore("unused_parameter")
-func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
+func update_velocity(_dt : float, _wish_dir : Vector3, _trying_jump : bool) -> StringName:
 	return "";
 
 

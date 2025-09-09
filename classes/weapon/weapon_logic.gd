@@ -9,7 +9,6 @@ func _init(_weapon : Weapon):
 	weapon = _weapon;
 
 
-@warning_ignore_start("unused_parameter")
 func shoot() -> void:
 	var space_state = weapon.carrier.get_world_3d().direct_space_state;
 	var query = PhysicsRayQueryParameters3D.create(weapon.global_position, weapon.global_position - weapon.res.max_range * weapon.global_transform.basis.z);
@@ -25,4 +24,3 @@ func stop_shoot() -> void:
 
 func abort_shoot() -> void:
 	print("default weapon_logic abort_shoot");
-@warning_ignore_restore("unused_parameter")

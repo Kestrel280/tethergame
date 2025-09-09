@@ -7,8 +7,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 
 
-@warning_ignore("unused_parameter")
-func _physics_process(delta: float) -> void:
+func _physics_process(_dt: float) -> void:
 	if Input.is_action_just_pressed("debug_spawn_nonuser_player"):
 		var p : Player = Player.construct();
 		var movctl : Movement_Controller_Base = Movement_Controller_Remote.new();

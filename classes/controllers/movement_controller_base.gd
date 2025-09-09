@@ -31,11 +31,9 @@ func set_jumping(j : bool):
 
 
 # Override these
-@warning_ignore_start("unused_parameter")
-func move(dt : float, wish_dir : Vector3):
+func move(_dt : float, _wish_dir : Vector3):
 	pass;
 
 
 func get_current_move_state() -> StringName:
 	return "Unknown_Move_State";
-@warning_ignore_restore("unused_parameter")

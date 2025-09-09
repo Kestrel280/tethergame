@@ -85,6 +85,7 @@ grow_horizontal = 0
 text = "127.0.0.1"
 alignment = 2
 expand_to_text_length = true
+select_all_on_focus = true
 
 [node name="Level1" type="Button" parent="Ui/Buttons_Hierarchy/Buttons_Level1"]
 layout_mode = 2

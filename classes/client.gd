@@ -63,7 +63,7 @@ func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArr
 	return true;
 
 
-func _process(dt : float) -> void:
+func _process(_dt : float) -> void:
 	if socket != null: socket.poll()
 	
 	if !has_connection: return;

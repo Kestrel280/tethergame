@@ -48,8 +48,7 @@ func _ready() -> void:
 	$Movement_Controller.start(self);
 
 
-@warning_ignore("unused_parameter")
-func _process(delta : float) -> void:
+func _process(_dt : float) -> void:
 	$Camera_Controller.add_rotation(-$Input_Controller.get_incremental_rotation());
 
 

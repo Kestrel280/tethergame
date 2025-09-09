@@ -9,8 +9,7 @@ func start(_body : CharacterBody3D):
 	super(_body);
 
 
-@warning_ignore("unused_parameter")
-func update_velocity(dt : float, wish_dir : Vector3, trying_jump : bool) -> StringName:
+func update_velocity(dt : float, _wish_dir : Vector3, trying_jump : bool) -> StringName:
 	# If we're on the floor this frame, first "bounce" along the floor. Then, multiple cases:
 	#	Slidemove if our projected velocity has a y component greater than our jump impulse
 	#	OR, if we're jumping, immediately rejump

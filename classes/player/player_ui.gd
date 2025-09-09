@@ -3,8 +3,7 @@ extends Control
 
 @export var player : Player;
 
-@warning_ignore("unused_parameter")
-func _physics_process(dt : float):
+func _physics_process(_dt : float):
 	var real_velocity = player.get_real_velocity();
 	var xy_speed : float = Vector2(real_velocity.x, real_velocity.z).length();
 	$Center_Screen/Kinetics_Console/Speed_Label.set_value(xy_speed);

@@ -78,7 +78,7 @@ func _process(_delta: float) -> void:
 					print("Unknown message type %d received from client %d" % [mtype, pid]);
 
 
-func _physics_process(dt : float):
+func _physics_process(_dt : float):
 	for pid : int in players.keys():
 		var pc : Player_Connection = players[pid];
 		while !pc.physics_queue.is_empty():
