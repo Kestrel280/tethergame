@@ -1,6 +1,7 @@
 class_name Player_Packet
 extends Object
 
+@export var pid : int;
 @export var position : Vector3;
 @export var velocity : Vector3;
 @export var rotation : Vector2;

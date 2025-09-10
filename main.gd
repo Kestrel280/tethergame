@@ -62,7 +62,6 @@ func join_server(ip : String):
 		pop_up.get_node("Label").text = "Failed to join server!";
 		await get_tree().create_timer(3.0).timeout;
 	pop_up.queue_free();
-	print("closed");
 
 
 func close_game():

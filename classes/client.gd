@@ -2,12 +2,15 @@ class_name Client
 extends Node
 
 
-signal connected;
-signal disconnected();
+signal established_connection;
+signal lost_connection;
 
 
 enum Message_Type {
 	CHANGELEVEL,
+	PEER_CONNECTED,
+	PEER_DISCONNECTED,
+	PEER_UPDATE,
 }
 
 
@@ -15,6 +18,7 @@ const MAX_RETRY : int = 5;
 const RETRY_TIMEOUT : float = 1.0;
 var has_connection : bool = false; # "is_connected" is a reserved attribute in GDScript
 var socket : WebSocketPeer = null;
+var peers : Array[Player];
 
 
 func start(ip : String = "127.0.0.1") -> bool:
@@ -39,7 +43,7 @@ func start(ip : String = "127.0.0.1") -> bool:
 	# Register
 	print("Client running");
 	has_connection = true;
-	connected.emit();
+	established_connection.emit();
 	return true;
 
 
@@ -51,7 +55,7 @@ func stop() -> void:
 		await get_tree().create_timer(1.0).timeout;
 		socket.poll();
 	socket = null;
-	disconnected.emit();
+	lost_connection.emit();
 
 
 func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArray()) -> bool:
@@ -76,6 +80,23 @@ func _process(_dt : float) -> void:
 			var payload : PackedByteArray = msg.slice(1);
 			match mtype:
 				Message_Type.CHANGELEVEL: Message_Bus.change_level_requested.emit(payload.get_string_from_ascii(), self);
+				Message_Type.PEER_CONNECTED: create_peer(payload.decode_s8(0));
+				Message_Type.PEER_DISCONNECTED: remove_peer(payload.decode_s8(0));
+				Message_Type.PEER_UPDATE: update_peer(bytes_to_var_with_objects(payload));
+				_:
+					print("CLIENT - UNKNOWN MESSAGE CODE %d" % mtype);
 	else:
 		print("Lost connection to server");
 		stop();
+
+
+func create_peer(id : int):
+	print("create_peer %d" % id);
+
+
+func remove_peer(id : int):
+	print("remove_peer %d" % id);
+
+
+func update_peer(pp : Player_Packet):
+	Globals.debug_panel.add_property("PEER %d POS" % pp.pid, str(pp.position));

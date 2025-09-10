@@ -79,6 +79,7 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_dt : float):
+	# Tick each player using queued physics update
 	for pid : int in players.keys():
 		var pc : Player_Connection = players[pid];
 		while !pc.physics_queue.is_empty():
@@ -86,30 +87,56 @@ func _physics_process(_dt : float):
 			pc.player.get_node("Camera_Controller").look_at(-pp.look_basis.z);
 			pc.player.get_node("Input_Controller").inject(pp.input_dir, pp.jumping, pp.crouching, pp.shooting, pp.interacting);
 			pc.player.tick(pp.tick_dt);
+			
+			# Send updated player data to each other peer
+			pp = pc.player.get_player_data(_dt); # Re-using pp
+			pp.pid = pid;
+			for peer_pid : int in players.keys():
+				if peer_pid == pid: continue;
+				players[peer_pid].send(Client.Message_Type.PEER_UPDATE, var_to_bytes_with_objects(pp));
 
 
 func register_player(conn : StreamPeerTCP) -> int:
+	# A new player has connected
+	# Assign them an ID
 	_id += 1;
 	var pid : int = _id;
+	
+	# Create a persistent socket for them
 	var socket : WebSocketPeer = WebSocketPeer.new();
 	socket.accept_stream(conn);
 	while socket.get_ready_state() != socket.STATE_OPEN:
 		await get_tree().create_timer(1.0).timeout;
 		socket.poll();
+	
+	# Register them in our players list
 	players[pid] = Player_Connection.new();
 	players[pid].socket = socket;
+	
+	# Tell them to change to our level
 	players[pid].send(Client.Message_Type.CHANGELEVEL, level.to_ascii_buffer());
+	
+	# Create a new Player instance to represent them, and install our Remote input controller
 	var p : Player = Player.construct();
 	Globals.level.add_child(p);
 	var inpctl : Input_Controller_Base = Input_Controller_Remote.new();
 	p.swap_controller(inpctl);
 	players[pid].player = p;
 	print("Player %d connected and registered" % _id);
+	
+	# Inform other peers of new player, and inform the new player of each existing player
+	for peer_pid : int in players.keys():
+		if pid == peer_pid: continue;
+		players[pid].send(Client.Message_Type.PEER_CONNECTED, PackedByteArray([peer_pid]));
+		players[peer_pid].send(Client.Message_Type.PEER_CONNECTED, PackedByteArray([pid]));
 	return pid;
 
 
-func deregister_player(player_id : int):
-	print("Player %d disconnected" % player_id);
-	players[player_id].player.queue_free();
-	players[player_id].socket.close();
-	players.erase(player_id);
+func deregister_player(pid : int):
+	print("Player %d disconnected" % pid);
+	players[pid].player.queue_free();
+	players[pid].socket.close();
+	players.erase(pid);
+	print(players);
+	for peer_pid : int in players.keys():
+		players[peer_pid].send(Client.Message_Type.PEER_DISCONNECTED, PackedByteArray([pid]));
