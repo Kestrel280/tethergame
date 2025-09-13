@@ -18,7 +18,7 @@ const MAX_RETRY : int = 5;
 const RETRY_TIMEOUT : float = 1.0;
 var has_connection : bool = false; # "is_connected" is a reserved attribute in GDScript
 var socket : WebSocketPeer = null;
-var peers : Array[Player];
+var peers : Dictionary;
 
 
 func start(ip : String = "127.0.0.1") -> bool:
@@ -48,6 +48,7 @@ func start(ip : String = "127.0.0.1") -> bool:
 
 
 func stop() -> void:
+	print("CLIENT STOP");
 	if socket == null: return;
 	has_connection = false;
 	socket.close();
@@ -56,6 +57,8 @@ func stop() -> void:
 		socket.poll();
 	socket = null;
 	lost_connection.emit();
+	for pid : int in peers.keys():
+		remove_peer(pid);
 
 
 func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArray()) -> bool:
@@ -67,10 +70,15 @@ func send(mtype : Server.Message_Type, payload : PackedByteArray = PackedByteArr
 	return true;
 
 
-func _process(_dt : float) -> void:
+func _process(dt : float) -> void:
 	if socket != null: socket.poll()
 	
 	if !has_connection: return;
+	
+	# Interpolate peer positions (BEOFRE calling update_peer())
+	for peer_pid : int in peers.keys():
+		var peer : Player = peers[peer_pid];
+		peer.position += peer.velocity * dt;
 	
 	# Process packets
 	if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
@@ -88,15 +96,31 @@ func _process(_dt : float) -> void:
 	else:
 		print("Lost connection to server");
 		stop();
+	
 
 
 func create_peer(id : int):
+	# Create new Player, register to our peers dictionary, and add to scene tree
+	var new_peer : Player = Player.construct(null);
+	peers[id] = new_peer;
+	add_child(new_peer);
+	
+	# Create Remote controllers for the Player and install them
+	var inpctl : Input_Controller_Base = Input_Controller_Remote.new();
+	var movctl : Movement_Controller_Base = Movement_Controller_Remote.new();
+	movctl.start(new_peer);
+	new_peer.swap_controller(inpctl);
+	new_peer.swap_controller(movctl);
 	print("create_peer %d" % id);
 
 
 func remove_peer(id : int):
-	print("remove_peer %d" % id);
+	peers[id].queue_free();
+	peers.erase(id);
 
 
 func update_peer(pp : Player_Packet):
+	var peer : Player = peers[pp.pid];
+	peer.get_node("Movement_Controller").inject(pp.position, pp.velocity);
+	peer.get_node("Camera_Controller").look_at(-pp.look_basis.z);
 	Globals.debug_panel.add_property("PEER %d POS" % pp.pid, str(pp.position));

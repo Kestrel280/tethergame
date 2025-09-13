@@ -118,7 +118,7 @@ func register_player(conn : StreamPeerTCP) -> int:
 	
 	# Create a new Player instance to represent them, and install our Remote input controller
 	var p : Player = Player.construct();
-	Globals.level.add_child(p);
+	add_child(p);
 	var inpctl : Input_Controller_Base = Input_Controller_Remote.new();
 	p.swap_controller(inpctl);
 	players[pid].player = p;

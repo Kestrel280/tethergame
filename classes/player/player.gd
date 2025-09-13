@@ -53,15 +53,15 @@ func _process(_dt : float) -> void:
 
 
 func _physics_process(dt: float) -> void:
-	if network_manager: tick(dt);
-	
-	Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
-	Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);
-	Globals.debug_panel.add_property("xy_speed", "%3.2f" % Vector2(get_real_velocity().x, get_real_velocity().z).length());
-	Globals.debug_panel.add_property("energy", "%3.2f" % (get_real_velocity().length_squared() / 2 + position.y * ProjectSettings.get_setting("physics/3d/default_gravity")));
-	Globals.debug_panel.add_property("rotation", "%3.1f, %3.1f" % [$Camera_Controller.get_rotation().x, $Camera_Controller.get_rotation().y]);
-	Globals.debug_panel.add_property("look_dir", str(-$Camera_Controller.get_look_basis().z));
-	Globals.debug_panel.add_property("movement_state", $Movement_Controller.get_current_move_state());
+	if network_manager:
+		tick(dt);
+		Globals.debug_panel.add_property("position", "%3.2f, %3.2f, %3.2f" % [position.x, position.y, position.z]);
+		Globals.debug_panel.add_property("velocity", "%3.2f, %3.2f, %3.2f" % [get_real_velocity().x, get_real_velocity().y, get_real_velocity().z]);
+		Globals.debug_panel.add_property("xy_speed", "%3.2f" % Vector2(get_real_velocity().x, get_real_velocity().z).length());
+		Globals.debug_panel.add_property("energy", "%3.2f" % (get_real_velocity().length_squared() / 2 + position.y * ProjectSettings.get_setting("physics/3d/default_gravity")));
+		Globals.debug_panel.add_property("rotation", "%3.1f, %3.1f" % [$Camera_Controller.get_rotation().x, $Camera_Controller.get_rotation().y]);
+		Globals.debug_panel.add_property("look_dir", str(-$Camera_Controller.get_look_basis().z));
+		Globals.debug_panel.add_property("movement_state", $Movement_Controller.get_current_move_state());
 
 
 func swap_controller(new_controller : Controller_Base, delete_old_controller : bool = true) -> Node:
