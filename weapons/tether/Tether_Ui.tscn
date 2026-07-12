@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqu01fwpntl2"]
+[gd_scene format=3 uid="uid://bqu01fwpntl2"]
 
-[ext_resource type="Texture2D" uid="uid://c5exk87jpac24" path="res://weapons/tether/tether_crosshair.png" id="1_df6x3"]
-[ext_resource type="Texture2D" uid="uid://ce2pxc3x6sipe" path="res://weapons/tether/tether_in_range_indicator.png" id="1_gxs1t"]
+[ext_resource type="Texture2D" uid="uid://6kvx7uy7r83m" path="res://weapons/tether/tether_crosshair.png" id="1_df6x3"]
+[ext_resource type="Texture2D" uid="uid://camsk588u1gra" path="res://weapons/tether/tether_in_range_indicator.png" id="1_gxs1t"]
 [ext_resource type="Shader" uid="uid://ct2xrijekjuwh" path="res://weapons/tether/In_Range_Indicator.gdshader" id="1_qrynj"]
 [ext_resource type="Shader" uid="uid://ck54esua5sjba" path="res://weapons/tether/Crosshair.gdshader" id="3_nsvh0"]
 [ext_resource type="Shader" uid="uid://d14ahkngttftw" path="res://weapons/tether/tether_accuracy_indicator.gdshader" id="5_527mr"]
-[ext_resource type="Texture2D" uid="uid://cfk38vibkpcgc" path="res://weapons/tether/tether_accuracy_indicator.png" id="5_s53ck"]
+[ext_resource type="Texture2D" uid="uid://dxm8d6s7kchnq" path="res://weapons/tether/tether_accuracy_indicator.png" id="5_s53ck"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nsvh0"]
 shader = ExtResource("1_qrynj")
@@ -17,7 +17,7 @@ shader = ExtResource("3_nsvh0")
 shader = ExtResource("5_527mr")
 shader_parameter/fillRatio = 1.0
 
-[node name="Tether_Ui" type="Control"]
+[node name="Tether_Ui" type="Control" unique_id=759157182]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Center_Screen" type="Control" parent="."]
+[node name="Center_Screen" type="Control" parent="." unique_id=1222453137]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,7 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="In_Range_Indicator" type="TextureRect" parent="Center_Screen"]
+[node name="In_Range_Indicator" type="TextureRect" parent="Center_Screen" unique_id=1849972749]
 z_index = 1
 material = SubResource("ShaderMaterial_nsvh0")
 layout_mode = 1
@@ -59,7 +59,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("1_gxs1t")
 
-[node name="Crosshair" type="TextureRect" parent="Center_Screen"]
+[node name="Crosshair" type="TextureRect" parent="Center_Screen" unique_id=1177084102]
 material = SubResource("ShaderMaterial_s53ck")
 layout_mode = 1
 anchors_preset = 8
@@ -77,7 +77,7 @@ mouse_filter = 2
 texture = ExtResource("1_df6x3")
 stretch_mode = 2
 
-[node name="Accuracy_Indicator" type="TextureRect" parent="Center_Screen"]
+[node name="Accuracy_Indicator" type="TextureRect" parent="Center_Screen" unique_id=923009563]
 material = SubResource("ShaderMaterial_ehx04")
 layout_mode = 1
 anchors_preset = 8

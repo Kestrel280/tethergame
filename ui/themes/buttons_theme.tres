@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cp7oojxyjnbs7"]
+[gd_resource type="Theme" format=3 uid="uid://cp7oojxyjnbs7"]
 
-[ext_resource type="FontFile" uid="uid://basd7o274qy5k" path="res://ui/fonts/JupiteroidBoldItalic.ttf" id="1_q7ora"]
+[ext_resource type="FontFile" uid="uid://24j288u4g5ai" path="res://ui/fonts/JupiteroidBoldItalic.ttf" id="1_q7ora"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8h7b"]
 content_margin_left = 10.0

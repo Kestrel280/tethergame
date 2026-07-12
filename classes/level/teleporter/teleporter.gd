@@ -15,7 +15,8 @@ extends Area3D
 
 func _get_configuration_warnings():
 	if !destination:
-		return ["Teleporter has no destination. Assign in the inspector, or ensure that code will set one before the teleporter is used."]
+		return ["Teleporter has no destination. Assign in the inspector, or ensure that code will set one before the teleporter is used."];
+	return [];
 
 
 func _on_body_entered(body: Node3D) -> void:
